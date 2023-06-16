@@ -1,0 +1,7 @@
+{
+	"/": "./index.html",
+	"/add" : "./index.html",
+	"/script" : "./public/script.js",
+	"/style" : "./public/style.css",
+	"/favicon" : "./public/images/favicon.png"
+}
