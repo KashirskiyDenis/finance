@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Personal Finance
+		</title>
+		<link rel="icon" type="image/png" href="public/images/favicon.png">
+		<script src="public/script.js"></script>
+		<link rel="stylesheet" href="public/style.css">
+	</head>
+	
+	<body>
+		<dialog id="accountsDialog">
+			<h2>Добавление нового счёта</h2>
+			<label for="titleBank">Название банка</label>
+			<input name="titleBank" type="text" required />
+			<label for="titleAccount">Название счёта</label>
+			<input name="titleAccount" type="text" required />
+			<label for="typeAccount">Тип счёта</label>
+			<select name="typeAccount">
+				<option>Дебетовый</option>
+				<option>Кредитный</option>
+				<option>Накопительный</option>
+			</select>
+			<label>Сумма, &#8381;</label>
+			<input type="number" required>
+			<div class="dialogControl">
+				<input type="button" id="addNewAccountDialogOk" class="button" value="OK" />
+				<input type="button" class="button" data-close data-dialog="accountsDialog" value="Close" />
+				<input type="button" class="button" data-reset value="Reset" />
+			</div>
+		</dialog>
+		<dialog id="incomeDialog">
+			<h2>Добавление нового дохода</h2>
+			<label for="titleBank">Категория дохода</label>
+			<input name="titleBank" type="text" required />
+			<label>Сумма, &#8381;</label>
+			<input type="number" required>
+			<div class="dialogControl">
+				<input type="button" id="addNewIncomeDialogOk" class="button" value="OK" />
+				<input type="button" class="button" data-close data-dialog="incomeDialog" value="Close" />
+				<input type="button" class="button" data-reset value="Reset" />
+			</div>
+		</dialog>
+		<dialog id="costsDialog">
+			<h2>Добавление новой траты</h2>
+			<label for="titleBank">Категория траты</label>
+			<input name="titleBank" type="text" required />
+			<label>Сумма, &#8381;</label>
+			<input type="number" required>
+			<div class="dialogControl">
+				<input type="button" id="addNewCostDialogOk" class="button" value="OK" />
+				<input type="button" class="button" data-close data-dialog="costsDialog" value="Close" />
+				<input type="button" class="button" data-reset value="Reset" />
+			</div>
+		</dialog>
+		<dialog id="categoryDialog">
+			<h2>Добавление новой категории</h2>
+			<label for="titleBank">Название категории</label>
+			<input name="titleBank" type="text" required />
+			<div class="dialogControl">
+				<input type="button" id="addNewCategoryDialogOk" class="button" value="OK" />
+				<input type="button" class="button" data-close data-dialog="categoryDialog" value="Close" />
+				<input type="button" class="button" data-reset value="Reset" />
+			</div>
+		</dialog>
+		<div class="container">
+            <header>
+                <h1 class="header">Управление личными финансами</h1>
+				<menu class="menu">
+					<div id="accounts" class="menuTab menuTab-active">Счета</div>
+					<div id="income" class="menuTab">Доходы</div>
+					<div id="costs" class="menuTab">Расходы</div>
+					<div id="category" class="menuTab">Категории</div>
+					<div id="statistics" class="menuTab">Статистика</div>
+				</menu>
+			</header>
+            <main class="content">
+                <div id="contentAccounts" class="">
+                    <div class="bankAccountLists">
+                        <div class="accountCard">
+                            <p class="bankAccountTitle">Title Bank 1</p>
+                            <p class="bankAccountInfo">Title Bank Account 1</p>
+                            <p class="bankAccountInfo">Дебетовый счёт</p>
+                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
+						</div>
+                        <div class="accountCard">
+                            <p class="bankAccountTitle">Title Bank 2</p>
+                            <p class="bankAccountInfo">Title Bank Account 1</p>
+                            <p class="bankAccountInfo">Накопительный счёт</p>
+                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
+						</div>
+                        <div class="accountCard">
+                            <p class="bankAccountTitle">Title Bank 3</p>
+                            <p class="bankAccountInfo">Title Bank Account 1</p>
+                            <p class="bankAccountInfo">Дебетовый счёт</p>
+                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
+						</div>
+                        <div class="accountCard">
+                            <p class="bankAccountTitle">Title Bank 3</p>
+                            <p class="bankAccountInfo">Title Bank Account 2</p>
+                            <p class="bankAccountInfo">Кредитный счёт</p>
+                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
+						</div>
+					</div>
+				</div>
+				<div id="contentIncome" style="display: none">
+					<h2>Месяц</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Дата</th>
+								<th>Категория</th>
+								<th>Сумма</th>
+							</tr>
+						</thead>
+						<tr>
+							<td>21/01/2023</td>
+							<td>Работа</td>
+							<td>100 000,00 &#8381;</td>
+						</tr>
+						<tr>
+							<td>22/01/2023</td>
+							<td>Толока</td>
+							<td>1 000,00 &#8381;</td>
+						</tr>
+						<tr>
+							<td>23/01/2023</td>
+							<td>Кэшбэк</td>
+							<td>10 000,00 &#8381;</td>
+						</tr>
+					</table>
+				</div>
+				<div id="contentCosts" style="display: none">
+					<h2>Месяц</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Дата</th>
+								<th>Категория</th>
+								<th>Сумма</th>
+							</tr>
+						</thead>
+						<tr>
+							<td>21/01/2023</td>
+							<td>Вкусняшки</td>
+							<td>1 000,00 &#8381;</td>
+						</tr>
+						<tr>
+							<td>22/01/2023</td>
+							<td>Продукты</td>
+							<td>1 000,00 &#8381;</td>
+						</tr>
+						<tr>
+							<td>23/01/2023</td>
+							<td>Досуг</td>
+							<td>1 000,00 &#8381;</td>
+						</tr>
+					</table>
+				</div>
+				<div id="contentCategory" style="display: none">
+					<h2>Категории</h2>
+					<div class="titleTableCategories">
+						<div class="titleCategory">Досуг</div>
+						<div class="titleCategory">Спорт</div>
+						<div class="titleCategory">Еда</div>
+						<div class="titleCategory">Больница</div>
+					</div>
+				</div>
+				<div id="contentStatistics" style="display: none">
+					<div class="titleTableCategories">
+						
+					</div>
+				</div>
+			</main>
+		</div>
+		<footer>
+			<button id="addNew" class="button-circle">&#43;</button>
+		</footer>
+	</div>
+</body>
+
+</html>
