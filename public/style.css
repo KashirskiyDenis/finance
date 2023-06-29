@@ -2,6 +2,7 @@ body {
     font-family: segoe ui, Arial, sans-serif;
     font-size: 16px;
     margin: 0px;
+	user-select: none;
 }
 .container {
     width: 920px;
@@ -50,7 +51,6 @@ input[type]:focus, select, button{
 	flex-grow: 1;
 	text-align: center;
 	transition: all 0.5s;
-	user-select: none;
 }
 .menuTab:hover {
 	box-shadow: 0.25rem 0.25rem 0.25rem #d3d3d3;
@@ -138,4 +138,13 @@ tr:nth-child(even) {
 }
 .titleCategory:hover {
 	box-shadow: 0.25rem 0.25rem 0.25rem #d3d3d3;
+}
+a {
+	text-decoration: none;
+}
+a:visited {
+	color: inherit;
+}
+a:hover {
+	color: #1978d2;
 }

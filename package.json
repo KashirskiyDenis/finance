@@ -6,6 +6,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"dependencies": {
+		"node-sqlite3": "^5.1.6"
+	},
 	"author": "Kashirskiy Denis",
 	"license": "MIT"
 }

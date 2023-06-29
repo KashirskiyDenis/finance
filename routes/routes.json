@@ -1,6 +1,5 @@
 {
 	"/": "./index.html",
-	"/add" : "./index.html",
 	"/404" : "./404.html",
 	"/script" : "./public/script.js",
 	"/style" : "./public/style.css",
