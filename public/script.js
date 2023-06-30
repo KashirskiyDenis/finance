@@ -3,9 +3,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 	let addNew = document.getElementById('addNew');
 	
-	let currentContent = document.getElementById('contentAccounts');
+	let currentContent = document.getElementById('contentAccount');
 	let currentDialog = document.getElementById('accountsDialog');;
-	let currentMenu = document.getElementById('accounts');;
+	let currentMenu = document.getElementById('account');;
 	
 	function activeMenu() {
 		currentMenu.classList.remove('menuTab-active');

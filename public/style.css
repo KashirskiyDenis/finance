@@ -91,7 +91,7 @@ button:active, .button:active {
     bottom: 1.5rem;
 	right: 1.5rem;
 }
-.bankAccountLists {
+.bankAccountList {
 	display: flex;
 	flex-wrap: wrap;
 }
