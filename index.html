@@ -12,54 +12,54 @@
 	</head>
 	
 	<body>
-		<dialog id="accountsDialog">
+		<dialog id="accountDialog">
 			<h2>Добавление нового счёта</h2>
 			<label for="titleBank">Название банка</label>
-			<input name="titleBank" type="text" required />
+			<input id="titleBank" name="titleBank" type="text" required />
 			<label for="titleAccount">Название счёта</label>
-			<input name="titleAccount" type="text" required />
+			<input id="titleAccount" name="titleAccount" type="text" required />
 			<label for="typeAccount">Тип счёта</label>
-			<select name="typeAccount">
+			<select id="typeAccount" name="typeAccount">
 				<option>Дебетовый</option>
 				<option>Кредитный</option>
 				<option>Накопительный</option>
 			</select>
 			<label>Сумма, &#8381;</label>
-			<input type="number" required>
+			<input id="countMoney" type="number" required>
 			<div class="dialogControl">
 				<input type="button" id="addNewAccountDialogOk" class="button" value="OK" />
-				<input type="button" class="button" data-close data-dialog="accountsDialog" value="Close" />
+				<input type="button" class="button" data-close data-dialog="accountDialog" value="Close" />
 				<input type="button" class="button" data-reset value="Reset" />
 			</div>
 		</dialog>
 		<dialog id="incomeDialog">
 			<h2>Добавление нового дохода</h2>
-			<label for="titleBank">Категория дохода</label>
-			<input name="titleBank" type="text" required />
+			<label for="categoryIncome">Категория дохода</label>
+			<input id="categoryIncome" name="categoryIncome" type="text" required />
 			<label>Сумма, &#8381;</label>
-			<input type="number" required>
+			<input id="countIncome" type="number" required>
 			<div class="dialogControl">
 				<input type="button" id="addNewIncomeDialogOk" class="button" value="OK" />
 				<input type="button" class="button" data-close data-dialog="incomeDialog" value="Close" />
 				<input type="button" class="button" data-reset value="Reset" />
 			</div>
 		</dialog>
-		<dialog id="costsDialog">
+		<dialog id="costDialog">
 			<h2>Добавление новой траты</h2>
-			<label for="titleBank">Категория траты</label>
-			<input name="titleBank" type="text" required />
+			<label for="categoryCost">Категория траты</label>
+			<input id="categoryCost" name="categoryCost" type="text" required />
 			<label>Сумма, &#8381;</label>
-			<input type="number" required>
+			<input id="countCost" type="number" required>
 			<div class="dialogControl">
 				<input type="button" id="addNewCostDialogOk" class="button" value="OK" />
-				<input type="button" class="button" data-close data-dialog="costsDialog" value="Close" />
+				<input type="button" class="button" data-close data-dialog="costDialog" value="Close" />
 				<input type="button" class="button" data-reset value="Reset" />
 			</div>
 		</dialog>
 		<dialog id="categoryDialog">
 			<h2>Добавление новой категории</h2>
-			<label for="titleBank">Название категории</label>
-			<input name="titleBank" type="text" required />
+			<label for="titleCategory">Название категории</label>
+			<input id="titleCategory" name="titleCategory" type="text" required />
 			<div class="dialogControl">
 				<input type="button" id="addNewCategoryDialogOk" class="button" value="OK" />
 				<input type="button" class="button" data-close data-dialog="categoryDialog" value="Close" />
@@ -70,16 +70,16 @@
             <header>
                <h1 class="header"> <a href="/">Управление личными финансами</a></h1></a>
 				<menu class="menu">
-					<div id="accounts" class="menuTab menuTab-active">Счета</div>
+					<div id="account" class="menuTab menuTab-active">Счета</div>
 					<div id="income" class="menuTab">Доходы</div>
-					<div id="costs" class="menuTab">Расходы</div>
+					<div id="cost" class="menuTab">Расходы</div>
 					<div id="category" class="menuTab">Категории</div>
 					<div id="statistics" class="menuTab">Статистика</div>
 				</menu>
 			</header>
             <main class="content">
-                <div id="contentAccounts" class="">
-                    <div class="bankAccountLists">
+                <div id="contentAccount" class="">
+                    <div class="bankAccountList">
                         <div class="accountCard">
                             <p class="bankAccountTitle">Title Bank 1</p>
                             <p class="bankAccountInfo">Title Bank Account 1</p>
@@ -108,7 +108,7 @@
 				</div>
 				<div id="contentIncome" style="display: none">
 					<h2>Месяц</h2>
-					<table>
+					<table id="tableIncome">
 						<thead>
 							<tr>
 								<th>Дата</th>
@@ -117,23 +117,23 @@
 							</tr>
 						</thead>
 						<tr>
-							<td>21/01/2023</td>
+							<td>2023/01/06</td>
 							<td>Работа</td>
 							<td>100 000,00 &#8381;</td>
 						</tr>
 						<tr>
-							<td>22/01/2023</td>
+							<td>2023/02/04</td>
 							<td>Толока</td>
 							<td>1 000,00 &#8381;</td>
 						</tr>
 						<tr>
-							<td>23/01/2023</td>
+							<td>2023/06/08</td>
 							<td>Кэшбэк</td>
 							<td>10 000,00 &#8381;</td>
 						</tr>
 					</table>
 				</div>
-				<div id="contentCosts" style="display: none">
+				<div id="contentCost" style="display: none">
 					<h2>Месяц</h2>
 					<table>
 						<thead>
@@ -162,7 +162,7 @@
 				</div>
 				<div id="contentCategory" style="display: none">
 					<h2>Категории</h2>
-					<div class="titleTableCategories">
+					<div class="titleTableCategory">
 						<div class="titleCategory">Досуг</div>
 						<div class="titleCategory">Спорт</div>
 						<div class="titleCategory">Еда</div>
@@ -170,7 +170,7 @@
 					</div>
 				</div>
 				<div id="contentStatistics" style="display: none">
-					<div class="titleTableCategories">
+					<div class="titleTableStatistics">
 						
 					</div>
 				</div>

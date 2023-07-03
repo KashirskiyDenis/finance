@@ -26,7 +26,7 @@ function readDB() {
 function writeDB() {
 	try {
 		fs.writeFileSync(path, JSON.stringify(db));
-		} catch (e) {
+	} catch (e) {
 		console.log(e.message);
 	}
 }
@@ -42,6 +42,8 @@ function get(collectionName, id) {
 function add(collectionName, entyty) {
 	entyty.id = db['id' + collectionName.charAt(0).toUpperCase() + collectionName.substring(1)]++;
 	db[collectionName].push(entyty);
+	writeDB();
+	return entyty
 }
 
 function update(collectionName, entyty) {
@@ -51,6 +53,8 @@ function update(collectionName, entyty) {
 			break;
 		}
 	}
+	writeDB();
+	return entyty	
 }
 
 function remove(collectionName, id) {
@@ -63,6 +67,7 @@ function remove(collectionName, id) {
 			break;
 		}
 	}
+	writeDB();
 }
 
 function checkReferentialIntegrity(collectionName, id) {
