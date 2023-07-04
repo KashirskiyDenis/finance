@@ -39,6 +39,10 @@ function get(collectionName, id) {
 	}
 }
 
+function getAll(collectionName) {
+	return db[collectionName];
+}
+
 function add(collectionName, entyty) {
 	entyty.id = db['id' + collectionName.charAt(0).toUpperCase() + collectionName.substring(1)]++;
 	db[collectionName].push(entyty);
@@ -86,4 +90,4 @@ function checkReferentialIntegrity(collectionName, id) {
 	return false;
 }
 
-module.exports = { db, initDB, writeDB , get, add, update, remove }
+module.exports = { initDB, writeDB , get, getAll, add, update, remove }

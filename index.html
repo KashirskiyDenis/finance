@@ -68,7 +68,7 @@
 		</dialog>
 		<div class="container">
             <header>
-               <h1 class="header"> <a href="/">Управление личными финансами</a></h1></a>
+				<h1 class="header"><a href="/">Управление личными финансами</a></h1>
 				<menu class="menu">
 					<div id="account" class="menuTab menuTab-active">Счета</div>
 					<div id="income" class="menuTab">Доходы</div>
@@ -77,88 +77,15 @@
 					<div id="statistics" class="menuTab">Статистика</div>
 				</menu>
 			</header>
-            <main class="content">
-                <div id="contentAccount" class="">
-                    <div class="bankAccountList">
-                        <div class="accountCard">
-                            <p class="bankAccountTitle">Title Bank 1</p>
-                            <p class="bankAccountInfo">Title Bank Account 1</p>
-                            <p class="bankAccountInfo">Дебетовый счёт</p>
-                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
-						</div>
-                        <div class="accountCard">
-                            <p class="bankAccountTitle">Title Bank 2</p>
-                            <p class="bankAccountInfo">Title Bank Account 1</p>
-                            <p class="bankAccountInfo">Накопительный счёт</p>
-                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
-						</div>
-                        <div class="accountCard">
-                            <p class="bankAccountTitle">Title Bank 3</p>
-                            <p class="bankAccountInfo">Title Bank Account 1</p>
-                            <p class="bankAccountInfo">Дебетовый счёт</p>
-                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
-						</div>
-                        <div class="accountCard">
-                            <p class="bankAccountTitle">Title Bank 3</p>
-                            <p class="bankAccountInfo">Title Bank Account 2</p>
-                            <p class="bankAccountInfo">Кредитный счёт</p>
-                            <p class="bankAccountInfo">12 345,67 &#8381;</p>
-						</div>
-					</div>
+			<main class="content">
+				<div id="contentAccount">
+					<div class="bankAccountList"></div>
 				</div>
 				<div id="contentIncome" style="display: none">
-					<h2>Месяц</h2>
-					<table id="tableIncome">
-						<thead>
-							<tr>
-								<th>Дата</th>
-								<th>Категория</th>
-								<th>Сумма</th>
-							</tr>
-						</thead>
-						<tr>
-							<td>2023/01/06</td>
-							<td>Работа</td>
-							<td>100 000,00 &#8381;</td>
-						</tr>
-						<tr>
-							<td>2023/02/04</td>
-							<td>Толока</td>
-							<td>1 000,00 &#8381;</td>
-						</tr>
-						<tr>
-							<td>2023/06/08</td>
-							<td>Кэшбэк</td>
-							<td>10 000,00 &#8381;</td>
-						</tr>
-					</table>
+					<table id="tableIncome"></table>
 				</div>
 				<div id="contentCost" style="display: none">
-					<h2>Месяц</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Дата</th>
-								<th>Категория</th>
-								<th>Сумма</th>
-							</tr>
-						</thead>
-						<tr>
-							<td>21/01/2023</td>
-							<td>Вкусняшки</td>
-							<td>1 000,00 &#8381;</td>
-						</tr>
-						<tr>
-							<td>22/01/2023</td>
-							<td>Продукты</td>
-							<td>1 000,00 &#8381;</td>
-						</tr>
-						<tr>
-							<td>23/01/2023</td>
-							<td>Досуг</td>
-							<td>1 000,00 &#8381;</td>
-						</tr>
-					</table>
+					<table id="tableCost"></table>
 				</div>
 				<div id="contentCategory" style="display: none">
 					<h2>Категории</h2>
@@ -179,7 +106,6 @@
 		<footer>
 			<button id="addNew" class="button-circle">&#43;</button>
 		</footer>
-	</div>
-</body>
-
+	</body>
+	
 </html>
