@@ -8,7 +8,6 @@ const routes = require('./routes');
 const db = require('./db');
 
 db.initDB(config.db);
-db.writeDB();
 
 const bodyParser = (string) => {
 	let collection = string.split('&');
@@ -23,12 +22,13 @@ const bodyParser = (string) => {
 	return object;
 };
 
-const bankAccountList = () => {
+const accountList = () => {
 	let list = db.getAll('account');
 	let html = '<div class="bankAccountList">';
 	
 	for (let i = 0; i < list.length; i++) {
 		html += `<div class="accountCard">
+		<p class="hidden">${list[i].idAccount}</p>
 		<p class="bankAccountTitle">${list[i].titleBank}</p>
 		<p class="bankAccountInfo">${list[i].titleAccount}</p>
 		<p class="bankAccountInfo">${list[i].typeAccount}</p>
@@ -64,7 +64,7 @@ const incomeList = () => {
 
 const costList = () => {
 	let list = db.getAll('cost');
-	let html = `<table id="tableIncome">
+	let html = `<table id="tableCost">
 	<thead>
 	<tr>
 	<th>Дата</th>
@@ -85,6 +85,18 @@ const costList = () => {
 	return html;
 };
 
+const categoryList = () => {
+	let list = db.getAll('category');
+	let html = '<div class="titleTableCategory">';
+	
+	for (let i = 0; i < list.length; i++) {
+		html += `<div class="titleCategory">${list[i].title}</div>`;
+	}
+	html += '</div>';
+	
+	return html;
+};
+
 const requestListener = function (req, res) {
 	let path = url.parse(req.url).pathname;
 	
@@ -93,71 +105,77 @@ const requestListener = function (req, res) {
 		.then(content => {
 			if (routes[path].includes('.html')) {
 				content = content.toString();
-				content = content.replace('<div class="bankAccountList"></div>', bankAccountList());
-				content = content.replace('<table id="tableIncome"><\/table>', incomeList());
-				content = content.replace('<table id="tableCost"><\table>', costList());
+				content = content.replace('<div class="bankAccountList"></div>', accountList());
+				content = content.replace('<table id="tableIncome"></table>', incomeList());
+				content = content.replace('<table id="tableCost"></table>', costList());
+				content = content.replace('<div class="titleTableCategory"></div>', categoryList());
 			}
 			res.writeHead(200);
 			res.end(content);
 		});
-		} else if (path.match(/(account|income|cost|category)\/[0-9]*/)) {
+	} else if (path.match(/(account|income|cost|category)\/[0-9]*/)) {
 		let method = req.method;
 		let collectionName = path.split('/')[1];
 		let id = path.split('/')[2];
 		
 		if (method == 'GET') {
-			let account = db.get(collectionName, id);
+			let collection = db.get(collectionName, id);
 			
-			if (account) {
+			if (collection) {
 				res.setHeader('Content-Type', 'application/json');
 				res.writeHead(404);
 				res.end('Not found');			
-				} else {
+			} else {
 				res.setHeader('Content-Type', 'application/json');
 				res.writeHead(200);
-				res.end(JSON.stringify(account));
+				res.end(JSON.stringify(collection));
 			}
-			} else if (method == 'PUT') {
+		} else if (method == 'PUT') {
 			let bodyReq = '';
+			
 			req.on('data', (chankData) => {
 				bodyReq += chankData;
 			});
 			req.on('end', () => {
 				try {
-					let account = db.add(collectionName, bodyParser(bodyReq));
+					let entity = bodyParser(bodyReq);
 					
+					if (collectionName == 'income' || collectionName == 'cost') {
+						entity.date = new Date().toISOString();
+					}
+					
+					let collection = db.add(collectionName, entity);
+
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
-					res.end(JSON.stringify(account));
-					} catch (e) {
+					res.end(JSON.stringify(collection));
+				} catch (e) {
 					res.writeHead(500);
 					res.end(e.message);
 				}
 			});
-			} else if (method == 'POST') {
+		} else if (method == 'POST') {
 			let bodyReq = '';
 			
 			req.on('data', (chankData) => {
 				bodyReq += chankData;
-			}
-			);
+			});
 			req.on('end', () => {
 				try {
-					let account = db.update(collectionName, bodyParser(bodyReq));
+					let collection = db.update(collectionName, bodyParser(bodyReq));
 					
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
-					res.end(JSON.stringify(account));
-					} catch (e) {
+					res.end(JSON.stringify(collection));
+				} catch (e) {
 					res.writeHead(500);
 					res.end(e.message);
 				}			
-			}
-			);			
-			} else if (method == 'DELETE') {
-			let account = db.remove(collectionName, id);
+			});
+		} else if (method == 'DELETE') {
+			let collection = db.remove(collectionName, id);
 		}
-		} else {
+	} else {
 		fs.readFile('./404.html')
 		.then(content => {
 			res.writeHead(404);

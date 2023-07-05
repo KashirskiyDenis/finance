@@ -90,4 +90,4 @@ function checkReferentialIntegrity(collectionName, id) {
 	return false;
 }
 
-module.exports = { initDB, writeDB , get, getAll, add, update, remove }
+module.exports = { initDB, get, getAll, add, update, remove }

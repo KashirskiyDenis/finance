@@ -1,1 +1,102 @@
-{"idAccount":0,"idIncome":0,"idCost":0,"idCategory":0,"account":[{"idAccount":1,"titleBank":"Title Bank 1","titleAccount":"Title Bank Account 1","typeAccount":"Дебетовый счёт","countMoney":12034.65},{"idAccount":2,"titleBank":"Title Bank 2","titleAccount":"Title Bank Account 2","typeAccount":"Накопительный счёт","countMoney":65632.05},{"idAccount":3,"titleBank":"Title Bank 3","titleAccount":"Title Bank Account 3","typeAccount":"Кредитный счёт","countMoney":6532.05}],"income":[],"cost":[],"category":[],"foreignKey":{"account":[],"income":[],"cost":[],"category":[]}}
+{
+	"idAccount": 4,
+	"idIncome": 0,
+	"idCost": 0,
+	"idCategory": 0,
+	"account": [
+		{
+			"idAccount": 0,
+			"titleBank": "СберБанк",
+			"titleAccount": "Копилка",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 12034.65
+		},
+		{
+			"idAccount": 1,
+			"titleBank": "Банк ВТБ",
+			"titleAccount": "Для Интернет покупок",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 65632.05
+		},
+		{
+			"idAccount": 2,
+			"titleBank": "Газпром Банк",
+			"titleAccount": "Зарплатный счёт",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 6532.05
+		},
+		{
+			"idAccount": 3,
+			"titleBank": "Тинькофф Банк",
+			"titleAccount": "Повседневные расходы",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 6532.05
+		}
+	],
+	"income": [],
+	"cost": [],
+	"category": [
+		{
+			"idCategory": 0,
+			"title": "Продукты"
+		},
+		{
+			"idCategory": 1,
+			"title": "Вкусняшки"
+		},
+		{
+			"idCategory": 2,
+			"title": "Лекарства"
+		},
+		{
+			"idCategory": 3,
+			"title": "Больницы"
+		},
+		{
+			"idCategory": 4,
+			"title": "Спорт"
+		},
+		{
+			"idCategory": 5,
+			"title": "Досуг"
+		},
+		{
+			"idCategory": 6,
+			"title": "ЖКХ"
+		},
+		{
+			"idCategory": 7,
+			"title": "Проезд"
+		},
+		{
+			"idCategory": 8,
+			"title": "Отпуск"
+		},
+		{
+			"idCategory": 9,
+			"title": "Одежда/обувь"
+		},
+		{
+			"idCategory": 10,
+			"title": "Свадьба"
+		},
+		{
+			"idCategory": 11,
+			"title": "Бытовые вещи"
+		},
+		{
+			"idCategory": 12,
+			"title": "Вещи для квартиры"
+		},
+		{
+			"idCategory": 13,
+			"title": "Прочее"
+		}
+	],
+	"foreignKey": {
+		"account": [],
+		"income": [],
+		"cost": [],
+		"category": []
+	}
+}

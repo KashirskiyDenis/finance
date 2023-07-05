@@ -14,6 +14,7 @@
 	<body>
 		<dialog id="accountDialog">
 			<h2>Добавление нового счёта</h2>
+			<input type="hidden" name="idAccount" value="">
 			<label for="titleBank">Название банка</label>
 			<input id="titleBank" name="titleBank" type="text" required />
 			<label for="titleAccount">Название счёта</label>
@@ -79,22 +80,20 @@
 			</header>
 			<main class="content">
 				<div id="contentAccount">
+					<h2>Карточки счетов</h2>
 					<div class="bankAccountList"></div>
 				</div>
 				<div id="contentIncome" style="display: none">
+					<h2>Список полученных доходов</h2>
 					<table id="tableIncome"></table>
 				</div>
 				<div id="contentCost" style="display: none">
+					<h2>Список совершённых расходов</h2>
 					<table id="tableCost"></table>
 				</div>
 				<div id="contentCategory" style="display: none">
-					<h2>Категории</h2>
-					<div class="titleTableCategory">
-						<div class="titleCategory">Досуг</div>
-						<div class="titleCategory">Спорт</div>
-						<div class="titleCategory">Еда</div>
-						<div class="titleCategory">Больница</div>
-					</div>
+					<h2>Категории расходов</h2>
+					<div class="titleTableCategory"></div>
 				</div>
 				<div id="contentStatistics" style="display: none">
 					<div class="titleTableStatistics">

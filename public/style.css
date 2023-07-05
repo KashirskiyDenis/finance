@@ -30,6 +30,11 @@ input[type], select {
 	border: 1px solid #d2e6ff;
 	width: 283px;
 }
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 input[type]:focus, select, button{
 	outline: none;
 	border: 1px solid #1978d2;
@@ -147,4 +152,7 @@ a:visited {
 }
 a:hover {
 	color: #1978d2;
+}
+.hidden {
+	display: none;
 }
