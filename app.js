@@ -32,7 +32,7 @@ const accountList = () => {
 		<p class="bankAccountTitle">${list[i].titleBank}</p>
 		<p class="bankAccountInfo">${list[i].titleAccount}</p>
 		<p class="bankAccountInfo">${list[i].typeAccount}</p>
-		<p class="bankAccountInfo">${list[i].countMoney} &#8381;</p>
+		<p class="bankAccountInfo countMoney">${list[i].countMoney} &#8381;</p>
 		</div>`;
 	}
 	html += '</div>';
@@ -87,10 +87,14 @@ const costList = () => {
 
 const categoryList = () => {
 	let list = db.getAll('category');
-	let html = '<div class="titleTableCategory">';
+	let html = '<div class="categoryList">';
 	
 	for (let i = 0; i < list.length; i++) {
-		html += `<div class="titleCategory">${list[i].title}</div>`;
+		html += `<div class="category">
+		<div class="hidden">${list[i].idCategory}</div>
+		<div class="titleCategory">${list[i].title}</div>
+		<div class="comment">${list[i].comment}</div>
+		</div>`;
 	}
 	html += '</div>';
 	
@@ -103,12 +107,12 @@ const requestListener = function (req, res) {
 	if (routes[path]) {
 		fs.readFile(routes[path], { encoding: 'utf8' })
 		.then(content => {
-			if (routes[path].includes('.html')) {
+			if (routes[path].includes('index.html')) {
 				content = content.toString();
 				content = content.replace('<div class="bankAccountList"></div>', accountList());
 				content = content.replace('<table id="tableIncome"></table>', incomeList());
 				content = content.replace('<table id="tableCost"></table>', costList());
-				content = content.replace('<div class="titleTableCategory"></div>', categoryList());
+				content = content.replace('<div class="categoryList"></div>', categoryList());
 			}
 			res.writeHead(200);
 			res.end(content);

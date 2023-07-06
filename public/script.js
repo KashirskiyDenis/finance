@@ -160,14 +160,25 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	document.getElementById('addNewCategoryDialogOk').addEventListener('click', () => {
 		let titleCategory = document.getElementById('titleCategory').value;
+		let commentCategory = document.getElementById('commentCategory').value;
 		
-		let data = `titleCategory=${titleCategory}`;
+		let data = `titleCategory=${titleCategory}&comment=${commentCategory}`;
 		ajax('PUT', '/category/', data).then(response => {
 			let category = `<div class="titleCategory">${response.titleCategory}</div>`;
 			
-			document.getElementById('.titleTableCategory').innerHTML += category;
+			document.querySelector('.titleTableCategory').innerHTML += category;
 			}).catch(e => {
 			alert(e);
 		});	
 	});
+	
+	let listCategory = document.querySelectorAll('.titleCategory');
+	
+	for (let i = 0; i < listCategory.length; i++) {
+		listCategory[i].addEventListener('click', (event) => {
+			let element = event.target;
+			element.firstChild()
+			console.log(element);
+		});
+	}
 });

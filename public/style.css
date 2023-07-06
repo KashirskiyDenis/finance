@@ -32,8 +32,8 @@ input[type], select {
 }
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 input[type]:focus, select, button{
 	outline: none;
@@ -117,7 +117,9 @@ button:active, .button:active {
 	text-align: right;
 	font-weight: 700;
 }
-
+.countMoney {
+	font-weight: 700;
+}
 table {
 	width: 100%;
 	border-collapse: collapse;
@@ -137,12 +139,29 @@ td {
 tr:nth-child(even) {
 	background-color: #d3d3d3;
 }
-.titleCategory{
-	padding: 10px 15px;
+.category {
+	border-bottom: 1px solid transparent;
+	border-right: 1px solid transparent;
+	cursor: pointer;
+	max-height: 31px;
+	margin-bottom: 5px;
+	overflow: hidden;
 	transition: all 0.5s;
 }
-.titleCategory:hover {
+.category:hover {
+	border-color: #ffffff;
 	box-shadow: 0.25rem 0.25rem 0.25rem #d3d3d3;
+	max-height: 84px;
+}
+
+.titleCategory {
+	padding: 5px 10px;
+}
+.comment {
+	padding: 5px 10px;
+	font-style: italic;
+	color: #ffffff;
+    background: #d3d3d3;
 }
 a {
 	text-decoration: none;

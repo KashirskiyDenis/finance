@@ -14,7 +14,7 @@
 	<body>
 		<dialog id="accountDialog">
 			<h2>Добавление нового счёта</h2>
-			<input type="hidden" name="idAccount" value="">
+			<input type="hidden" name="idAccount">
 			<label for="titleBank">Название банка</label>
 			<input id="titleBank" name="titleBank" type="text" required />
 			<label for="titleAccount">Название счёта</label>
@@ -59,8 +59,11 @@
 		</dialog>
 		<dialog id="categoryDialog">
 			<h2>Добавление новой категории</h2>
+			<input type="hidden" name="idCategory">
 			<label for="titleCategory">Название категории</label>
 			<input id="titleCategory" name="titleCategory" type="text" required />
+			<label for="commentCategory">Комментарий категории</label>
+			<input id="commentCategory" name="commentCategory" type="text" required />
 			<div class="dialogControl">
 				<input type="button" id="addNewCategoryDialogOk" class="button" value="OK" />
 				<input type="button" class="button" data-close data-dialog="categoryDialog" value="Close" />
@@ -80,7 +83,7 @@
 			</header>
 			<main class="content">
 				<div id="contentAccount">
-					<h2>Карточки счетов</h2>
+					<h2>Список карточек счетов</h2>
 					<div class="bankAccountList"></div>
 				</div>
 				<div id="contentIncome" style="display: none">
@@ -92,8 +95,8 @@
 					<table id="tableCost"></table>
 				</div>
 				<div id="contentCategory" style="display: none">
-					<h2>Категории расходов</h2>
-					<div class="titleTableCategory"></div>
+					<h2>Список категорий расходов</h2>
+					<div class="categoryList"></div>
 				</div>
 				<div id="contentStatistics" style="display: none">
 					<div class="titleTableStatistics">
