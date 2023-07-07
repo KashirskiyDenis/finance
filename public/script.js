@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		menu[i].addEventListener('click', activeMenu);
 	}
 	
-	let closeDialogButtons = document.querySelectorAll('input[data-close]');
+	let closeDialogButtons = document.querySelectorAll('input[data-cancel]');
 	for (let i = 0; i < closeDialogButtons.length; i++) {
 		closeDialogButtons[i].addEventListener('click', closeDialogWindow);
 	}
@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			</tr>`;
 			
 			document.getElementById('tableIncome').innerHTML += income;
+			currentDialog.close();
 			}).catch(e => {
 			alert(e);
 		});
@@ -153,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			</tr>`;
 			
 			document.getElementById('tableCost').innerHTML += cost;
+			currentDialog.close();
 			}).catch(e => {
 			alert(e);
 		});
@@ -162,11 +164,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		let titleCategory = document.getElementById('titleCategory').value;
 		let commentCategory = document.getElementById('commentCategory').value;
 		
-		let data = `titleCategory=${titleCategory}&comment=${commentCategory}`;
+		let data = `title=${titleCategory}&comment=${commentCategory}`;
 		ajax('PUT', '/category/', data).then(response => {
-			let category = `<div class="titleCategory">${response.titleCategory}</div>`;
+			let category = `<div class="category">
+			<div class="hidden">${response.idCategory}</div>
+			<div class="titleCategory">${response.title}</div>
+			<div class="comment">${response.comment}</div>
+			</div>`;
 			
-			document.querySelector('.titleTableCategory').innerHTML += category;
+			let dom = new DOMParser().parseFromString(category, "text/html");
+			let element = dom.querySelector('.category');
+			document.querySelector('.categoryList').appendChild(element);
+			currentDialog.close();
 			}).catch(e => {
 			alert(e);
 		});	

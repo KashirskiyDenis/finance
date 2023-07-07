@@ -1,8 +1,8 @@
 {
 	"idAccount": 4,
-	"idIncome": 0,
-	"idCost": 0,
-	"idCategory": 14,
+	"idIncome": 1,
+	"idCost": 1,
+	"idCategory": 15,
 	"account": [
 		{
 			"idAccount": 0,
@@ -23,23 +23,39 @@
 			"titleBank": "Газпром Банк",
 			"titleAccount": "Зарплатный счёт",
 			"typeAccount": "Дебетовый счёт",
-			"countMoney": 6532.05
+			"countMoney": 98411.05
 		},
 		{
 			"idAccount": 3,
 			"titleBank": "Тинькофф Банк",
 			"titleAccount": "Повседневные расходы",
 			"typeAccount": "Дебетовый счёт",
-			"countMoney": 6532.05
+			"countMoney": 135245.05
 		}
 	],
-	"income": [],
-	"cost": [],
+	"income": [
+		{
+			"idIncome": 0,
+			"date": "2023-07-07",
+			"categoryIncome": "Работа",
+			"countIncome": 100000,
+			"comment": "Зарплата"
+		}
+	],
+	"cost": [
+		{
+			"idCost": 0,
+			"date": "2023-07-07",
+			"categoryCost": "Продукты",
+			"countCost": 1000.03,
+			"comment": "No comment"
+		}
+	],
 	"category": [
 		{
 			"idCategory": 0,
 			"title": "Продукты",
-			"comment" : "Основные продукты, которые едятся на постоянной основе. А так же приёмы пищи в кафе, вызванные необходимостью."
+			"comment": "Основные продукты, которые едятся на постоянной основе. А так же приёмы пищи в кафе, вызванные необходимостью."
 		},
 		{
 			"idCategory": 1,
@@ -64,7 +80,7 @@
 		{
 			"idCategory": 5,
 			"title": "Досуг",
-			"comment": "Посещение кафе и развлекательных мест, с покупкой там всякого."
+			"comment": "Посещение кафе и развлекательных мест."
 		},
 		{
 			"idCategory": 6,

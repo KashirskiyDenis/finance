@@ -22,17 +22,32 @@ const bodyParser = (string) => {
 	return object;
 };
 
+const formatMoney = (str) => {
+	str = str.split('').reverse().join('');
+	let arr = str.split(/(\d{1,3})/).reverse();
+	
+	for (let i = 0; i < arr.length; i++) {
+		arr[i] = arr[i].split('').reverse().join('');
+	}
+	
+	return arr.join(' ').trim();
+};
+
 const accountList = () => {
 	let list = db.getAll('account');
 	let html = '<div class="bankAccountList">';
 	
 	for (let i = 0; i < list.length; i++) {
+		let countMoney = list[i].countMoney.toString();
+		let rub = formatMoney(countMoney.split('.')[0]);
+		let kop = countMoney.split('.')[1] ??= '00';
+		
 		html += `<div class="accountCard">
 		<p class="hidden">${list[i].idAccount}</p>
 		<p class="bankAccountTitle">${list[i].titleBank}</p>
 		<p class="bankAccountInfo">${list[i].titleAccount}</p>
 		<p class="bankAccountInfo">${list[i].typeAccount}</p>
-		<p class="bankAccountInfo countMoney">${list[i].countMoney} &#8381;</p>
+		<p class="bankAccountInfo countMoney">${rub} &#8381;</p><p class="countMoney">&nbsp;${kop} &#162;</p>
 		</div>`;
 	}
 	html += '</div>';
@@ -52,10 +67,14 @@ const incomeList = () => {
 	</thead>`;
 	
 	for (let i = 0; i < list.length; i++) {
+		let countMoney = list[i].countIncome.toString();
+		let rub = formatMoney(countMoney.split('.')[0]);
+		let kop = countMoney.split('.')[1] ??= '00';
+		
 		html += `<tr>
 		<td>${list[i].date}</td>
 		<td>${list[i].categoryIncome}</td>
-		<td>${list[i].countIncome} &#8381;</td>
+		<td>${rub}.${kop} &#8381;</td>
 		</tr>`;
 	}
 	html += '</table>';	
@@ -74,10 +93,14 @@ const costList = () => {
 	</thead>`;
 	
 	for (let i = 0; i < list.length; i++) {
+		let countMoney = list[i].countCost.toString();
+		let rub = formatMoney(countMoney.split('.')[0]);
+		let kop = countMoney.split('.')[1] ??= '00';
+		
 		html += `<tr>
 		<td>${list[i].date}</td>
 		<td>${list[i].categoryCost}</td>
-		<td>${list[i].countICost} &#8381;</td>
+		<td>${rub}.${kop} &#8381;</td>
 		</tr>`;
 	}
 	html += '</table>';

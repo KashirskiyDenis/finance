@@ -62,7 +62,7 @@ input[type]:focus, select, button{
 }
 .menuTab-active {
 	color: #1978d2;
-	border-bottom: 2px solid #1978d2;
+	border-bottom-color: #1978d2;
 }
 .content {
     padding: 10px;
@@ -117,8 +117,18 @@ button:active, .button:active {
 	text-align: right;
 	font-weight: 700;
 }
+.bankAccountInfo {
+	margin: 0.5rem 0;
+}
 .countMoney {
-	font-weight: 700;
+	display: inline-block;
+    font-weight: 700;
+    margin-top: 0px;
+    font-size: 1.25rem;	
+}
+.countMoney + .countMoney {
+	font-weight: 400;
+    font-size: 1rem;
 }
 table {
 	width: 100%;
@@ -135,6 +145,13 @@ th {
 td {
 	padding: 10px 0px 10px 15px;
 	border-width: 0px;
+}
+tr {
+	transition: all 0.5s;
+}
+table tr:hover {
+	background-color: #d3d3d3;
+	color: #1978d2;
 }
 tr:nth-child(even) {
 	background-color: #d3d3d3;

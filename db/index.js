@@ -44,7 +44,8 @@ function getAll(collectionName) {
 }
 
 function add(collectionName, entyty) {
-	entyty.id = db['id' + collectionName.charAt(0).toUpperCase() + collectionName.substring(1)]++;
+	let id = 'id' + collectionName.charAt(0).toUpperCase() + collectionName.substring(1);
+	entyty[id] = db[id]++;
 	db[collectionName].push(entyty);
 	writeDB();
 	return entyty
@@ -63,7 +64,7 @@ function update(collectionName, entyty) {
 
 function remove(collectionName, id) {
 	if (checkReferentialIntegrity(collectionName, id)) {
-		throw new Error('Cannot to remove entyty. Referential integrity will be destroyed.');
+		throw new Error('Cannot to remove entity. Referential integrity will be destroyed.');
 	}
 	for (let i = 0; i < db[collectionName].length; i++) {
 		if (db[collectionName][i]['id'] == id) {
