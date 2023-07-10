@@ -12,8 +12,9 @@
 	</head>
 	
 	<body>
-		<dialog id="accountDialog">
+		<dialog id="accountDialogAdd">
 			<h2>Добавление нового счёта</h2>
+			<form id="accountFormAdd">
 			<input type="hidden" name="idAccount">
 			<label for="titleBank">Название банка</label>
 			<input id="titleBank" name="titleBank" type="text" required />
@@ -21,18 +22,42 @@
 			<input id="titleAccount" name="titleAccount" type="text" required />
 			<label for="typeAccount">Тип счёта</label>
 			<select id="typeAccount" name="typeAccount">
-				<option>Дебетовый</option>
-				<option>Кредитный</option>
-				<option>Накопительный</option>
+				<option>Дебетовый счёт</option>
+				<option>Накопительный счёт</option>
+				<option>Кредитный счёт</option
+			</select>
+			<label>Сумма, &#8381;</label>
+			<input id="countMoney" name="countMoney" type="number" required>
+			<div class="dialogControl">
+				<input type="button" class="button" id="accountAddOk" value="OK" />
+				<input type="button" class="button" data-cancel data-dialog="accountDialogAdd" value="Cancel" />
+				<input type="button" class="button" data-reset value="Reset" />
+			</div>
+			</form>
+		</dialog>
+		<dialog id="accountDialogUpdate">
+			<h2>Редактировать счёт</h2>
+			<form id="accountFormUpdate">
+			<input id="idAccount" name="idAccount" type="hidden">
+			<label for="titleBank">Название банка</label>
+			<input id="titleBank" name="titleBank" type="text" required />
+			<label for="titleAccount">Название счёта</label>
+			<input id="titleAccount" name="titleAccount" type="text" required />
+			<label for="typeAccount">Тип счёта</label>
+			<select id="typeAccount" name="typeAccount">
+				<option>Дебетовый счёт</option>
+				<option>Накопительный счёт</option>
+				<option>Кредитный счёт</option>
 			</select>
 			<label>Сумма, &#8381;</label>
 			<input id="countMoney" type="number" required>
 			<div class="dialogControl">
-				<input type="button" id="addNewAccountDialogOk" class="button" value="OK" />
-				<input type="button" class="button" data-cancel data-dialog="accountDialog" value="Cancel" />
-				<input type="button" class="button" data-reset value="Reset" />
+				<input type="button" class="button" id="accountUpdateOk" value="OK" />
+				<input type="button" class="button" data-cancel data-dialog="accountDialogUpdate" value="Cancel" />
+				<input type="button" class="button" id="deleteAccount" data-reset value="Delete" />
 			</div>
-		</dialog>
+			</form>
+		</dialog>		
 		<dialog id="incomeDialog">
 			<h2>Добавление нового дохода</h2>
 			<label for="categoryIncome">Категория дохода</label>
@@ -82,23 +107,23 @@
 				</menu>
 			</header>
 			<main class="content">
-				<div id="contentAccount">
+				<div id="accountContent">
 					<h2>Список карточек счетов</h2>
 					<div class="bankAccountList"></div>
 				</div>
-				<div id="contentIncome" style="display: none">
+				<div id="incomeContent" style="display: none">
 					<h2>Список полученных доходов</h2>
 					<table id="tableIncome"></table>
 				</div>
-				<div id="contentCost" style="display: none">
+				<div id="costContent" style="display: none">
 					<h2>Список совершённых расходов</h2>
 					<table id="tableCost"></table>
 				</div>
-				<div id="contentCategory" style="display: none">
+				<div id="categoryContent" style="display: none">
 					<h2>Список категорий расходов</h2>
 					<div class="categoryList"></div>
 				</div>
-				<div id="contentStatistics" style="display: none">
+				<div id="statisticsContent" style="display: none">
 					<div class="titleTableStatistics">
 						
 					</div>

@@ -31,9 +31,15 @@ function writeDB() {
 	}
 }
 
+
+function formatId(str) {
+	return 'id' + str.charAt(0).toUpperCase() + str.substring(1);
+}
+
 function get(collectionName, id) {
 	for (let i = 0; i < db[collectionName].length; i++) {
-		if (db[collectionName][i]['id'] == id) {
+		let idDB = formatId(collectionName);
+		if (db[collectionName][i][idDB] == id) {
 			return db[collectionName][i];
 		}
 	}
@@ -44,7 +50,7 @@ function getAll(collectionName) {
 }
 
 function add(collectionName, entyty) {
-	let id = 'id' + collectionName.charAt(0).toUpperCase() + collectionName.substring(1);
+	let id = formatId(collectionName);
 	entyty[id] = db[id]++;
 	db[collectionName].push(entyty);
 	writeDB();
@@ -53,7 +59,8 @@ function add(collectionName, entyty) {
 
 function update(collectionName, entyty) {
 	for (let i = 0; i < db[collectionName].length; i++) {
-		if (db[collectionName][i]['id'] == entyty.id) {
+		let id = formatId(collectionName);
+		if (db[collectionName][i][id] == entyty.id) {
 			db[collectionName][i] = entyty;
 			break;
 		}
@@ -67,7 +74,8 @@ function remove(collectionName, id) {
 		throw new Error('Cannot to remove entity. Referential integrity will be destroyed.');
 	}
 	for (let i = 0; i < db[collectionName].length; i++) {
-		if (db[collectionName][i]['id'] == id) {
+		let idDB = formatId(collectionName);
+		if (db[collectionName][i][idDB] == id) {
 			db[collectionName].splice(i, 1);
 			break;
 		}

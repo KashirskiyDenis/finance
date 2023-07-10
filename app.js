@@ -148,8 +148,7 @@ const requestListener = function (req, res) {
 		if (method == 'GET') {
 			let collection = db.get(collectionName, id);
 			
-			if (collection) {
-				res.setHeader('Content-Type', 'application/json');
+			if (!collection) {
 				res.writeHead(404);
 				res.end('Not found');			
 			} else {
