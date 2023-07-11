@@ -199,7 +199,16 @@ const requestListener = function (req, res) {
 				}			
 			});
 		} else if (method == 'DELETE') {
-			let collection = db.remove(collectionName, id);
+			try {
+				let result = db.remove(collectionName, id);
+				
+				res.setHeader('Content-Type', 'text/plain');
+				res.writeHead(200);
+				res.end(result);
+			} catch (e) {
+				res.writeHead(500);
+				res.end(e.message);
+			}			
 		}
 	} else {
 		fs.readFile('./404.html')

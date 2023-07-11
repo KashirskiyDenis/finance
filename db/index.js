@@ -31,7 +31,6 @@ function writeDB() {
 	}
 }
 
-
 function formatId(str) {
 	return 'id' + str.charAt(0).toUpperCase() + str.substring(1);
 }
@@ -81,6 +80,8 @@ function remove(collectionName, id) {
 		}
 	}
 	writeDB();
+	
+	return true;
 }
 
 function checkReferentialIntegrity(collectionName, id) {

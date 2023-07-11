@@ -3,9 +3,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 	let addNew = document.getElementById('addNew');
 	let currentContent = document.getElementById('accountContent');
-	let currentDialogAdd = document.getElementById('accountDialogAdd');
+	let currentDialog = document.getElementById('accountDialog');
 	let currentMenu = document.getElementById('account');
-	let currentUpdateElement = null;
+	let currentEntity = null;
 	
 	function activeMenu() {
 		currentMenu.classList.remove('menuTab-active');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		currentMenu = this;
 		
 		let content = document.getElementById(this.id + 'Content');
-		currentDialogAdd = document.getElementById(this.id + 'DialogAdd');
+		currentDialog = document.getElementById(this.id + 'DialogAdd');
 		activeContent(content);
 	}
 	
@@ -27,40 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		currentContent.style.display = 'none'
 		content.style.display = 'block';
 		currentContent = content;
-	}	
-	
-	addNew.addEventListener('click', () => {
-		currentDialogAdd.showModal();
-	});
-	
-	function closeDialogWindow() {
-		document.getElementById(this.dataset.dialog).close();
-	};
-	
-	let menu = document.querySelectorAll('.menuTab');
-	for (let i = 0; i < menu.length; i++) {
-		menu[i].addEventListener('click', activeMenu);
 	}
 	
-	let closeDialogButtons = document.querySelectorAll('input[data-cancel]');
-	for (let i = 0; i < closeDialogButtons.length; i++) {
-		closeDialogButtons[i].addEventListener('click', closeDialogWindow);
-	}
-	
-	let resetForm = () => {
-		let inputs = document.querySelectorAll('dialog > input[type=text], input[type=number]');
-		let len = inputs.length;
-		for (let i = 0; i < len; i++) {
-			inputs[i].value = '';
-		}		
-	};
-	
-	let resetDialogButtons = document.querySelectorAll('input[data-reset]');
-	for (let i = 0; i < resetDialogButtons.length; i++) {
-		resetDialogButtons[i].addEventListener('click',resetForm);
-	}
-	
-	const ajax = (type, url, data) => {
+	let ajax = (type, url, data) => {
 		let promise = new Promise(function (resolve, reject) {
 			let request = new XMLHttpRequest();
 			
@@ -95,19 +64,91 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		
 		return arr.join(' ').trim();
+	};	
+	
+	let formatId = (str) => {
+		return 'id' + str.charAt(0).toUpperCase() + str.substring(1);
+	}
+	
+	addNew.addEventListener('click', () => {
+		currentDialog.showModal();
+		hiddenEntityNew();
+		resetForm();
+	});
+	
+	function closeDialogWindow() {
+		document.getElementById(this.dataset.dialog).close();
 	};
 	
+	let menu = document.querySelectorAll('.menuTab');
+	for (let i = 0; i < menu.length; i++) {
+		menu[i].addEventListener('click', activeMenu);
+	}
+	
+	let closeDialogButtons = document.querySelectorAll('input[data-cancel]');
+	for (let i = 0; i < closeDialogButtons.length; i++) {
+		closeDialogButtons[i].addEventListener('click', closeDialogWindow);
+	}
+	
+	let resetForm = () => {
+		let inputs = currentDialog.querySelectorAll('input[type=text], input[type=number]');
+		let len = inputs.length;
+		for (let i = 0; i < len; i++) {
+			inputs[i].value = '';
+		}		
+	};
+	
+	let resetDialogButtons = document.querySelectorAll('input[data-reset]');
+	for (let i = 0; i < resetDialogButtons.length; i++) {
+		resetDialogButtons[i].addEventListener('click', resetForm);
+	}
+	
+	let deleteEntyti = (e) => {
+		let collectionName = e.target.dataset['entity'];
+		let id = currentEntity.querySelector('.hidden').innerText;
+		ajax('DELETE', `/${collectionName}/` + id).then(response => {
+			console.log(response);
+			// currentEntity.remove();
+		}).catch(e => {
+			alert(e);
+		});		
+	};
+	
+	let deleteDialogButtons = document.querySelectorAll('input[data-delete]');
+	for (let i = 0; i < deleteDialogButtons.length; i++) {
+		deleteDialogButtons[i].addEventListener('click', deleteEntyti);
+	}
+	
+
+	let hiddenEntityNew = () => {
+		currentDialog.querySelector('#accountUpdateOk').classList.add('hidden');
+		currentDialog.querySelector('#accountDelete').classList.add('hidden');
+		
+		currentDialog.querySelector('#accountAddOk').classList.remove('hidden');
+		currentDialog.querySelector('#accountReset').classList.remove('hidden');
+	};
+	
+	let hiddenEntityChange = (entityName) => {
+		currentDialog.querySelector('#${entityName}UpdateOk').classList.remove('hidden');
+		currentDialog.querySelector('#${entityName}Delete').classList.remove('hidden');
+		
+		currentDialog.querySelector('#${entityName}AddOk').classList.add('hidden');
+		currentDialog.querySelector('#${entityName}Reset').classList.add('hidden');
+	};	
+	
 	let getAccountById = (event) => {
-		currentUpdateElement = event.currentTarget;
-		let id = currentUpdateElement.querySelector('.hidden').innerText;
+		currentEntity = event.currentTarget;
+		let id = currentEntity.querySelector('.hidden').innerText;
 		
 		ajax('GET', '/account/' + id).then(response => {
-			accountDialogUpdate.showModal();
-			accountDialogUpdate.querySelector('#idAccount').value = response.idAccount;
-			accountDialogUpdate.querySelector('#titleBank').value = response.titleBank;
-			accountDialogUpdate.querySelector('#titleAccount').value = response.titleAccount;
-			accountDialogUpdate.querySelector('#typeAccount').value = response.typeAccount;
-			accountDialogUpdate.querySelector('#countMoney').value = response.countMoney;
+			currentDialog.showModal();
+			currentDialog.querySelector('#idAccount').value = response.idAccount;
+			currentDialog.querySelector('#titleBank').value = response.titleBank;
+			currentDialog.querySelector('#titleAccount').value = response.titleAccount;
+			currentDialog.querySelector('#typeAccount').value = response.typeAccount;
+			currentDialog.querySelector('#countMoney').value = response.countMoney;
+			
+			hiddenEntityChange('account');
 		}).catch(e => {
 			alert(e);
 		});
@@ -125,7 +166,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		
 		let account = Object.fromEntries(new FormData(document.getElementById('accountFormAdd')).entries());
-		let data = `titleBank=${account.titleBank}&titleAccount=${account.titleAccount}&typeAccount=${account.typeAccount}&countMoney=${account.countMoney}`;
+		let data = `titleBank=${account.titleBank}&
+			titleAccount=${account.titleAccount}&
+			typeAccount=${account.typeAccount}&
+			countMoney=${account.countMoney}`;
 		
 		ajax('PUT', '/account/', data).then(response => {
 			let countMoney = response.countMoney.toString();
@@ -139,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			<p class="bankAccountInfo">${response.typeAccount}</p>
 			<p class="bankAccountInfo countMoney">${rub} &#8381;</p><p class="countMoney">&nbsp;${kop} &#162;</p>
 			</div>`;
-			currentDialogAdd.close();
+			currentDialog.close();
 			
 			let dom = new DOMParser().parseFromString(html, "text/html");
 			let newAccount = dom.querySelector('.accountCard');
@@ -157,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		
-		let account = Object.fromEntries(new FormData(document.getElementById('accountFormUpdate')).entries());
+		let account = Object.fromEntries(new FormData(document.getElementById('accountFormAdd')).entries());
 		let data = `idAccount=${account.idAccount}&
 			titleBank=${account.titleBank}&
 			titleAccount=${account.titleAccount}&
@@ -176,16 +220,17 @@ document.addEventListener('DOMContentLoaded', function () {
 			<p class="bankAccountInfo">${response.typeAccount}</p>
 			<p class="bankAccountInfo countMoney">${rub} &#8381;</p><p class="countMoney">&nbsp;${kop} &#162;</p>
 			</div>`;
-			currentDialogAdd.close();
+			currentDialog.close();
 			
 			let dom = new DOMParser().parseFromString(html, "text/html");
-			currentUpdateElement = dom.querySelector('.accountCard');
+			currentEntity = dom.querySelector('.accountCard');
+			currentEntity.addEventListener('click', getAccountById);
 		}).catch(e => {
 			alert(e);
 		});		
 	});
 	
-	document.getElementById('addNewIncomeDialogOk').addEventListener('click', () => {
+	document.getElementById('incomeAddOk').addEventListener('click', () => {
 		let categoryIncome = document.getElementById('categoryIncome').value;
 		let countIncome = document.getElementById('countIncome').value;
 		
@@ -203,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			<td>${response.countIncome} &#8381;</td>
 			</tr>`;
 			
-			currentDialogAdd.close();
+			currentDialog.close();
 			document.getElementById('tableIncome').innerHTML += html;
 			}).catch(e => {
 			alert(e);
@@ -228,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			<td>${response.countCost} &#8381;</td>
 			</tr>`;
 			
-			currentDialogAdd.close();
+			currentDialog.close();
 			document.getElementById('tableCost').innerHTML += html;
 			}).catch(e => {
 			alert(e);
@@ -249,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			let dom = new DOMParser().parseFromString(html, "text/html");
 			let element = dom.querySelector('.category');
-			currentDialogAdd.close();
+			currentDialog.close();
 			document.querySelector('.categoryList').appendChild(element);
 			}).catch(e => {
 			alert(e);
