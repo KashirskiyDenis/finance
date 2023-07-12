@@ -57,53 +57,51 @@ const accountList = () => {
 
 const incomeList = () => {
 	let list = db.getAll('income');
-	let html = `<table id="tableIncome">
-	<thead>
-	<tr>
-	<th>Дата</th>
-	<th>Категория</th>
-	<th>Сумма</th>
-	</tr>
-	</thead>`;
+	let html = `<div id="incomeList">
+	<div class="operationHead">
+		<div>Дата</div>
+		<div>Категория</div>
+		<div>Сумма</div>
+	</div>`;
 	
 	for (let i = 0; i < list.length; i++) {
 		let countMoney = list[i].countIncome.toString();
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<tr>
-		<td>${list[i].date}</td>
-		<td>${list[i].categoryIncome}</td>
-		<td>${rub}.${kop} &#8381;</td>
-		</tr>`;
+		html += `<div class="incomeRecord">
+		<div class="hidden">${list[i].idIncome}</div>
+		<div>${list[i].date}</div>
+		<div>${list[i].categoryIncome}</div>
+		<div>${rub}.${kop} &#8381;</div>
+		</div>`;
 	}
-	html += '</table>';	
+	html += '</div>';
 	return html;
 };
 
 const costList = () => {
 	let list = db.getAll('cost');
-	let html = `<table id="tableCost">
-	<thead>
-	<tr>
-	<th>Дата</th>
-	<th>Категория</th>
-	<th>Сумма</th>
-	</tr>
-	</thead>`;
+	let html = `<div id="costList">
+	<div class="operationHead">
+		<div>Дата</div>
+		<div>Категория</div>
+		<div>Сумма</div>
+	</div>`;
 	
 	for (let i = 0; i < list.length; i++) {
 		let countMoney = list[i].countCost.toString();
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<tr>
-		<td>${list[i].date}</td>
-		<td>${list[i].categoryCost}</td>
-		<td>${rub}.${kop} &#8381;</td>
-		</tr>`;
+		html += `<div class="costRecord">
+		<div class="hidden">${list[i].idCost}</div>
+		<div>${list[i].date}</div>
+		<div>${list[i].categoryCost}</div>
+		<div>${rub}.${kop} &#8381;</div>
+		</div>`;
 	}
-	html += '</table>';
+	html += '</div>';
 	
 	return html;
 };
@@ -133,8 +131,8 @@ const requestListener = function (req, res) {
 			if (routes[path].includes('index.html')) {
 				content = content.toString();
 				content = content.replace('<div class="bankAccountList"></div>', accountList());
-				content = content.replace('<table id="tableIncome"></table>', incomeList());
-				content = content.replace('<table id="tableCost"></table>', costList());
+				content = content.replace('<div id="incomeList"></div>', incomeList());
+				content = content.replace('<div id="costList"></div>', costList());
 				content = content.replace('<div class="categoryList"></div>', categoryList());
 			}
 			res.writeHead(200);
@@ -196,7 +194,7 @@ const requestListener = function (req, res) {
 				} catch (e) {
 					res.writeHead(500);
 					res.end(e.message);
-				}			
+				}
 			});
 		} else if (method == 'DELETE') {
 			try {
@@ -204,11 +202,11 @@ const requestListener = function (req, res) {
 				
 				res.setHeader('Content-Type', 'text/plain');
 				res.writeHead(200);
-				res.end(result);
+				res.end(result.toString());
 			} catch (e) {
 				res.writeHead(500);
 				res.end(e.message);
-			}			
+			}
 		}
 	} else {
 		fs.readFile('./404.html')

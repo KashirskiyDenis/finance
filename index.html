@@ -14,108 +14,121 @@
 	<body>
 		<dialog id="accountDialog">
 			<h2>Добавление счёта</h2>
-			<form id="accountFormAdd">
-			<input id="idAccount" name="idAccount" type="hidden">
-			<label for="titleBank">Название банка</label>
-			<input id="titleBank" name="titleBank" type="text" required />
-			<label for="titleAccount">Название счёта</label>
-			<input id="titleAccount" name="titleAccount" type="text" required />
-			<label for="typeAccount">Тип счёта</label>
-			<select id="typeAccount" name="typeAccount">
-				<option>Дебетовый счёт</option>
-				<option>Накопительный счёт</option>
-				<option>Кредитный счёт</option
-			</select>
-			<label>Сумма, &#8381;</label>
-			<input id="countMoney" name="countMoney" type="number" required>
-			<div class="dialogControl">
-				<input type="button" class="button" id="accountAddOk" value="Create" />
-				<input type="button" class="button hidden" id="accountUpdateOk" value="OK" />
-				<input type="button" class="button" data-cancel data-dialog="accountDialog" value="Cancel" />
-				<input type="button" class="button" id="accountReset" data-reset value="Reset" />
-				<input type="button" class="button hidden" id="accountDelete" data-delete data-entity="account" value="Delete" />
-			</div>
+			<form id="accountForm">
+				<input id="idAccount" name="idAccount" type="hidden">
+				<label for="titleBank">Название банка</label>
+				<input id="titleBank" name="titleBank" type="text" required />
+				<label for="titleAccount">Название счёта</label>
+				<input id="titleAccount" name="titleAccount" type="text" required />
+				<label for="typeAccount">Тип счёта</label>
+				<select id="typeAccount" name="typeAccount">
+					<option>Дебетовый счёт</option>
+					<option>Накопительный счёт</option>
+					<option>Кредитный счёт</option>
+				</select>
+				<label>Сумма, &#8381;</label>
+				<input id="countMoney" name="countMoney" type="number" required>
+				<div class="dialogControl">
+					<input type="button" class="button" id="accountAddOk" value="Create" />
+					<input type="button" class="button hidden" id="accountUpdateOk" value="Update" />
+					<input type="button" class="button" data-cancel data-dialog="accountDialog" value="Cancel" />
+					<input type="button" class="button" id="accountReset" data-reset value="Reset" />
+					<input type="button" class="button hidden" id="accountDelete" data-delete data-entity="account" value="Delete" />
+				</div>
 			</form>
 		</dialog>
 		<dialog id="incomeDialog">
 			<h2>Добавление дохода</h2>
-			<label for="categoryIncome">Категория</label>
-			<input id="categoryIncome" name="categoryIncome" type="text" required />
-			<label for="dateIncome">Дата</label>
-			<input id="dateIncome" name="dateIncome" type="date" required />			
-			<label>Сумма, &#8381;</label>
-			<input id="countIncome" name="countIncome" type="number" required>
-			<div class="dialogControl">
-				<input type="button" class="button" id="incomeAddOk" value="OK" />
-				<input type="button" class="button hidden" id="incomeUpdateOk" value="OK" />				
-				<input type="button" class="button" data-cancel data-dialog="incomeDialog" value="Cancel" />
-				<input type="button" class="button" id="incomeReset" data-reset value="Reset" />
-				<input type="button" class="button hidden" id="incomeDelete" data-delete data-entity="income" value="Delete" />				
-			</div>
+			<form id="incomeForm">			
+				<input id="idIncome" name="idIncome" type="hidden">
+				<label for="categoryIncome">Категория</label>
+				<input id="categoryIncome" name="categoryIncome" type="text" required />
+				<label for="dateIncome">Дата</label>
+				<input id="dateIncome" name="dateIncome" type="date" required />			
+				<label>Сумма, &#8381;</label>
+				<input id="countIncome" name="countIncome" type="number" required>
+				<div class="dialogControl">
+					<input type="button" class="button" id="incomeAddOk" value="Create" />
+					<input type="button" class="button hidden" id="incomeUpdateOk" value="Update" />
+					<input type="button" class="button" data-cancel data-dialog="incomeDialog" value="Cancel" />
+					<input type="button" class="button" id="incomeReset" data-reset value="Reset" />
+					<input type="button" class="button hidden" id="incomeDelete" data-delete data-entity="income" value="Delete" />
+				</div>
+			</form>
 		</dialog>
 		<dialog id="costDialog">
-			<h2>Добавление новой траты</h2>
-			<label for="categoryCost">Категория траты</label>
-			<input id="categoryCost" name="categoryCost" type="text" required />
-			<label>Сумма, &#8381;</label>
-			<input id="countCost" type="number" required>
-			<div class="dialogControl">
-				<input type="button" id="addNewCostDialogOk" class="button" value="OK" />
-				<input type="button" class="button" data-cancel data-dialog="costDialog" value="Cancel" />
-				<input type="button" class="button" data-reset value="Reset" />
-			</div>
-		</dialog>
-		<dialog id="categoryDialog">
-			<h2>Добавление новой категории</h2>
-			<input type="hidden" name="idCategory">
-			<label for="titleCategory">Название категории</label>
-			<input id="titleCategory" name="titleCategory" type="text" required />
-			<label for="commentCategory">Комментарий категории</label>
-			<input id="commentCategory" name="commentCategory" type="text" required />
-			<div class="dialogControl">
-				<input type="button" id="addNewCategoryDialogOk" class="button" value="OK" />
-				<input type="button" class="button" data-cancel data-dialog="categoryDialog" value="Cancel" />
-				<input type="button" class="button" data-reset value="Reset" />
-			</div>
-		</dialog>
-		<div class="container">
-            <header>
-				<h1 class="header"><a href="/">Управление личными финансами</a></h1>
-				<menu class="menu">
-					<div id="account" class="menuTab menuTab-active">Счета</div>
-					<div id="income" class="menuTab">Доходы</div>
-					<div id="cost" class="menuTab">Расходы</div>
-					<div id="category" class="menuTab">Категории</div>
-					<div id="statistics" class="menuTab">Статистика</div>
-				</menu>
-			</header>
-			<main class="content">
-				<div id="accountContent">
-					<h2>Список карточек счетов</h2>
-					<div class="bankAccountList"></div>
+			<h2>Добавление траты</h2>
+			<form id="costForm">
+				<input id="idCost" name="idCost" type="hidden">
+				<label for="categoryCost">Категория траты</label>
+				<input id="categoryCost" name="categoryCost" type="text" required />
+				<label for="dateCost">Дата</label>
+				<input id="dateCost" name="dateCost" type="date" required />
+				<label>Сумма, &#8381;</label>
+				<input id="countCost" type="number" required>
+				<div class="dialogControl">
+					<input type="button" class="button" id="costAddOk" value="Create" />
+					<input type="button" class="button hidden" id="costUpdateOk" value="Update" />
+					<input type="button" class="button" data-cancel data-dialog="costDialog" value="Cancel" />
+					<input type="button" class="button" id="costReset" data-reset value="Reset" />
+					<input type="button" class="button hidden" id="costDelete" data-delete data-entity="cost" value="Delete" />	
 				</div>
-				<div id="incomeContent" style="display: none">
-					<h2>Список полученных доходов</h2>
-					<table id="tableIncome"></table>
-				</div>
-				<div id="costContent" style="display: none">
-					<h2>Список совершённых расходов</h2>
-					<table id="tableCost"></table>
-				</div>
-				<div id="categoryContent" style="display: none">
-					<h2>Список категорий расходов</h2>
-					<div class="categoryList"></div>
-				</div>
-				<div id="statisticsContent" style="display: none">
-					<div class="titleTableStatistics">
-						
+				</form>
+			</dialog>
+			<dialog id="categoryDialog">
+				<h2>Добавление новой категории</h2>
+				<form id="categoryForm">			
+					<input type="hidden" name="idCategory">
+					<label for="titleCategory">Название категории</label>
+					<input id="titleCategory" name="titleCategory" type="text" required />
+					<label for="commentCategory">Комментарий категории</label>
+					<input id="commentCategory" name="commentCategory" type="text" required />
+					<div class="dialogControl">
+						<input type="button" class="button" id="categoryAddOk" value="Create" />
+						<input type="button" class="button hidden" id="categoryUpdateOk" value="Update" />
+						<input type="button" class="button" data-cancel data-dialog="categoryDialog" value="Cancel" />
+						<input type="button" class="button" id="categoryReset" data-reset value="Reset" />
+						<input type="button" class="button hidden" id="categoryDelete" data-delete data-entity="category" value="Delete" />
 					</div>
-				</div>
-			</main>
-		</div>
-		<footer>
-			<button id="addNew" class="button-circle">&#43;</button>
-		</footer>
-	</body>
-	
-</html>
+				</form>
+			</dialog>
+			<div class="container">
+				<header>
+					<h1 class="header"><a href="/">Управление личными финансами</a></h1>
+					<menu class="menu">
+						<div id="account" class="menuTab menuTab-active">Счета</div>
+						<div id="income" class="menuTab">Доходы</div>
+						<div id="cost" class="menuTab">Расходы</div>
+						<div id="category" class="menuTab">Категории</div>
+						<div id="statistics" class="menuTab">Статистика</div>
+					</menu>
+				</header>
+				<main class="content">
+					<div id="accountContent">
+						<h2>Список карточек счетов</h2>
+						<div class="bankAccountList"></div>
+					</div>
+					<div id="incomeContent" style="display: none">
+						<h2>Список полученных доходов</h2>
+						<div id="incomeList"></div>
+					</div>
+					<div id="costContent" style="display: none">
+						<h2>Список совершённых расходов</h2>
+						<div id="costList"></div>
+					</div>
+					<div id="categoryContent" style="display: none">
+						<h2>Список категорий расходов</h2>
+						<div class="categoryList"></div>
+					</div>
+					<div id="statisticsContent" style="display: none">
+						<h2>Статистика по счетам</h2>
+						<div class="titleTableStatistics"></div>
+					</div>
+				</main>
+			</div>
+			<footer>
+				<button id="addNew" class="button-circle">&#43;</button>
+			</footer>
+		</body>
+		
+	</html>		

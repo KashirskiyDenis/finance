@@ -53,13 +53,13 @@ function add(collectionName, entyty) {
 	entyty[id] = db[id]++;
 	db[collectionName].push(entyty);
 	writeDB();
-	return entyty
+	return entyty;
 }
 
 function update(collectionName, entyty) {
 	for (let i = 0; i < db[collectionName].length; i++) {
 		let id = formatId(collectionName);
-		if (db[collectionName][i][id] == entyty.id) {
+		if (db[collectionName][i][id] == entyty[id]) {
 			db[collectionName][i] = entyty;
 			break;
 		}

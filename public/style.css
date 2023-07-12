@@ -130,31 +130,25 @@ button:active, .button:active {
 	font-weight: 400;
     font-size: 1rem;
 }
-table {
-	width: 100%;
-	border-collapse: collapse;
-	table-layout: fixed;
-}
-th {
-	font-weight: 500;
-	text-align: left;
-	background-color: #1978d2;
-	color: #ffffff;
-	padding: 10px;
-}
-td {
-	padding: 10px 0px 10px 15px;
-	border-width: 0px;
-}
-tr {
+.operationHead, .incomeRecord, .costRecord {
+	display: flex;
 	transition: all 0.5s;
 }
-table tr:hover {
+.operationHead div {
+	background-color: #1978d2;
+	color: #ffffff;
+	font-weight: 500;
+	padding: 10px;	
+	width: calc(100% / 3);
+}
+.incomeRecord:hover, .costRecord:hover {
 	background-color: #d3d3d3;
 	color: #1978d2;
+	cursor: pointer;
 }
-tr:nth-child(even) {
-	background-color: #d3d3d3;
+.incomeRecord div, .costRecord div {
+	width: calc(100% / 3);
+	padding: 10px 0px 10px 15px;	
 }
 .category {
 	border-bottom: 1px solid transparent;
