@@ -18,7 +18,7 @@ function initDB(dbStructura) {
 function readDB() {
 	try {
 		db = JSON.parse(fs.readFileSync(path));
-		} catch (e) {
+	} catch (e) {
 		console.log(e.message);
 	}
 }
@@ -35,7 +35,7 @@ function formatId(str) {
 	return 'id' + str.charAt(0).toUpperCase() + str.substring(1);
 }
 
-function get(collectionName, id) {
+function getById(collectionName, id) {
 	for (let i = 0; i < db[collectionName].length; i++) {
 		let idDB = formatId(collectionName);
 		if (db[collectionName][i][idDB] == id) {
@@ -44,19 +44,31 @@ function get(collectionName, id) {
 	}
 }
 
+function getByIdFull(collectionName, id) {
+	let entity = getById(collectionName, id);
+	let foreignKeyArray = db.foreignKeyRead[collectionName];
+	
+	for (let i = 0; i < foreignKeyArray.length; i++) {
+		let arrTmp = db[foreignKeyArray[i]];
+	}
+	
+}
+
 function getAll(collectionName) {
 	return db[collectionName];
 }
 
-function add(collectionName, entyty) {
+function add(collectionName, entyty, sort) {
 	let id = formatId(collectionName);
 	entyty[id] = db[id]++;
 	db[collectionName].push(entyty);
+	if (sort)
+		db[collectionName].sort(compareFunction);
 	writeDB();
 	return entyty;
 }
 
-function update(collectionName, entyty) {
+function update(collectionName, entyty, sort) {
 	for (let i = 0; i < db[collectionName].length; i++) {
 		let id = formatId(collectionName);
 		if (db[collectionName][i][id] == entyty[id]) {
@@ -64,6 +76,8 @@ function update(collectionName, entyty) {
 			break;
 		}
 	}
+	if (sort)
+		db[collectionName].sort(compareFunction);
 	writeDB();
 	return entyty	
 }
@@ -85,19 +99,24 @@ function remove(collectionName, id) {
 }
 
 function checkReferentialIntegrity(collectionName, id) {
-	let arr = db.foreignKey[collectionName];
+	let arr = db.foreignKeyDelete[collectionName];
+	let idColl = formatId(collectionName);
 	
 	for (let i = 0; i < arr.length; i++) {
-		let refCall = arr[i];
-		let tmp = db[refCall];
+		let refColl = arr[i];
+		let tmp = db[refColl];
 		
-		for (j = 0; i< tmp.length; j++) {
-			if (tmp[j]['id'] == id)
-			return true
+		for (let j = 0; j < tmp.length; j++) {
+			if (tmp[j][idColl] == id)
+				return true;
 		}
 		
 	}
 	return false;
 }
 
-module.exports = { initDB, get, getAll, add, update, remove }
+function compareFunction(a, b) {
+	return a.date.localeCompare(b.date);
+}
+
+module.exports = { initDB, getById, getAll, add, update, remove }

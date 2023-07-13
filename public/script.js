@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		ajax('GET', '/income/' + id).then(response => {
 			currentDialog.showModal();
 			currentDialog.querySelector('#idIncome').value = response.idIncome;
-			currentDialog.querySelector('#categoryIncome').value = response.categoryIncome;
+			currentDialog.querySelector('#idCategory').value = response.idCategory;
 			currentDialog.querySelector('#dateIncome').value = response.date;
 			currentDialog.querySelector('#countIncome').value = response.countIncome;
 			
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		ajax('GET', '/cost/' + id).then(response => {
 			currentDialog.showModal();
 			currentDialog.querySelector('#idCost').value = response.idCost;
-			currentDialog.querySelector('#categoryCost').value = response.categoryCost;
+			currentDialog.querySelector('#idCategory').value = response.idCategory;
 			currentDialog.querySelector('#dateCost').value = response.date;
 			currentDialog.querySelector('#countCost').value = response.countCost;
 			
@@ -201,6 +201,27 @@ document.addEventListener('DOMContentLoaded', function () {
 	for (let i = 0; i < costList.length; i++) {
 		costList[i].addEventListener('click', getCostById);
 	}
+	
+	let getCategoryById = (event) => {
+		currentEntity = event.currentTarget;
+		let id = currentEntity.querySelector('.hidden').innerText;
+		
+		ajax('GET', '/category/' + id).then(response => {
+			currentDialog.showModal();
+			currentDialog.querySelector('#idCategory').value = response.idCategory;
+			currentDialog.querySelector('#titleCategory').value = response.title;
+			currentDialog.querySelector('#commentCategory').value = response.comment;
+			
+			hiddenEntityUpdate('category');
+		}).catch(e => {
+			alert(e);
+		});		
+	};
+	
+	let categoryList = document.querySelectorAll('.category');
+	for (let i = 0; i < categoryList.length; i++) {
+		categoryList[i].addEventListener('click', getCategoryById);
+	}	
 
 	let addOrUpdateAccount = (event) => {
 		let account = Object.fromEntries(new FormData(document.getElementById('accountForm')).entries());
@@ -223,8 +244,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			<p class="bankAccountInfo">${response.typeAccount}</p>
 			<p class="bankAccountInfo countMoney">${rub} &#8381;</p><p class="countMoney">&nbsp;${kop} &#162;</p>
 			</div>`;
-			currentDialog.close();
 			
+			currentDialog.close();
 			let dom = new DOMParser().parseFromString(html, 'text/html');
 			let newAccount = dom.querySelector('.accountCard');
 			newAccount.addEventListener('click', getAccountById);
@@ -243,18 +264,19 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let addOrUpdateIncome = (event) => {
 		let income = Object.fromEntries(new FormData(document.getElementById('incomeForm')).entries());
-		if (income.countMoney <= 0) {
+		if (income.countIncome <= 0) {
 			alert('Сумма не должна быть меньше или раной нулю.');
 			return;
 		}
-		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&categoryIncome=${income.categoryIncome}&countIncome=${income.countIncome}`;
+		income.dateIncome = income.dateIncome.toString().split('T')[0];
+		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&idCategory=${income.idCategory}&countIncome=${income.countIncome}&comment=${income.commentIncome}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/income/', data).then(response => {
 			let html = `<div class="incomeRecord">
 			<div class="hidden">${response.idIncome}</div>
 			<div>${response.date}</div>
-			<div>${response.categoryIncome}</div>
+			<div>${response.idCategory}</div>
 			<div>${response.countIncome} &#8381;</div>
 			</div>`;
 			
@@ -277,25 +299,26 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let addOrUpdateCost = () => {
 		let cost = Object.fromEntries(new FormData(document.getElementById('costForm')).entries());
-		if (cost.countMoney <= 0) {
+		if (cost.countCost <= 0) {
 			alert('Сумма не должна быть меньше или раной нулю.');
 			return;
 		}
-		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&categoryCost=${cost.categoryCost}&countCost=${cost.countCost}`;
+		cost.dateCost = cost.dateCost.toString().split('T')[0];
+		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&idCategory=${cost.idCategory}&countCost=${cost.countCost}&comment=${cost.commentCost}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/cost/', data).then(response => {
 			let html = `<div class="costRecord">
 			<div class="hidden">${response.idCost}</div>
 			<div>${response.date}</div>
-			<div>${response.categoryCost}</div>
+			<div>${response.idCategory}</div>
 			<div>${response.countCost} &#8381;</div>
 			</div>`;
 			
 			currentDialog.close();
 			let dom = new DOMParser().parseFromString(html, 'text/html');
 			let newCost = dom.querySelector('.costRecord');
-			newCost.addEventListener('click', getIncomeById);
+			newCost.addEventListener('click', getCostById);
 			
 			if (method == 'PUT')
 				document.getElementById('costList').appendChild(newCost);
@@ -309,35 +332,32 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('costAddOk').addEventListener('click', addOrUpdateCost);
 	document.getElementById('costUpdateOk').addEventListener('click', addOrUpdateCost);
 	
-	document.getElementById('addNewCategoryDialogOk').addEventListener('click', () => {
-		let titleCategory = document.getElementById('titleCategory').value;
-		let commentCategory = document.getElementById('commentCategory').value;
+	let addOrUpdateCategory = () => {
+		let category = Object.fromEntries(new FormData(document.getElementById('categoryForm')).entries());
+		let data = `idCategory=${category.idCategory}&title=${category.titleCategory}&comment=${category.commentCategory}`;
+		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
-		let data = `title=${titleCategory}&comment=${commentCategory}`;
-		ajax('PUT', '/category/', data).then(response => {
+		ajax(method, '/category/', data).then(response => {
 			let html = `<div class="category">
 			<div class="hidden">${response.idCategory}</div>
 			<div class="titleCategory">${response.title}</div>
 			<div class="comment">${response.comment}</div>
 			</div>`;
 			
-			let dom = new DOMParser().parseFromString(html, 'text/html');
-			let element = dom.querySelector('.category');
 			currentDialog.close();
-			document.querySelector('.categoryList').appendChild(element);
+			let dom = new DOMParser().parseFromString(html, 'text/html');
+			let newCategory = dom.querySelector('.category');
+			newCategory.addEventListener('click', getCategoryById);
+			
+			if (method == 'PUT')
+				document.querySelector('.categoryList').appendChild(newCategory);
+			else
+				currentEntity.innerHTML = newCategory.innerHTML;				
 		}).catch(e => {
 			alert(e);
-		});	
-	});
-	
-	let listCategory = document.querySelectorAll('.titleCategory');
-	
-	for (let i = 0; i < listCategory.length; i++) {
-		listCategory[i].addEventListener('click', (event) => {
-			let element = event.target;
-			element.firstChild()
-			// console.log(element);
-
 		});
-	}
+	};
+	
+	document.getElementById('categoryAddOk').addEventListener('click', addOrUpdateCategory);
+	document.getElementById('categoryUpdateOk').addEventListener('click', addOrUpdateCategory);
 });

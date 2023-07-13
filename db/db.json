@@ -1,1 +1,151 @@
-{"idAccount":5,"idIncome":2,"idCost":1,"idCategory":15,"account":[{"idAccount":0,"titleBank":"СберБанк","titleAccount":"Копилка","typeAccount":"Дебетовый счёт","countMoney":12034.65},{"idAccount":1,"titleBank":"Банк ВТБ","titleAccount":"Для Интернет покупок","typeAccount":"Дебетовый счёт","countMoney":65632.05},{"idAccount":2,"titleBank":"Газпром Банк","titleAccount":"Зарплатный счёт","typeAccount":"Дебетовый счёт","countMoney":98411.05},{"idAccount":3,"titleBank":"Тинькофф Банк","titleAccount":"Повседневные расходы","typeAccount":"Дебетовый счёт","countMoney":135245.05}],"income":[{"idIncome":0,"date":"2023-07-07","categoryIncome":"Работа","countIncome":100000,"comment":"Зарплата"},{"idIncome":"1","date":"undefined","categoryIncome":"Случайность2","countIncome":"1000"}],"cost":[{"idCost":0,"date":"2023-07-07","categoryCost":"Продукты","countCost":1000.03,"comment":"No comment"}],"category":[{"idCategory":0,"title":"Продукты","comment":"Основные продукты, которые едятся на постоянной основе. А так же приёмы пищи в кафе, вызванные необходимостью."},{"idCategory":1,"title":"Вкусняшки","comment":"Конфеты, шоколадки, печенье, лимонады. И всё, что нельзя отнести к продуктам."},{"idCategory":2,"title":"Лекарства","comment":"Всё, что покупается в аптеке или относится к БАДам."},{"idCategory":3,"title":"Больницы","comment":"Посещение врачей, сдача анализов, обследования."},{"idCategory":4,"title":"Спорт","comment":"Абонемент в тренажёрный зал, бассейн. Спортивный инвентарь."},{"idCategory":5,"title":"Досуг","comment":"Посещение кафе и развлекательных мест."},{"idCategory":6,"title":"ЖКХ","comment":"Плата коммунальным службам за воду, электричество, газ. Оплата услуг ЖКХ, Интернета и сотовой связи."},{"idCategory":7,"title":"Проезд","comment":"Траты на проезд в общественном транспорте. Траты на бензин и обслуживание машины."},{"idCategory":8,"title":"Отпуск","comment":"Все траты, которые связаны с отпуском. Билеты, проживания, развлечения, еда."},{"idCategory":9,"title":"Одежда/обувь","comment":"Одежда и обувь купленная не для конкретного мероприятия"},{"idCategory":10,"title":"Свадьба","comment":"Все траты, которые связаны со свадьбой."},{"idCategory":11,"title":"Бытовые вещи","comment":"Моющие средства, салфетки и прочее."},{"idCategory":12,"title":"Вещи для квартиры","comment":"Мебель, мелкая и крупная бытовая техника."},{"idCategory":13,"title":"Прочее","comment":"Всё, что не подходит под другие категории."}],"foreignKey":{"account":[],"income":[],"cost":[],"category":[]}}
+{
+	"idAccount": 4,
+	"idIncome": 1,
+	"idCost": 1,
+	"idCategory": 15,
+	"account": [
+		{
+			"idAccount": 0,
+			"titleBank": "СберБанк",
+			"titleAccount": "Копилка",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 12034.65
+		},
+		{
+			"idAccount": 1,
+			"titleBank": "Банк ВТБ",
+			"titleAccount": "Для Интернет покупок",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 65632.05
+		},
+		{
+			"idAccount": 2,
+			"titleBank": "Газпром Банк",
+			"titleAccount": "Зарплатный счёт",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 98411.05
+		},
+		{
+			"idAccount": 3,
+			"titleBank": "Тинькофф Банк",
+			"titleAccount": "Повседневные расходы",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 135245.05
+		}
+	],
+	"income": [
+		{
+			"idIncome": 0,
+			"date": "2023-07-07",
+			"idCategory": 14,
+			"countIncome": 100000,
+			"comment": "Зарплата",
+			"idAccount": 1
+		}
+	],
+	"cost": [
+		{
+			"idCost": 0,
+			"date": "2023-07-07",
+			"idCategory": 0,
+			"countCost": 1000.03,
+			"comment": "No comment",
+			"idAccount": 1
+		}
+	],
+	"category": [
+		{
+			"idCategory": 0,
+			"title": "Продукты",
+			"comment": "Основные продукты, которые едятся на постоянной основе. А так же приёмы пищи в кафе, вызванные необходимостью."
+		},
+		{
+			"idCategory": 1,
+			"title": "Вкусняшки",
+			"comment": "Конфеты, шоколадки, печенье, лимонады. И всё, что нельзя отнести к продуктам."
+		},
+		{
+			"idCategory": 2,
+			"title": "Лекарства",
+			"comment": "Всё, что покупается в аптеке или относится к БАДам."
+		},
+		{
+			"idCategory": 3,
+			"title": "Больницы",
+			"comment": "Посещение врачей, сдача анализов, обследования."
+		},
+		{
+			"idCategory": 4,
+			"title": "Спорт",
+			"comment": "Абонемент в тренажёрный зал, бассейн. Спортивный инвентарь."
+		},
+		{
+			"idCategory": 5,
+			"title": "Досуг",
+			"comment": "Посещение кафе и развлекательных мест."
+		},
+		{
+			"idCategory": 6,
+			"title": "ЖКХ",
+			"comment": "Плата коммунальным службам за воду, электричество, газ. Оплата услуг ЖКХ, Интернета и сотовой связи."
+		},
+		{
+			"idCategory": 7,
+			"title": "Проезд",
+			"comment": "Траты на проезд в общественном транспорте. Траты на бензин и обслуживание машины."
+		},
+		{
+			"idCategory": 8,
+			"title": "Отпуск",
+			"comment": "Все траты, которые связаны с отпуском. Билеты, проживания, развлечения, еда."
+		},
+		{
+			"idCategory": 9,
+			"title": "Одежда/обувь",
+			"comment": "Одежда и обувь купленная не для конкретного мероприятия"
+		},
+		{
+			"idCategory": 10,
+			"title": "Свадьба",
+			"comment": "Все траты, которые связаны со свадьбой."
+		},
+		{
+			"idCategory": 11,
+			"title": "Бытовые вещи",
+			"comment": "Моющие средства, салфетки и прочее."
+		},
+		{
+			"idCategory": 12,
+			"title": "Вещи для квартиры",
+			"comment": "Мебель, мелкая и крупная бытовая техника."
+		},
+		{
+			"idCategory": 13,
+			"title": "Прочее",
+			"comment": "Всё, что не подходит под другие категории."
+		},
+		{
+			"idCategory": 14,
+			"title": "Работа",
+			"comment": "ЗП, аванс, премии и прочие доходы связанные с работой."
+		}
+	],
+	"foreignKeyDelete": {
+		"account": [
+			"income",
+			"cost"
+		],
+		"income": [],
+		"cost": [],
+		"category": [
+			"income",
+			"cost"
+		]
+	},
+	"foreignKeyRead": {
+		"account": [],
+		"income": ["account", "category"],
+		"cost": ["account", "category"],
+		"category": []
+	}
+}

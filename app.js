@@ -72,7 +72,7 @@ const incomeList = () => {
 		html += `<div class="incomeRecord">
 		<div class="hidden">${list[i].idIncome}</div>
 		<div>${list[i].date}</div>
-		<div>${list[i].categoryIncome}</div>
+		<div>${list[i].idCategory}</div>
 		<div>${rub}.${kop} &#8381;</div>
 		</div>`;
 	}
@@ -97,7 +97,7 @@ const costList = () => {
 		html += `<div class="costRecord">
 		<div class="hidden">${list[i].idCost}</div>
 		<div>${list[i].date}</div>
-		<div>${list[i].categoryCost}</div>
+		<div>${list[i].idCategory}</div>
 		<div>${rub}.${kop} &#8381;</div>
 		</div>`;
 	}
@@ -109,17 +109,21 @@ const costList = () => {
 const categoryList = () => {
 	let list = db.getAll('category');
 	let html = '<div class="categoryList">';
-	
+	let select = '<select id="idCategory" name="idCategory">';
+
 	for (let i = 0; i < list.length; i++) {
 		html += `<div class="category">
 		<div class="hidden">${list[i].idCategory}</div>
 		<div class="titleCategory">${list[i].title}</div>
 		<div class="comment">${list[i].comment}</div>
 		</div>`;
+		
+		select += `<option value="${list[i].idCategory}">${list[i].title}</option>`;		
 	}
 	html += '</div>';
+	select += '</select>';
 	
-	return html;
+	return { html, select };
 };
 
 const requestListener = function (req, res) {
@@ -133,7 +137,10 @@ const requestListener = function (req, res) {
 				content = content.replace('<div class="bankAccountList"></div>', accountList());
 				content = content.replace('<div id="incomeList"></div>', incomeList());
 				content = content.replace('<div id="costList"></div>', costList());
-				content = content.replace('<div class="categoryList"></div>', categoryList());
+				
+				let category = categoryList();
+				content = content.replace('<div class="categoryList"></div>', category.html);
+				content = content.replaceAll('<select id="idCategory" name="idCategory"></select>', category.select);
 			}
 			res.writeHead(200);
 			res.end(content);
@@ -144,7 +151,7 @@ const requestListener = function (req, res) {
 		let id = path.split('/')[2];
 		
 		if (method == 'GET') {
-			let collection = db.get(collectionName, id);
+			let collection = db.getById(collectionName, id);
 			
 			if (!collection) {
 				res.writeHead(404);
@@ -163,11 +170,6 @@ const requestListener = function (req, res) {
 			req.on('end', () => {
 				try {
 					let entity = bodyParser(bodyReq);
-					
-					if (collectionName == 'income' || collectionName == 'cost') {
-						entity.date = new Date().toISOString();
-					}
-					
 					let collection = db.add(collectionName, entity);
 
 					res.setHeader('Content-Type', 'application/json');
@@ -186,7 +188,8 @@ const requestListener = function (req, res) {
 			});
 			req.on('end', () => {
 				try {
-					let collection = db.update(collectionName, bodyParser(bodyReq));
+					let sortFlag = (collectionName == 'cost' || collectionName == 'income') ? true : false;
+					let collection = db.update(collectionName, bodyParser(bodyReq), sortFlag);
 					
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
