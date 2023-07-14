@@ -45,17 +45,31 @@ function getById(collectionName, id) {
 }
 
 function getByIdFull(collectionName, id) {
-	let entity = getById(collectionName, id);
-	let foreignKeyArray = db.foreignKeyRead[collectionName];
+	let entity = { ...getById(collectionName, id) };
+	let aFK = db.foreignKeyRead[collectionName];
 	
-	for (let i = 0; i < foreignKeyArray.length; i++) {
-		let arrTmp = db[foreignKeyArray[i]];
+	if (aFK.length == 0)
+		return { ...entity };
+	
+	for (let i = 0; i < aFK.length; i++) {
+		let idFK = formatId(aFK[i]);
+		entity[idFK] = getByIdFull(aFK[i], entity[idFK]);
 	}
-	
+	return { ...entity };
 }
 
 function getAll(collectionName) {
 	return db[collectionName];
+}
+
+function getAllFull(collectionName) {
+	let arr = [];
+	for (let i = 0; i < db[collectionName].length; i++) {
+		let idColl = formatId(collectionName);
+		let entity = getByIdFull(collectionName, db[collectionName][i][idColl]);
+		arr.push(entity);
+	}
+	return arr;
 }
 
 function add(collectionName, entyty, sort) {
@@ -119,4 +133,4 @@ function compareFunction(a, b) {
 	return a.date.localeCompare(b.date);
 }
 
-module.exports = { initDB, getById, getAll, add, update, remove }
+module.exports = { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove }

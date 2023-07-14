@@ -36,6 +36,7 @@ const formatMoney = (str) => {
 const accountList = () => {
 	let list = db.getAll('account');
 	let html = '<div class="bankAccountList">';
+	let select = '<select id="idAccount" name="idAccount">';
 	
 	for (let i = 0; i < list.length; i++) {
 		let countMoney = list[i].countMoney.toString();
@@ -49,14 +50,16 @@ const accountList = () => {
 		<p class="bankAccountInfo">${list[i].typeAccount}</p>
 		<p class="bankAccountInfo countMoney">${rub} &#8381;</p><p class="countMoney">&nbsp;${kop} &#162;</p>
 		</div>`;
+		select += `<option value="${list[i].idAccount}">${list[i].titleAccount}</option>`;		
 	}
 	html += '</div>';
+	select += '</select>';
 	
-	return html;
+	return { html, select };
 };
 
 const incomeList = () => {
-	let list = db.getAll('income');
+	let list = db.getAllFull('income');
 	let html = `<div id="incomeList">
 	<div class="operationHead">
 		<div>Дата</div>
@@ -69,19 +72,19 @@ const incomeList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="incomeRecord">
-		<div class="hidden">${list[i].idIncome}</div>
+		html += `<div class="incomeRecord" data-id="${list[i].idIncome}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count-income="${list[i].countIncome}" data-comment="${list[i].comment}">
 		<div>${list[i].date}</div>
-		<div>${list[i].idCategory}</div>
+		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
 		</div>`;
 	}
 	html += '</div>';
+	
 	return html;
 };
 
 const costList = () => {
-	let list = db.getAll('cost');
+	let list = db.getAllFull('cost');
 	let html = `<div id="costList">
 	<div class="operationHead">
 		<div>Дата</div>
@@ -94,10 +97,9 @@ const costList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="costRecord">
-		<div class="hidden">${list[i].idCost}</div>
+		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count-cost="${list[i].countCost}" data-comment="${list[i].comment}>
 		<div>${list[i].date}</div>
-		<div>${list[i].idCategory}</div>
+		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
 		</div>`;
 	}
@@ -134,7 +136,10 @@ const requestListener = function (req, res) {
 		.then(content => {
 			if (routes[path].includes('index.html')) {
 				content = content.toString();
-				content = content.replace('<div class="bankAccountList"></div>', accountList());
+				let accounts = accountList();
+				content = content.replace('<div class="bankAccountList"></div>', accounts.html);
+				content = content.replaceAll('<select id="idAccount" name="idAccount"></select>', accounts.select);
+				
 				content = content.replace('<div id="incomeList"></div>', incomeList());
 				content = content.replace('<div id="costList"></div>', costList());
 				

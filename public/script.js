@@ -160,19 +160,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let getIncomeById = (event) => {
 		currentEntity = event.currentTarget;
-		let id = currentEntity.querySelector('.hidden').innerText;
-		
-		ajax('GET', '/income/' + id).then(response => {
-			currentDialog.showModal();
-			currentDialog.querySelector('#idIncome').value = response.idIncome;
-			currentDialog.querySelector('#idCategory').value = response.idCategory;
-			currentDialog.querySelector('#dateIncome').value = response.date;
-			currentDialog.querySelector('#countIncome').value = response.countIncome;
-			
-			hiddenEntityUpdate('income');
-		}).catch(e => {
-			alert(e);
-		});
+		currentDialog.showModal();
+		currentDialog.querySelector('#idIncome').value = currentEntity.dataset.id;
+		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
+		currentDialog.querySelector('#dateIncome').value = currentEntity.dataset.date;
+		currentDialog.querySelector('#countIncome').value = currentEntity.dataset.countIncome;
+		currentDialog.querySelector('#commentIncome').value = currentEntity.dataset.comment;
+		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.idAccount;
+		hiddenEntityUpdate('income');
 	};
 	
 	let incomeList = document.querySelectorAll('.incomeRecord');
@@ -182,19 +177,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let getCostById = (event) => {
 		currentEntity = event.currentTarget;
-		let id = currentEntity.querySelector('.hidden').innerText;
-		
-		ajax('GET', '/cost/' + id).then(response => {
-			currentDialog.showModal();
-			currentDialog.querySelector('#idCost').value = response.idCost;
-			currentDialog.querySelector('#idCategory').value = response.idCategory;
-			currentDialog.querySelector('#dateCost').value = response.date;
-			currentDialog.querySelector('#countCost').value = response.countCost;
-			
-			hiddenEntityUpdate('cost');
-		}).catch(e => {
-			alert(e);
-		});
+		currentDialog.showModal();
+		currentDialog.querySelector('#idCost').value = currentEntity.dataset.id;
+		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
+		currentDialog.querySelector('#dateCost').value = currentEntity.dataset.date;
+		currentDialog.querySelector('#countCost').value = currentEntity.dataset.countCost;
+		currentDialog.querySelector('#commentCost').value = currentEntity.dataset.comment;
+		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.idAccount;
+		hiddenEntityUpdate('cost');
 	};
 	
 	let costList = document.querySelectorAll('.costRecord');
@@ -238,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			let rub = formatMoney(countMoney.split('.')[0]);
 			let kop = countMoney.split('.')[1] ??= '00';
 			let html = `<div class="accountCard">
-			<p class="hidden">${response.idAccount}</p>			
+			<p class="hidden">${response.idAccount}</p>
 			<p class="bankAccountTitle">${response.titleBank}</p>
 			<p class="bankAccountInfo">${response.titleAccount}</p>
 			<p class="bankAccountInfo">${response.typeAccount}</p>
@@ -250,13 +240,25 @@ document.addEventListener('DOMContentLoaded', function () {
 			let newAccount = dom.querySelector('.accountCard');
 			newAccount.addEventListener('click', getAccountById);
 			
-			if (method == 'PUT')
+			if (method == 'PUT') {
 				document.querySelector('.bankAccountList').appendChild(newAccount);
-			else
+				addOrUpdateAccountSelect('PUT', newAccount);
+			} else {
 				currentEntity.innerHTML = newAccount.innerHTML;
+				addOrUpdateAccountSelect('POST', newAccount);
+			}
 		}).catch(e => {
 			alert(e);
 		});
+	};
+	
+	let addOrUpdateAccountSelect = (operation, entity) => {
+		let incomeDialog = document.getElementById('incomeDialog');
+		if (operation == 'PUT') {
+			incomeDialog.querySelector('#idAccount').innerHTML += `<option value="${entity.idAccount}">${entity.titleAccount}</option>`;
+		} else if (operation == 'POST') {
+			incomeDialog.querySelector('#idAccount').options[entity.idAccount].innerText = entity.titleAccount;
+		}
 	};
 	
 	document.getElementById('accountAddOk').addEventListener('click', addOrUpdateAccount);
@@ -323,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (method == 'PUT')
 				document.getElementById('costList').appendChild(newCost);
 			else
-				currentEntity.innerHTML = newCost.innerHTML;					
+				currentEntity.innerHTML = newCost.innerHTML;
 		}).catch(e => {
 			alert(e);
 		});			
@@ -352,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (method == 'PUT')
 				document.querySelector('.categoryList').appendChild(newCategory);
 			else
-				currentEntity.innerHTML = newCategory.innerHTML;				
+				currentEntity.innerHTML = newCategory.innerHTML;
 		}).catch(e => {
 			alert(e);
 		});
