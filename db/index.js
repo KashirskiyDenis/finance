@@ -39,7 +39,7 @@ function getById(collectionName, id) {
 	for (let i = 0; i < db[collectionName].length; i++) {
 		let idDB = formatId(collectionName);
 		if (db[collectionName][i][idDB] == id) {
-			return db[collectionName][i];
+			return { ...db[collectionName][i] };
 		}
 	}
 }
@@ -72,28 +72,35 @@ function getAllFull(collectionName) {
 	return arr;
 }
 
-function add(collectionName, entyty, sort) {
+function add(collectionName, entity, sort) {
 	let id = formatId(collectionName);
-	entyty[id] = db[id]++;
-	db[collectionName].push(entyty);
+	entity[id] = db[id]++;
+	for (let key in entity) {
+		if (Number(entity[key]))
+			entity[key] = +entity[key];
+	}
+	db[collectionName].push(entity);
+	
 	if (sort)
 		db[collectionName].sort(compareFunction);
 	writeDB();
-	return entyty;
+	
+	return { ...entity };
 }
 
-function update(collectionName, entyty, sort) {
+function update(collectionName, entity, sort) {
 	for (let i = 0; i < db[collectionName].length; i++) {
 		let id = formatId(collectionName);
-		if (db[collectionName][i][id] == entyty[id]) {
-			db[collectionName][i] = entyty;
+		if (db[collectionName][i][id] == entity[id]) {
+			db[collectionName][i] = entity;
 			break;
 		}
 	}
 	if (sort)
 		db[collectionName].sort(compareFunction);
 	writeDB();
-	return entyty	
+	
+	return { ...entity };
 }
 
 function remove(collectionName, id) {
@@ -124,7 +131,6 @@ function checkReferentialIntegrity(collectionName, id) {
 			if (tmp[j][idColl] == id)
 				return true;
 		}
-		
 	}
 	return false;
 }

@@ -19,6 +19,7 @@ const bodyParser = (string) => {
 		object[parName] = parValue;
 	}
 	
+	object = toNumber(object);
 	return object;
 };
 
@@ -33,6 +34,18 @@ const formatMoney = (str) => {
 	return arr.join(' ').trim();
 };
 
+const formatId = (str) => {
+	return 'id' + str.charAt(0).toUpperCase() + str.substring(1);
+};
+
+const toNumber = (obj) => {
+	for (let key in obj) {
+		if (Number(obj[key]) || obj[key] == '0')
+			obj[key] = +obj[key];
+	}
+	return obj;
+};
+
 const accountList = () => {
 	let list = db.getAll('account');
 	let html = '<div class="bankAccountList">';
@@ -43,14 +56,13 @@ const accountList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="accountCard">
-		<p class="hidden">${list[i].idAccount}</p>
+		html += `<div class="accountCard" data-id="${list[i].idAccount}">
 		<p class="bankAccountTitle">${list[i].titleBank}</p>
 		<p class="bankAccountInfo">${list[i].titleAccount}</p>
 		<p class="bankAccountInfo">${list[i].typeAccount}</p>
 		<p class="bankAccountInfo countMoney">${rub} &#8381;</p><p class="countMoney">&nbsp;${kop} &#162;</p>
 		</div>`;
-		select += `<option value="${list[i].idAccount}">${list[i].titleAccount}</option>`;		
+		select += `<option value="${list[i].idAccount}">${list[i].titleAccount}</option>`;
 	}
 	html += '</div>';
 	select += '</select>';
@@ -97,7 +109,7 @@ const costList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count-cost="${list[i].countCost}" data-comment="${list[i].comment}>
+		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count-cost="${list[i].countCost}" data-comment="${list[i].comment}">
 		<div>${list[i].date}</div>
 		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
@@ -114,13 +126,12 @@ const categoryList = () => {
 	let select = '<select id="idCategory" name="idCategory">';
 
 	for (let i = 0; i < list.length; i++) {
-		html += `<div class="category">
-		<div class="hidden">${list[i].idCategory}</div>
+		html += `<div class="category" data-id={${list[i].idCategory}">
 		<div class="titleCategory">${list[i].title}</div>
 		<div class="comment">${list[i].comment}</div>
 		</div>`;
 		
-		select += `<option value="${list[i].idCategory}">${list[i].title}</option>`;		
+		select += `<option value="${list[i].idCategory}">${list[i].title}</option>`;
 	}
 	html += '</div>';
 	select += '</select>';
@@ -160,7 +171,7 @@ const requestListener = function (req, res) {
 			
 			if (!collection) {
 				res.writeHead(404);
-				res.end('Not found');			
+				res.end('Not found');
 			} else {
 				res.setHeader('Content-Type', 'application/json');
 				res.writeHead(200);
@@ -175,8 +186,19 @@ const requestListener = function (req, res) {
 			req.on('end', () => {
 				try {
 					let entity = bodyParser(bodyReq);
-					let collection = db.add(collectionName, entity);
-
+					let collection = { ...db.add(collectionName, entity) };
+					
+					if (collectionName == 'income' || collectionName == 'cost') {
+						let account = db.getById('account', entity.idAccount);
+						if (collectionName == 'income')
+							account.countMoney += entity.countIncome;
+						else
+							account.countMoney -= entity.countCost;
+						collection.idAccount = account;
+						collection.idCategory = db.getById('category', collection.idCategory);
+						db.update('account', account);
+					}
+					
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
 					res.end(JSON.stringify(collection));
@@ -193,9 +215,25 @@ const requestListener = function (req, res) {
 			});
 			req.on('end', () => {
 				try {
-					let sortFlag = (collectionName == 'cost' || collectionName == 'income') ? true : false;
-					let collection = db.update(collectionName, bodyParser(bodyReq), sortFlag);
+					let entity = bodyParser(bodyReq);
+					let sortFlag = false;
+					let collection = null;
 					
+					if (collectionName == 'income' || collectionName == 'cost') {
+						let account = db.getById('account', entity.idAccount);
+						let entityOld = db.getById(collectionName, entity[formatId(collectionName)]);
+						
+						sortFlag = true;
+						collection = db.update(collectionName, entity, sortFlag);
+						
+						if (collectionName == 'income')
+							account.countMoney += entityOld.countIncome - entity.countIncome;
+						else
+							account.countMoney += entityOld.countCost - entity.countCost;
+						
+						collection.idAccount = db.update('account', account);
+					}
+				
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
 					res.end(JSON.stringify(collection));
@@ -208,6 +246,15 @@ const requestListener = function (req, res) {
 			try {
 				let result = db.remove(collectionName, id);
 				
+				if (collectionName == 'income') {
+					let account = db.getById('account', entity.idAccount);
+					account.countMoney -= entity.countIncome;
+					db.update('account', account);
+				} else if (collectionName == 'cost') {
+					let account = db.getById('account', entity.idAccount);
+					account.countMoney += entity.countCost;
+					db.update('account', account);
+				}
 				res.setHeader('Content-Type', 'text/plain');
 				res.writeHead(200);
 				res.end(result.toString());

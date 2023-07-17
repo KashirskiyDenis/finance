@@ -107,14 +107,27 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let deleteEntity = (event) => {
 		let collectionName = event.target.dataset['entity'];
-		let id = currentEntity.querySelector('.hidden').innerText;
+		let id = currentEntity.dataset.id;
 		ajax('DELETE', `/${collectionName}/` + id).then(response => {
 			currentDialog.close();
 			currentEntity.remove();
+			if (collectionName == 'account' || collectionName == 'category')
+				deleteEntityOption(id, collectionName);
 		}).catch(e => {
 			alert(e);
 		});		
 	};
+	
+	let deleteEntityOption = (entityId, collectionName) => {
+		let id = formatId(collectionName);
+		let select = document.querySelectorAll('select#' + id);	
+		for (let i = 0; i < select.length; i++) {
+			for (let j = 0; j < select[i].options.length; j++) {
+				if (select[i][j].value == entityId)
+					select[i][j].remove();
+			}
+		}	
+	};	
 	
 	let deleteDialogButtons = document.querySelectorAll('input[data-delete]');
 	for (let i = 0; i < deleteDialogButtons.length; i++) {
@@ -242,22 +255,29 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			if (method == 'PUT') {
 				document.querySelector('.bankAccountList').appendChild(newAccount);
-				addOrUpdateAccountSelect('PUT', newAccount);
+				addOrUpdateAccountSelect('PUT', response);
 			} else {
 				currentEntity.innerHTML = newAccount.innerHTML;
-				addOrUpdateAccountSelect('POST', newAccount);
+				addOrUpdateAccountSelect('POST', response);
 			}
 		}).catch(e => {
 			alert(e);
 		});
 	};
 	
-	let addOrUpdateAccountSelect = (operation, entity) => {
-		let incomeDialog = document.getElementById('incomeDialog');
-		if (operation == 'PUT') {
-			incomeDialog.querySelector('#idAccount').innerHTML += `<option value="${entity.idAccount}">${entity.titleAccount}</option>`;
-		} else if (operation == 'POST') {
-			incomeDialog.querySelector('#idAccount').options[entity.idAccount].innerText = entity.titleAccount;
+	let addOrUpdateAccountSelect = (method, account) => {
+		let select = document.querySelectorAll('select#idAccount');
+		if (method == 'PUT') {
+			for (let i = 0; i < select.length; i++) {
+				select[i].innerHTML += `<option value="${account.idAccount}">${account.titleAccount}</option>`;
+			}
+		} else if (method == 'POST') {
+			for (let i = 0; i < select.length; i++) {
+				for (let j = 0; j < select[i].options.length; j++) {
+					if (select[i][j].value == account.idAccount)
+						select[i][j].innerHTML = account.titleAccount;
+				}
+			}
 		}
 	};
 	
@@ -271,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		income.dateIncome = income.dateIncome.toString().split('T')[0];
-		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&idCategory=${income.idCategory}&countIncome=${income.countIncome}&comment=${income.commentIncome}`;
+		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&idCategory=${income.idCategory}&countIncome=${income.countIncome}&comment=${income.commentIncome}&idAccount=${income.idAccount}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/income/', data).then(response => {
@@ -306,14 +326,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		cost.dateCost = cost.dateCost.toString().split('T')[0];
-		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&idCategory=${cost.idCategory}&countCost=${cost.countCost}&comment=${cost.commentCost}`;
+		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&idCategory=${cost.idCategory}&countCost=${cost.countCost}&comment=${cost.commentCost}&idAccount=${cost.idAccount}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/cost/', data).then(response => {
-			let html = `<div class="costRecord">
-			<div class="hidden">${response.idCost}</div>
+			let html = `<div class="costRecord" data-id="${response.idCost}" data-id-category="${response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="${response.date}" data-count-cost="${response.countCost}" data-comment="${response.comment}">
 			<div>${response.date}</div>
-			<div>${response.idCategory}</div>
+			<div>${response.idCategory.title}</div>
 			<div>${response.countCost} &#8381;</div>
 			</div>`;
 			
@@ -351,13 +370,32 @@ document.addEventListener('DOMContentLoaded', function () {
 			let newCategory = dom.querySelector('.category');
 			newCategory.addEventListener('click', getCategoryById);
 			
-			if (method == 'PUT')
+			if (method == 'PUT') {
 				document.querySelector('.categoryList').appendChild(newCategory);
-			else
+				addOrUpdateCategorySelect(method, response);
+			} else {
 				currentEntity.innerHTML = newCategory.innerHTML;
+				addOrUpdateCategorySelect(method, response);
+			}
 		}).catch(e => {
 			alert(e);
 		});
+	};
+	
+	let addOrUpdateCategorySelect = (method, category) => {
+		let select = document.querySelectorAll('select#idCategory');
+		if (method == 'PUT') {
+			for (let i = 0; i < select.length; i++) {
+				select[i].innerHTML += `<option value="${category.idCategory}">${category.title}</option>`;
+			}
+		} else if (method == 'POST') {
+			for (let i = 0; i < select.length; i++) {
+				for (let j = 0; j < select[i].options.length; j++) {
+					if (select[i][j].value == category.idCategory)
+						select[i][j].innerHTML = category.title;
+				}
+			}
+		}
 	};
 	
 	document.getElementById('categoryAddOk').addEventListener('click', addOrUpdateCategory);
