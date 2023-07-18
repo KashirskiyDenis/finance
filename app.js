@@ -56,7 +56,7 @@ const accountList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="accountCard" data-id="${list[i].idAccount}">
+		html += `<div class="accountCard" data-id="${list[i].idAccount}" data-title-bank="${list[i].titleBank}" data-title-account="${list[i].titleAccount}" data-type-account="${list[i].typeAccount}" data-count-money="${list[i].countMoney}">
 		<p class="bankAccountTitle">${list[i].titleBank}</p>
 		<p class="bankAccountInfo">${list[i].titleAccount}</p>
 		<p class="bankAccountInfo">${list[i].typeAccount}</p>
@@ -126,7 +126,7 @@ const categoryList = () => {
 	let select = '<select id="idCategory" name="idCategory">';
 
 	for (let i = 0; i < list.length; i++) {
-		html += `<div class="category" data-id={${list[i].idCategory}">
+		html += `<div class="category" data-id="${list[i].idCategory}" data-title="${list[i].title}" data-comment="${list[i].comment}">
 		<div class="titleCategory">${list[i].title}</div>
 		<div class="comment">${list[i].comment}</div>
 		</div>`;
@@ -150,10 +150,10 @@ const requestListener = function (req, res) {
 				let accounts = accountList();
 				content = content.replace('<div class="bankAccountList"></div>', accounts.html);
 				content = content.replaceAll('<select id="idAccount" name="idAccount"></select>', accounts.select);
-				
+
 				content = content.replace('<div id="incomeList"></div>', incomeList());
 				content = content.replace('<div id="costList"></div>', costList());
-				
+
 				let category = categoryList();
 				content = content.replace('<div class="categoryList"></div>', category.html);
 				content = content.replaceAll('<select id="idCategory" name="idCategory"></select>', category.select);
@@ -165,10 +165,10 @@ const requestListener = function (req, res) {
 		let method = req.method;
 		let collectionName = path.split('/')[1];
 		let id = path.split('/')[2];
-		
+
 		if (method == 'GET') {
 			let collection = db.getById(collectionName, id);
-			
+
 			if (!collection) {
 				res.writeHead(404);
 				res.end('Not found');
@@ -179,26 +179,27 @@ const requestListener = function (req, res) {
 			}
 		} else if (method == 'PUT') {
 			let bodyReq = '';
-			
+
 			req.on('data', (chankData) => {
 				bodyReq += chankData;
 			});
 			req.on('end', () => {
 				try {
 					let entity = bodyParser(bodyReq);
-					let collection = { ...db.add(collectionName, entity) };
-					
+					let collection = db.add(collectionName, entity);
+
 					if (collectionName == 'income' || collectionName == 'cost') {
 						let account = db.getById('account', entity.idAccount);
+
 						if (collectionName == 'income')
 							account.countMoney += entity.countIncome;
 						else
 							account.countMoney -= entity.countCost;
+
 						collection.idAccount = account;
 						collection.idCategory = db.getById('category', collection.idCategory);
 						db.update('account', account);
 					}
-					
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
 					res.end(JSON.stringify(collection));
@@ -209,31 +210,48 @@ const requestListener = function (req, res) {
 			});
 		} else if (method == 'POST') {
 			let bodyReq = '';
-			
+
 			req.on('data', (chankData) => {
 				bodyReq += chankData;
 			});
 			req.on('end', () => {
+				let entity = bodyParser(bodyReq);
+				let sortFlag = false;
+				let collection = null;
+
 				try {
-					let entity = bodyParser(bodyReq);
-					let sortFlag = false;
-					let collection = null;
-					
 					if (collectionName == 'income' || collectionName == 'cost') {
 						let account = db.getById('account', entity.idAccount);
 						let entityOld = db.getById(collectionName, entity[formatId(collectionName)]);
-						
+
 						sortFlag = true;
 						collection = db.update(collectionName, entity, sortFlag);
+
+						if (entity.idAccount == entityOld.idAccount) {
+							if (collectionName == 'income')
+								account.countMoney += entity.countIncome - entityOld.countIncome;
+							else
+								account.countMoney += entityOld.countCost - entity.countCost;
+
+							collection.idAccount = db.update('account', account);
+							collection.idCategory = db.getById('category', collection.idCategory);
+						} else {
+							let accountOld = db.getById('account', entityOld.idAccount);
 						
-						if (collectionName == 'income')
-							account.countMoney += entityOld.countIncome - entity.countIncome;
-						else
-							account.countMoney += entityOld.countCost - entity.countCost;
-						
-						collection.idAccount = db.update('account', account);
+							if (collectionName == 'income') {
+								accountOld.countMoney -= entity.countIncome;
+								account.countMoney += entity.countIncome;
+							} else {
+								accountOld.countMoney += entityOld.countCost;
+								account.countMoney -= entity.countCost;
+							}
+							db.update('account', accountOld);
+							collection.idAccount = db.update('account', account);
+							collection.idCategory = db.getById('category', collection.idCategory);
+						}
+					} else {
+						collection = db.update(collectionName, entity);
 					}
-				
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
 					res.end(JSON.stringify(collection));
@@ -244,22 +262,24 @@ const requestListener = function (req, res) {
 			});
 		} else if (method == 'DELETE') {
 			try {
+				let entity = db.getById(collectionName, id);
 				let result = db.remove(collectionName, id);
-				
-				if (collectionName == 'income') {
+
+				if (collectionName == 'income' || collectionName == 'cost') {
 					let account = db.getById('account', entity.idAccount);
-					account.countMoney -= entity.countIncome;
-					db.update('account', account);
-				} else if (collectionName == 'cost') {
-					let account = db.getById('account', entity.idAccount);
-					account.countMoney += entity.countCost;
+
+					if (collectionName == 'income')
+						account.countMoney -= entity.countIncome;
+					else
+						account.countMoney += entity.countCost;
+
 					db.update('account', account);
 				}
 				res.setHeader('Content-Type', 'text/plain');
 				res.writeHead(200);
 				res.end(result.toString());
 			} catch (e) {
-				res.writeHead(500);
+				res.writeHead(422);
 				res.end(e.message);
 			}
 		}

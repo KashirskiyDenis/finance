@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			request.onload = function () {
 				if (this.status === 200) {
 					resolve(JSON.parse(this.response));
+				} else if (this.status === 422) {
+					reject(this.responseText);
 				} else {
 					let error = new Error(this.statusText);
 					error.code = this.status;
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			};
 			
-			request.onerror = function () {
+			request.onerror = function (error) {
 				reject(new Error('Network error'));
 			};
 		});
@@ -108,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let deleteEntity = (event) => {
 		let collectionName = event.target.dataset['entity'];
 		let id = currentEntity.dataset.id;
-		ajax('DELETE', `/${collectionName}/` + id).then(response => {
+		ajax('DELETE', `/${collectionName}/` + id, null).then(response => {
 			currentDialog.close();
 			currentEntity.remove();
 			if (collectionName == 'account' || collectionName == 'category')
@@ -150,20 +152,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let getAccountById = (event) => {
 		currentEntity = event.currentTarget;
-		let id = currentEntity.querySelector('.hidden').innerText;
-		
-		ajax('GET', '/account/' + id).then(response => {
-			currentDialog.showModal();
-			currentDialog.querySelector('#idAccount').value = response.idAccount;
-			currentDialog.querySelector('#titleBank').value = response.titleBank;
-			currentDialog.querySelector('#titleAccount').value = response.titleAccount;
-			currentDialog.querySelector('#typeAccount').value = response.typeAccount;
-			currentDialog.querySelector('#countMoney').value = response.countMoney;
-			
-			hiddenEntityUpdate('account');
-		}).catch(e => {
-			alert(e);
-		});
+		currentDialog.showModal();
+		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.id;
+		currentDialog.querySelector('#titleBank').value = currentEntity.dataset.titleBank;
+		currentDialog.querySelector('#titleAccount').value = currentEntity.dataset.titleAccount;
+		currentDialog.querySelector('#typeAccount').value = currentEntity.dataset.typeAccount;
+		currentDialog.querySelector('#countMoney').value = currentEntity.dataset.countMoney;
+		hiddenEntityUpdate('account');
 	};	
 	
 	let accountList = document.querySelectorAll('.accountCard');
@@ -207,18 +202,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let getCategoryById = (event) => {
 		currentEntity = event.currentTarget;
-		let id = currentEntity.querySelector('.hidden').innerText;
-		
-		ajax('GET', '/category/' + id).then(response => {
-			currentDialog.showModal();
-			currentDialog.querySelector('#idCategory').value = response.idCategory;
-			currentDialog.querySelector('#titleCategory').value = response.title;
-			currentDialog.querySelector('#commentCategory').value = response.comment;
-			
-			hiddenEntityUpdate('category');
-		}).catch(e => {
-			alert(e);
-		});		
+		currentDialog.showModal();
+		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
+		currentDialog.querySelector('#titleCategory').value = currentEntity.dataset.title;
+		currentDialog.querySelector('#commentCategory').value = currentEntity.dataset.comment;
+		hiddenEntityUpdate('category');
 	};
 	
 	let categoryList = document.querySelectorAll('.category');
@@ -237,10 +225,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/account/', data).then(response => {
-			let countMoney = response.countMoney;
+			let countMoney = response.countMoney.toString();
 			let rub = formatMoney(countMoney.split('.')[0]);
 			let kop = countMoney.split('.')[1] ??= '00';
-			let html = `<div class="accountCard">
+			let html = `<div class="accountCard" data-id="${response.idAccount}" data-title-bank="${response.titleBank}" data-title-account="${response.titleAccount}" data-type-account="${response.typeAccount}" data-count-money="${response.countMoney}">
 			<p class="hidden">${response.idAccount}</p>
 			<p class="bankAccountTitle">${response.titleBank}</p>
 			<p class="bankAccountInfo">${response.titleAccount}</p>
@@ -295,10 +283,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/income/', data).then(response => {
-			let html = `<div class="incomeRecord">
+			let html = `<div class="incomeRecord" data-id="${response.idIncome}" data-id-category="$response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="$response.date}" data-count-income="${response.countIncome}" data-comment="${response.comment}">
 			<div class="hidden">${response.idIncome}</div>
 			<div>${response.date}</div>
-			<div>${response.idCategory}</div>
+			<div>${response.idCategory.title}</div>
 			<div>${response.countIncome} &#8381;</div>
 			</div>`;
 			
@@ -359,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/category/', data).then(response => {
-			let html = `<div class="category">
+			let html = `<div class="category" data-id="${response.idCategory}" data-title="${response.title}" data-comment="${response.comment}">
 			<div class="hidden">${response.idCategory}</div>
 			<div class="titleCategory">${response.title}</div>
 			<div class="comment">${response.comment}</div>

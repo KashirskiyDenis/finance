@@ -17,9 +17,9 @@
 			<form id="accountForm">
 				<input id="idAccount" name="idAccount" type="hidden">
 				<label for="titleBank">Название банка</label>
-				<input id="titleBank" name="titleBank" type="text" required />
+				<input id="titleBank" name="titleBank" type="text" required>
 				<label for="titleAccount">Название счёта</label>
-				<input id="titleAccount" name="titleAccount" type="text" required />
+				<input id="titleAccount" name="titleAccount" type="text" required>
 				<label for="typeAccount">Тип счёта</label>
 				<select id="typeAccount" name="typeAccount">
 					<option value="Дебетовый счёт">Дебетовый счёт</option>
@@ -29,11 +29,11 @@
 				<label>Сумма, &#8381;</label>
 				<input id="countMoney" name="countMoney" type="number" required>
 				<div class="dialogControl">
-					<input type="button" class="button" id="accountAddOk" value="Create" />
-					<input type="button" class="button hidden" id="accountUpdateOk" value="Update" />
-					<input type="button" class="button" data-cancel data-dialog="accountDialog" value="Cancel" />
-					<input type="button" class="button" id="accountReset" data-reset value="Reset" />
-					<input type="button" class="button hidden" id="accountDelete" data-delete data-entity="account" value="Delete" />
+					<input type="button" class="button" id="accountAddOk" value="Create">
+					<input type="button" class="button hidden" id="accountUpdateOk" value="Update">
+					<input type="button" class="button" data-cancel data-dialog="accountDialog" value="Cancel">
+					<input type="button" class="button" id="accountReset" data-reset value="Reset">
+					<input type="button" class="button hidden" id="accountDelete" data-delete data-entity="account" value="Delete">
 				</div>
 			</form>
 		</dialog>
@@ -42,21 +42,21 @@
 			<form id="incomeForm">			
 				<input id="idIncome" name="idIncome" type="hidden">
 				<label for="dateIncome">Дата</label>
-				<input id="dateIncome" name="dateIncome" type="date" required />
+				<input id="dateIncome" name="dateIncome" type="date" required>
 				<label for="idCategory">Категория</label>
 				<select id="idCategory" name="idCategory"></select>
 				<label>Сумма, &#8381;</label>
 				<input id="countIncome" name="countIncome" type="number" required>
 				<label for="commentIncome">Комментарий</label>
-				<input id="commentIncome" name="commentIncome" type="text" />
+				<input id="commentIncome" name="commentIncome" type="text">
 				<label for="idAccount">Счёт зачисления</label>
 				<select id="idAccount" name="idAccount"></select>
 				<div class="dialogControl">
-					<input type="button" class="button" id="incomeAddOk" value="Create" />
-					<input type="button" class="button hidden" id="incomeUpdateOk" value="Update" />
-					<input type="button" class="button" data-cancel data-dialog="incomeDialog" value="Cancel" />
-					<input type="button" class="button" id="incomeReset" data-reset value="Reset" />
-					<input type="button" class="button hidden" id="incomeDelete" data-delete data-entity="income" value="Delete" />
+					<input type="button" class="button" id="incomeAddOk" value="Create">
+					<input type="button" class="button hidden" id="incomeUpdateOk" value="Update">
+					<input type="button" class="button" data-cancel data-dialog="incomeDialog" value="Cancel">
+					<input type="button" class="button" id="incomeReset" data-reset value="Reset">
+					<input type="button" class="button hidden" id="incomeDelete" data-delete data-entity="income" value="Delete">
 				</div>
 			</form>
 		</dialog>
@@ -65,21 +65,21 @@
 			<form id="costForm">
 				<input id="idCost" name="idCost" type="hidden">
 				<label for="dateCost">Дата</label>
-				<input id="dateCost" name="dateCost" type="date" required />
+				<input id="dateCost" name="dateCost" type="date" required>
 				<label for="idCategory">Категория траты</label>
 				<select id="idCategory" name="idCategory"></select>
 				<label>Сумма, &#8381;</label>
 				<input id="countCost" name="countCost" type="number" required>
 				<label for="commentCost">Комментарий</label>
-				<input id="commentCost" name="commentCost" type="text" />
+				<input id="commentCost" name="commentCost" type="text">
 				<label for="idAccount">Счёт списания</label>
 				<select id="idAccount" name="idAccount"></select>
 				<div class="dialogControl">
-					<input type="button" class="button" id="costAddOk" value="Create" />
-					<input type="button" class="button hidden" id="costUpdateOk" value="Update" />
-					<input type="button" class="button" data-cancel data-dialog="costDialog" value="Cancel" />
-					<input type="button" class="button" id="costReset" data-reset value="Reset" />
-					<input type="button" class="button hidden" id="costDelete" data-delete data-entity="cost" value="Delete" />	
+					<input type="button" class="button" id="costAddOk" value="Create">
+					<input type="button" class="button hidden" id="costUpdateOk" value="Update">
+					<input type="button" class="button" data-cancel data-dialog="costDialog" value="Cancel">
+					<input type="button" class="button" id="costReset" data-reset value="Reset">
+					<input type="button" class="button hidden" id="costDelete" data-delete data-entity="cost" value="Delete">	
 				</div>
 			</form>
 		</dialog>
@@ -88,15 +88,15 @@
 			<form id="categoryForm">
 				<input id="idCategory" type="hidden" name="idCategory">
 				<label for="titleCategory">Название категории</label>
-				<input id="titleCategory" name="titleCategory" type="text" required />
+				<input id="titleCategory" name="titleCategory" type="text" required>
 				<label for="commentCategory">Комментарий</label>
-				<input id="commentCategory" name="commentCategory" type="text" required />
+				<input id="commentCategory" name="commentCategory" type="text" required>
 				<div class="dialogControl">
-					<input type="button" class="button" id="categoryAddOk" value="Create" />
-					<input type="button" class="button hidden" id="categoryUpdateOk" value="Update" />
-					<input type="button" class="button" data-cancel data-dialog="categoryDialog" value="Cancel" />
-					<input type="button" class="button" id="categoryReset" data-reset value="Reset" />
-					<input type="button" class="button hidden" id="categoryDelete" data-delete data-entity="category" value="Delete" />
+					<input type="button" class="button" id="categoryAddOk" value="Create">
+					<input type="button" class="button hidden" id="categoryUpdateOk" value="Update">
+					<input type="button" class="button" data-cancel data-dialog="categoryDialog" value="Cancel">
+					<input type="button" class="button" id="categoryReset" data-reset value="Reset">
+					<input type="button" class="button hidden" id="categoryDelete" data-delete data-entity="category" value="Delete">
 				</div>
 			</form>
 		</dialog>
