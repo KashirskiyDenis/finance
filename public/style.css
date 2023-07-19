@@ -187,3 +187,18 @@ a:hover {
 .hidden {
 	display: none;
 }
+.titleTableStatistics h3 {
+	text-align: center;
+}
+.chartBody {
+	display: grid;
+	grid-template-columns: 150px auto 75px;
+	grid-auto-rows: 50px;
+	column-gap: 10px;
+	row-gap: 10px;
+}
+.chartBody div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

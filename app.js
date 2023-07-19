@@ -46,6 +46,24 @@ const toNumber = (obj) => {
 	return obj;
 };
 
+const countMoneyByCategory = () => {
+	let list = db.getAllFull('income');
+	let currentMonthFirstDay = new Date().toISOString().split(/\d\dT/)[0] + '01';
+	let categoryIncome = {};
+	
+	for (let i = 0; i < list.length; i++) {
+		if (currentMonthFirstDay.localeCompare(list[i].date) > 0)
+			continue;
+
+		if (categoryIncome[list[i].idCategory.title])
+			categoryIncome[list[i].idCategory.title] += list[i].countIncome;
+		else
+			categoryIncome[list[i].idCategory.title] = list[i].countIncome;
+	}
+	
+	return categoryIncome;
+};
+
 const accountList = () => {
 	let list = db.getAll('account');
 	let html = '<div class="bankAccountList">';
