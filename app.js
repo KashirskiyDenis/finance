@@ -46,22 +46,67 @@ const toNumber = (obj) => {
 	return obj;
 };
 
-const countMoneyByCategory = () => {
-	let list = db.getAllFull('income');
+const countMoneyByAccountCurrentMonth = (categoryName) => {
+	let list = db.getAllFull(categoryName);
 	let currentMonthFirstDay = new Date().toISOString().split(/\d\dT/)[0] + '01';
-	let categoryIncome = {};
+	let CMBA = new Map();
 	
 	for (let i = 0; i < list.length; i++) {
 		if (currentMonthFirstDay.localeCompare(list[i].date) > 0)
 			continue;
-
-		if (categoryIncome[list[i].idCategory.title])
-			categoryIncome[list[i].idCategory.title] += list[i].countIncome;
-		else
-			categoryIncome[list[i].idCategory.title] = list[i].countIncome;
+		
+		let title = list[i].idAccount.titleAccount;
+		if (CMBA.get(title)) {
+			let sum = CMBA.get(title) + list[i].count;
+			CMBA.set(title, sum);
+		} else
+			CMBA.set(title, list[i].count);
 	}
 	
-	return categoryIncome;
+	return CMBA;
+	
+};
+
+const countMoneyByCategoryCurrentMonth = (categoryName) => {
+	let list = db.getAllFull(categoryName);
+	let currentMonthFirstDay = new Date().toISOString().split(/\d\dT/)[0] + '01';
+	let CMBC = new Map();
+	
+	for (let i = 0; i < list.length; i++) {
+		if (currentMonthFirstDay.localeCompare(list[i].date) > 0)
+			continue;
+		
+		let title = list[i].idCategory.title;
+		if (CMBC.get(title)) {
+			let sum = CMBC.get(title) + list[i].count;
+			CMBC.set(title, sum);
+		} else
+			CMBC.set(title, list[i].count);
+	}
+	
+	return CMBC;
+};
+
+const createDataForChart = (assArr) => {
+	let max = -1;
+	let data = [];
+	
+	for (let entry of assArr) {
+		let key = Object.values(entry)[0];
+		let val = Object.values(entry)[1];
+		
+		if (val > max)
+			max = val;
+		
+		data.push({ title : key , val : val });
+	}
+
+	for (let i =0; i < data.length; i++) {
+		let tmp = data[i].val / max * 100;
+		data[i].percent = Math.floor(tmp * 100) / 100;
+	}
+	
+	return data;
 };
 
 const accountList = () => {
@@ -98,11 +143,11 @@ const incomeList = () => {
 	</div>`;
 	
 	for (let i = 0; i < list.length; i++) {
-		let countMoney = list[i].countIncome.toString();
+		let countMoney = list[i].count.toString();
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="incomeRecord" data-id="${list[i].idIncome}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count-income="${list[i].countIncome}" data-comment="${list[i].comment}">
+		html += `<div class="incomeRecord" data-id="${list[i].idIncome}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}">
 		<div>${list[i].date}</div>
 		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
@@ -123,11 +168,11 @@ const costList = () => {
 	</div>`;
 	
 	for (let i = 0; i < list.length; i++) {
-		let countMoney = list[i].countCost.toString();
+		let countMoney = list[i].count.toString();
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count-cost="${list[i].countCost}" data-comment="${list[i].comment}">
+		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}">
 		<div>${list[i].date}</div>
 		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
@@ -157,6 +202,25 @@ const categoryList = () => {
 	return { html, select };
 };
 
+const createChartHTML = (data, titleChart) => {
+	let html = `<div class="chart">
+	<h3>${titleChart}</h3>
+	<div class="chartBody">`;
+	
+	for (let i = 0; i < data.length; i++) {
+		let rub = formatMoney(data[i].val.toString().split('.')[0]);
+		let kop = data[i].val.toString().split('.')[1] ??= '00';
+		
+		html += `<div>${data[i].title}</div>
+		<div style="background-image: linear-gradient(to right, #1978d2 ${data[i].percent}%, #ffffff ${data[i].percent}% 100%);"></div>
+		<div>${rub}.${kop} &#8381;</div>`;
+	}
+	
+	html += '</div></div>'
+	
+	return html;
+};
+
 const requestListener = function (req, res) {
 	let path = url.parse(req.url).pathname;
 	
@@ -175,6 +239,16 @@ const requestListener = function (req, res) {
 				let category = categoryList();
 				content = content.replace('<div class="categoryList"></div>', category.html);
 				content = content.replaceAll('<select id="idCategory" name="idCategory"></select>', category.select);
+				
+				let dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('income'));
+				let chartsHTML = createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
+				dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('cost'));
+				chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
+				dataChart = createDataForChart(countMoneyByAccountCurrentMonth('income'));
+				chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
+				dataChart = createDataForChart(countMoneyByAccountCurrentMonth('cost'));
+				chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
+				content = content.replace('<div class="chart"></div>', chartsHTML);
 			}
 			res.writeHead(200);
 			res.end(content);
@@ -210,9 +284,9 @@ const requestListener = function (req, res) {
 						let account = db.getById('account', entity.idAccount);
 
 						if (collectionName == 'income')
-							account.countMoney += entity.countIncome;
+							account.countMoney += entity.count;
 						else
-							account.countMoney -= entity.countCost;
+							account.countMoney -= entity.count;
 
 						collection.idAccount = account;
 						collection.idCategory = db.getById('category', collection.idCategory);
@@ -247,9 +321,9 @@ const requestListener = function (req, res) {
 
 						if (entity.idAccount == entityOld.idAccount) {
 							if (collectionName == 'income')
-								account.countMoney += entity.countIncome - entityOld.countIncome;
+								account.countMoney += entity.count - entityOld.count;
 							else
-								account.countMoney += entityOld.countCost - entity.countCost;
+								account.countMoney += entityOld.count - entity.count;
 
 							collection.idAccount = db.update('account', account);
 							collection.idCategory = db.getById('category', collection.idCategory);
@@ -257,11 +331,11 @@ const requestListener = function (req, res) {
 							let accountOld = db.getById('account', entityOld.idAccount);
 						
 							if (collectionName == 'income') {
-								accountOld.countMoney -= entity.countIncome;
-								account.countMoney += entity.countIncome;
+								accountOld.countMoney -= entity.count;
+								account.countMoney += entity.count;
 							} else {
-								accountOld.countMoney += entityOld.countCost;
-								account.countMoney -= entity.countCost;
+								accountOld.countMoney += entityOld.count;
+								account.countMoney -= entity.count;
 							}
 							db.update('account', accountOld);
 							collection.idAccount = db.update('account', account);
@@ -287,9 +361,9 @@ const requestListener = function (req, res) {
 					let account = db.getById('account', entity.idAccount);
 
 					if (collectionName == 'income')
-						account.countMoney -= entity.countIncome;
+						account.countMoney -= entity.count;
 					else
-						account.countMoney += entity.countCost;
+						account.countMoney += entity.count;
 
 					db.update('account', account);
 				}

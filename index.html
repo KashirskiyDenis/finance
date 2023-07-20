@@ -46,7 +46,7 @@
 				<label for="idCategory">Категория</label>
 				<select id="idCategory" name="idCategory"></select>
 				<label>Сумма, &#8381;</label>
-				<input id="countIncome" name="countIncome" type="number" required>
+				<input id="count" name="count" type="number" required>
 				<label for="commentIncome">Комментарий</label>
 				<input id="commentIncome" name="commentIncome" type="text">
 				<label for="idAccount">Счёт зачисления</label>
@@ -69,7 +69,7 @@
 				<label for="idCategory">Категория траты</label>
 				<select id="idCategory" name="idCategory"></select>
 				<label>Сумма, &#8381;</label>
-				<input id="countCost" name="countCost" type="number" required>
+				<input id="count" name="count" type="number" required>
 				<label for="commentCost">Комментарий</label>
 				<input id="commentCost" name="commentCost" type="text">
 				<label for="idAccount">Счёт списания</label>
@@ -129,25 +129,9 @@
 					<div class="categoryList"></div>
 				</div>
 				<div id="statisticsContent" style="display: none">
-					<h2>Статистика по счетам</h2>
+					<h2>Статистика расходов/доходов</h2>
 					<div class="titleTableStatistics">
-					<div class="chart">
-						<h3>Название графика</h3>
-						<div class="chartBody">
-							<div>Название категории</div>
-							<div></div>
-							<div>Деньги</div>
-							<div>Название категории</div>
-							<div></div>
-							<div>Деньги</div>
-							<div>Название категории</div>
-							<div></div>
-							<div>Деньги</div>
-							<div>Название категории</div>
-							<div></div>
-							<div>Деньги</div>
-						</div>
-					</div>
+						<div class="chart"></div>
 					</div>
 				</div>
 			</main>

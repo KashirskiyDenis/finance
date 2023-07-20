@@ -190,15 +190,27 @@ a:hover {
 .titleTableStatistics h3 {
 	text-align: center;
 }
+.chart {
+	cursor: pointer;
+	border: 1px solid #f0f0f0;
+	border-radius: 5px;
+	margin: 5px;
+	padding-top: 0px;
+	padding-bottom: 10px;
+	transition: all 0.5s;
+}
+.chart:hover {
+	border-color: #1978d2;
+	box-shadow: 0.25rem 0.25rem 0.25rem #d3d3d3;
+}
 .chartBody {
 	display: grid;
-	grid-template-columns: 150px auto 75px;
-	grid-auto-rows: 50px;
-	column-gap: 10px;
-	row-gap: 10px;
+	grid-template-columns: 175px auto 100px;
+	grid-auto-rows: 30px;
+	column-gap: 5px;
+	row-gap: 5px;
 }
-.chartBody div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
+.chartBody div:nth-child(3n+1) {
+	text-align: right;
 }

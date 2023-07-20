@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		currentDialog.querySelector('#idIncome').value = currentEntity.dataset.id;
 		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
 		currentDialog.querySelector('#dateIncome').value = currentEntity.dataset.date;
-		currentDialog.querySelector('#countIncome').value = currentEntity.dataset.countIncome;
+		currentDialog.querySelector('#count').value = currentEntity.dataset.count;
 		currentDialog.querySelector('#commentIncome').value = currentEntity.dataset.comment;
 		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.idAccount;
 		hiddenEntityUpdate('income');
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		currentDialog.querySelector('#idCost').value = currentEntity.dataset.id;
 		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
 		currentDialog.querySelector('#dateCost').value = currentEntity.dataset.date;
-		currentDialog.querySelector('#countCost').value = currentEntity.dataset.countCost;
+		currentDialog.querySelector('#count').value = currentEntity.dataset.count;
 		currentDialog.querySelector('#commentCost').value = currentEntity.dataset.comment;
 		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.idAccount;
 		hiddenEntityUpdate('cost');
@@ -274,20 +274,20 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let addOrUpdateIncome = (event) => {
 		let income = Object.fromEntries(new FormData(document.getElementById('incomeForm')).entries());
-		if (income.countIncome <= 0) {
+		if (income.count <= 0) {
 			alert('Сумма не должна быть меньше или раной нулю.');
 			return;
 		}
 		income.dateIncome = income.dateIncome.toString().split('T')[0];
-		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&idCategory=${income.idCategory}&countIncome=${income.countIncome}&comment=${income.commentIncome}&idAccount=${income.idAccount}`;
+		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&idCategory=${income.idCategory}&count=${income.count}&comment=${income.commentIncome}&idAccount=${income.idAccount}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/income/', data).then(response => {
-			let html = `<div class="incomeRecord" data-id="${response.idIncome}" data-id-category="$response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="$response.date}" data-count-income="${response.countIncome}" data-comment="${response.comment}">
+			let html = `<div class="incomeRecord" data-id="${response.idIncome}" data-id-category="$response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="$response.date}" data-count="${response.count}" data-comment="${response.comment}">
 			<div class="hidden">${response.idIncome}</div>
 			<div>${response.date}</div>
 			<div>${response.idCategory.title}</div>
-			<div>${response.countIncome} &#8381;</div>
+			<div>${response.count} &#8381;</div>
 			</div>`;
 			
 			currentDialog.close();
@@ -309,19 +309,19 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let addOrUpdateCost = () => {
 		let cost = Object.fromEntries(new FormData(document.getElementById('costForm')).entries());
-		if (cost.countCost <= 0) {
+		if (cost.count <= 0) {
 			alert('Сумма не должна быть меньше или раной нулю.');
 			return;
 		}
 		cost.dateCost = cost.dateCost.toString().split('T')[0];
-		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&idCategory=${cost.idCategory}&countCost=${cost.countCost}&comment=${cost.commentCost}&idAccount=${cost.idAccount}`;
+		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&idCategory=${cost.idCategory}&count=${cost.count}&comment=${cost.commentCost}&idAccount=${cost.idAccount}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/cost/', data).then(response => {
-			let html = `<div class="costRecord" data-id="${response.idCost}" data-id-category="${response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="${response.date}" data-count-cost="${response.countCost}" data-comment="${response.comment}">
+			let html = `<div class="costRecord" data-id="${response.idCost}" data-id-category="${response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="${response.date}" data-count="${response.count}" data-comment="${response.comment}">
 			<div>${response.date}</div>
 			<div>${response.idCategory.title}</div>
-			<div>${response.countCost} &#8381;</div>
+			<div>${response.count} &#8381;</div>
 			</div>`;
 			
 			currentDialog.close();
