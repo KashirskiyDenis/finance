@@ -17,6 +17,27 @@ h2 {
     margin: 0px 10px;
 	padding-bottom: 5px;
 }
+h3 {
+    font-weight: 400;
+}
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+	border-radius: 5px;
+    left: 50%;
+	transform: translateX(-50%);
+    background: #d3d3d3;
+    padding: 4.5px 10px;
+    visibility: hidden;
+	z-index: 1;
+} 
+[data-tooltip]:hover::after {
+    visibility: visible;
+	opacity: 0.75;
+}
 dialog {
 	width: 305px;
 	border: 1px solid #1978d2;
@@ -191,7 +212,6 @@ a:hover {
 	text-align: center;
 }
 .chart {
-	cursor: pointer;
 	border: 1px solid #f0f0f0;
 	border-radius: 5px;
 	margin: 5px;
@@ -210,7 +230,6 @@ a:hover {
 	column-gap: 5px;
 	row-gap: 5px;
 }
-
 .chartBody div:nth-child(3n+1) {
 	text-align: right;
 }

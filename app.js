@@ -64,7 +64,6 @@ const countMoneyByAccountCurrentMonth = (categoryName) => {
 	}
 	
 	return CMBA;
-	
 };
 
 const countMoneyByCategoryCurrentMonth = (categoryName) => {
@@ -89,6 +88,7 @@ const countMoneyByCategoryCurrentMonth = (categoryName) => {
 
 const createDataForChart = (assArr) => {
 	let max = -1;
+	let sum = 0;
 	let data = [];
 	
 	for (let entry of assArr) {
@@ -98,12 +98,15 @@ const createDataForChart = (assArr) => {
 		if (val > max)
 			max = val;
 		
+		sum += val;
 		data.push({ title : key , val : val });
 	}
 
 	for (let i =0; i < data.length; i++) {
 		let tmp = data[i].val / max * 100;
 		data[i].percent = Math.floor(tmp * 100) / 100;
+		tmp = data[i].val / sum * 100;
+		data[i].percentMax = Math.floor(tmp * 100) / 100;
 	}
 	
 	return data;
@@ -212,13 +215,25 @@ const createChartHTML = (data, titleChart) => {
 		let kop = data[i].val.toString().split('.')[1] ??= '00';
 		
 		html += `<div>${data[i].title}</div>
-		<div style="background-image: linear-gradient(to right, #1978d2 ${data[i].percent}%, #ffffff ${data[i].percent}% 100%);"></div>
+		<div style="background-image: linear-gradient(to right, #1978d2 ${data[i].percent}%, #ffffff ${data[i].percent}% 100%);" data-tooltip="Процент от общей суммы ${data[i].percentMax}"></div>
 		<div>${rub}.${kop} &#8381;</div>`;
 	}
 	
 	html += '</div></div>'
 	
 	return html;
+};
+
+const createAllChartHTML = () => {
+	let dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('income'));
+	let chartsHTML = createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
+	dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('cost'));
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
+	dataChart = createDataForChart(countMoneyByAccountCurrentMonth('income'));
+	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
+	dataChart = createDataForChart(countMoneyByAccountCurrentMonth('cost'));
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');	
+	return chartsHTML;
 };
 
 const requestListener = function (req, res) {
@@ -240,14 +255,7 @@ const requestListener = function (req, res) {
 				content = content.replace('<div class="categoryList"></div>', category.html);
 				content = content.replaceAll('<select id="idCategory" name="idCategory"></select>', category.select);
 				
-				let dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('income'));
-				let chartsHTML = createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
-				dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('cost'));
-				chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
-				dataChart = createDataForChart(countMoneyByAccountCurrentMonth('income'));
-				chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
-				dataChart = createDataForChart(countMoneyByAccountCurrentMonth('cost'));
-				chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
+				let chartsHTML = createAllChartHTML();
 				content = content.replace('<div class="chart"></div>', chartsHTML);
 			}
 			res.writeHead(200);
