@@ -295,9 +295,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			let newIncome = dom.querySelector('.incomeRecord');
 			newIncome.addEventListener('click', getIncomeById);
 			
-			if (method == 'PUT')
+			if (method == 'PUT') {
 				document.getElementById('incomeList').appendChild(newIncome);
-			else
+				updateAccountCountMoney(response.idAccount.idAccount, response.count);
+			} else
 				currentEntity.innerHTML = newIncome.innerHTML;			
 		}).catch(e => {
 			alert(e);
@@ -329,9 +330,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			let newCost = dom.querySelector('.costRecord');
 			newCost.addEventListener('click', getCostById);
 			
-			if (method == 'PUT')
+			if (method == 'PUT') {
 				document.getElementById('costList').appendChild(newCost);
-			else
+				updateAccountCountMoney(response.idAccount.idAccount, -1 * response.count);
+			} else
 				currentEntity.innerHTML = newCost.innerHTML;
 		}).catch(e => {
 			alert(e);
@@ -340,6 +342,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	document.getElementById('costAddOk').addEventListener('click', addOrUpdateCost);
 	document.getElementById('costUpdateOk').addEventListener('click', addOrUpdateCost);
+	
+	let updateAccountCountMoney = (idAccount, count) => {
+		let account = document.querySelector(`div[data-id="${idAccount}"]`);
+		account.dataset.countMoney = +(account.dataset.countMoney) + count;
+		let rub = formatMoney(account.dataset.countMoney.split('.')[0]);
+		let kop = account.dataset.countMoney.split('.')[1] ??= '00';		
+		rub = rub + ' &#8381;';
+		kop = kop + ' &#162;';
+		
+		account.querySelectorAll('.countMoney')[0].innerHTML = rub;
+		account.querySelectorAll('.countMoney')[1].innerHTML = kop;
+	};
 	
 	let addOrUpdateCategory = () => {
 		let category = Object.fromEntries(new FormData(document.getElementById('categoryForm')).entries());

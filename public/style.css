@@ -225,7 +225,7 @@ a:hover {
 }
 .chartBody {
 	display: grid;
-	grid-template-columns: 175px auto 100px;
+	grid-template-columns: 185px auto 110px;
 	grid-auto-rows: 30px;
 	column-gap: 5px;
 	row-gap: 5px;

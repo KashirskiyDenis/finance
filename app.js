@@ -57,7 +57,7 @@ const countMoneyByAccountCurrentMonth = (categoryName) => {
 		
 		let title = list[i].idAccount.titleAccount;
 		if (CMBA.get(title)) {
-			let sum = CMBA.get(title) + list[i].count;
+			let sum = round(CMBA.get(title) + list[i].count);
 			CMBA.set(title, sum);
 		} else
 			CMBA.set(title, list[i].count);
@@ -76,15 +76,20 @@ const countMoneyByCategoryCurrentMonth = (categoryName) => {
 			continue;
 		
 		let title = list[i].idCategory.title;
+		
 		if (CMBC.get(title)) {
-			let sum = CMBC.get(title) + list[i].count;
+			let sum = round(CMBC.get(title) + list[i].count);
 			CMBC.set(title, sum);
 		} else
 			CMBC.set(title, list[i].count);
 	}
-	
+
 	return CMBC;
 };
+
+const round = (n) => {
+	return +n.toFixed(2);
+}
 
 const createDataForChart = (assArr) => {
 	let max = -1;
@@ -104,11 +109,10 @@ const createDataForChart = (assArr) => {
 
 	for (let i =0; i < data.length; i++) {
 		let tmp = data[i].val / max * 100;
-		data[i].percent = Math.floor(tmp * 100) / 100;
+		data[i].percent = round(tmp);
 		tmp = data[i].val / sum * 100;
-		data[i].percentMax = Math.floor(tmp * 100) / 100;
+		data[i].percentMax = round(tmp);
 	}
-	
 	return data;
 };
 
