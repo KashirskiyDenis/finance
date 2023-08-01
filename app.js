@@ -46,13 +46,17 @@ const toNumber = (obj) => {
 	return obj;
 };
 
-const countMoneyByAccountCurrentMonth = (categoryName) => {
+const countMoneyByAccountByPeriod = (categoryName, period) => {
 	let list = db.getAllFull(categoryName);
-	let currentMonthFirstDay = new Date().toISOString().split(/\d\dT/)[0] + '01';
+	if (period == 'month')
+		period = new Date().toISOString().split(/\d\dT/)[0] + '01';
+	else if (period == 'year')
+		period = new Date().toISOString().split(/\d\d-\d\dT/)[0] + '01-01';
+	
 	let CMBA = new Map();
 	
 	for (let i = 0; i < list.length; i++) {
-		if (currentMonthFirstDay.localeCompare(list[i].date) > 0)
+		if (period.localeCompare(list[i].date) > 0)
 			continue;
 		
 		let title = list[i].idAccount.titleAccount;
@@ -66,13 +70,17 @@ const countMoneyByAccountCurrentMonth = (categoryName) => {
 	return CMBA;
 };
 
-const countMoneyByCategoryCurrentMonth = (categoryName) => {
+const countMoneyByCategoryByPeriod = (categoryName, period) => {
 	let list = db.getAllFull(categoryName);
-	let currentMonthFirstDay = new Date().toISOString().split(/\d\dT/)[0] + '01';
+	if (period == 'month')
+		period = new Date().toISOString().split(/\d\dT/)[0] + '01';
+	else if (period == 'year')
+		period = new Date().toISOString().split(/\d\d-\d\dT/)[0] + '01-01';
+
 	let CMBC = new Map();
 	
 	for (let i = 0; i < list.length; i++) {
-		if (currentMonthFirstDay.localeCompare(list[i].date) > 0)
+		if (period.localeCompare(list[i].date) > 0)
 			continue;
 		
 		let title = list[i].idCategory.title;
@@ -154,7 +162,7 @@ const incomeList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="incomeRecord" data-id="${list[i].idIncome}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}">
+		html += `<div class="incomeRecord" data-id="${list[i].idIncome}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}" data-type="income">
 		<div>${list[i].date}</div>
 		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
@@ -179,7 +187,7 @@ const costList = () => {
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		
-		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}">
+		html += `<div class="costRecord" data-id="${list[i].idCost}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}" data-type="cost">
 		<div>${list[i].date}</div>
 		<div>${list[i].idCategory.title}</div>
 		<div>${rub}.${kop} &#8381;</div>
@@ -229,14 +237,26 @@ const createChartHTML = (data, titleChart) => {
 };
 
 const createAllChartHTML = () => {
-	let dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('income'));
-	let chartsHTML = createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
-	dataChart = createDataForChart(countMoneyByCategoryCurrentMonth('cost'));
-	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
-	dataChart = createDataForChart(countMoneyByAccountCurrentMonth('income'));
+	let dataChart;
+	let chartsHTML = '';
+	
+	dataChart = createDataForChart(countMoneyByCategoryByPeriod('income', 'month'));
 	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
-	dataChart = createDataForChart(countMoneyByAccountCurrentMonth('cost'));
+	dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'month'));
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
+	dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'month'));
+	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
+	dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'month'));
 	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');	
+	dataChart = createDataForChart(countMoneyByCategoryByPeriod('income', 'year'));
+	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
+	dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'year'));
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');
+	dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'year'));
+	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
+	dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'year'));
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');	
+	
 	return chartsHTML;
 };
 
@@ -299,7 +319,8 @@ const requestListener = function (req, res) {
 							account.countMoney += entity.count;
 						else
 							account.countMoney -= entity.count;
-
+						
+						account.countMoney = round(account.countMoney);
 						collection.idAccount = account;
 						collection.idCategory = db.getById('category', collection.idCategory);
 						db.update('account', account);
@@ -337,6 +358,7 @@ const requestListener = function (req, res) {
 							else
 								account.countMoney += entityOld.count - entity.count;
 
+							account.countMoney = round(account.countMoney);
 							collection.idAccount = db.update('account', account);
 							collection.idCategory = db.getById('category', collection.idCategory);
 						} else {
@@ -350,6 +372,7 @@ const requestListener = function (req, res) {
 								account.countMoney -= entity.count;
 							}
 							db.update('account', accountOld);
+							account.countMoney = round(account.countMoney);
 							collection.idAccount = db.update('account', account);
 							collection.idCategory = db.getById('category', collection.idCategory);
 						}
@@ -387,6 +410,10 @@ const requestListener = function (req, res) {
 				res.end(e.message);
 			}
 		}
+	}  else if (path.match('charts')) {
+		res.setHeader('Content-Type', 'text/html');
+		res.writeHead(200);
+		res.end(createAllChartHTML());
 	} else {
 		fs.readFile('./404.html')
 		.then(content => {

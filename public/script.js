@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			request.onload = function () {
 				if (this.status === 200) {
-					resolve(JSON.parse(this.response));
+					resolve(this.response);
 				} else if (this.status === 422) {
 					reject(this.responseText);
 				} else {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		return promise;
 	};
 	
-	const formatMoney = (str) => {
+	let formatMoney = (str) => {
 		str = str.split('').reverse().join('');
 		let arr = str.split(/(\d{1,3})/).reverse();
 		
@@ -115,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			currentEntity.remove();
 			if (collectionName == 'account' || collectionName == 'category')
 				deleteEntityOption(id, collectionName);
+			else if (collectionName == 'cost')
+				updateAccountCountMoney(currentEntity.dataset.idAccount, currentEntity.dataset.count);
+			else if (collectionName == 'income')
+				updateAccountCountMoney(currentEntity.dataset.idAccount, -1 * currentEntity.dataset.count);
+			updateCharts();
 		}).catch(e => {
 			alert(e);
 		});		
@@ -166,38 +171,27 @@ document.addEventListener('DOMContentLoaded', function () {
 		accountList[i].addEventListener('click', getAccountById);
 	}
 	
-	let getIncomeById = (event) => {
+	let getOperationById = (event) => {
 		currentEntity = event.currentTarget;
 		currentDialog.showModal();
-		currentDialog.querySelector('#idIncome').value = currentEntity.dataset.id;
+		let id = formatId(currentEntity.dataset.type);
+		currentDialog.querySelector('#' + id).value = currentEntity.dataset.id;
 		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
-		currentDialog.querySelector('#dateIncome').value = currentEntity.dataset.date;
+		currentDialog.querySelector('#date').value = currentEntity.dataset.date;
 		currentDialog.querySelector('#count').value = currentEntity.dataset.count;
-		currentDialog.querySelector('#commentIncome').value = currentEntity.dataset.comment;
+		currentDialog.querySelector('#comment').value = currentEntity.dataset.comment;
 		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.idAccount;
-		hiddenEntityUpdate('income');
+		hiddenEntityUpdate(currentEntity.dataset.type);
 	};
 	
 	let incomeList = document.querySelectorAll('.incomeRecord');
 	for (let i = 0; i < incomeList.length; i++) {
-		incomeList[i].addEventListener('click', getIncomeById);
+		incomeList[i].addEventListener('click', getOperationById);
 	}	
-	
-	let getCostById = (event) => {
-		currentEntity = event.currentTarget;
-		currentDialog.showModal();
-		currentDialog.querySelector('#idCost').value = currentEntity.dataset.id;
-		currentDialog.querySelector('#idCategory').value = currentEntity.dataset.idCategory;
-		currentDialog.querySelector('#dateCost').value = currentEntity.dataset.date;
-		currentDialog.querySelector('#count').value = currentEntity.dataset.count;
-		currentDialog.querySelector('#commentCost').value = currentEntity.dataset.comment;
-		currentDialog.querySelector('#idAccount').value = currentEntity.dataset.idAccount;
-		hiddenEntityUpdate('cost');
-	};
 	
 	let costList = document.querySelectorAll('.costRecord');
 	for (let i = 0; i < costList.length; i++) {
-		costList[i].addEventListener('click', getCostById);
+		costList[i].addEventListener('click', getOperationById);
 	}
 	
 	let getCategoryById = (event) => {
@@ -225,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/account/', data).then(response => {
+			response = JSON.parse(response);
 			let countMoney = response.countMoney.toString();
 			let rub = formatMoney(countMoney.split('.')[0]);
 			let kop = countMoney.split('.')[1] ??= '00';
@@ -278,12 +273,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			alert('Сумма не должна быть меньше или раной нулю.');
 			return;
 		}
-		income.dateIncome = income.dateIncome.toString().split('T')[0];
-		let data = `idIncome=${income.idIncome}&date=${income.dateIncome}&idCategory=${income.idCategory}&count=${income.count}&comment=${income.commentIncome}&idAccount=${income.idAccount}`;
+		income.date = income.date.toString().split('T')[0];
+		let data = `idIncome=${income.idIncome}&date=${income.date}&idCategory=${income.idCategory}&count=${income.count}&comment=${income.comment}&idAccount=${income.idAccount}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/income/', data).then(response => {
-			let html = `<div class="incomeRecord" data-id="${response.idIncome}" data-id-category="$response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="$response.date}" data-count="${response.count}" data-comment="${response.comment}">
+			response = JSON.parse(response);
+			let html = `<div class="incomeRecord" data-id="${response.idIncome}" data-id-category="$response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="$response.date}" data-count="${response.count}" data-comment="${response.comment}" data-type="income">
 			<div class="hidden">${response.idIncome}</div>
 			<div>${response.date}</div>
 			<div>${response.idCategory.title}</div>
@@ -293,13 +289,23 @@ document.addEventListener('DOMContentLoaded', function () {
 			currentDialog.close();
 			let dom = new DOMParser().parseFromString(html, 'text/html');
 			let newIncome = dom.querySelector('.incomeRecord');
-			newIncome.addEventListener('click', getIncomeById);
+			newIncome.addEventListener('click', getOperationById);
 			
 			if (method == 'PUT') {
 				document.getElementById('incomeList').appendChild(newIncome);
 				updateAccountCountMoney(response.idAccount.idAccount, response.count);
-			} else
+			} else {
+				if (currentEntity.dataset.idAccount == response.idAccount.idAccount) {
+					let count = +newCost.dataset.count - +currentEntity.dataset.count;
+					count = +count.toFixed(2);
+					updateAccountCountMoney(response.idAccount.idAccount, count);
+					currentEntity.innerHTML = newCost.innerHTML;
+				} else {
+					updateAccountCountMoney(currentEntity.dataset.idAccount, -1 * currentEntity.dataset.count);
+					updateAccountCountMoney(response.idAccount.idAccount, response.count);
+				}			
 				currentEntity.innerHTML = newIncome.innerHTML;			
+			}
 		}).catch(e => {
 			alert(e);
 		});		
@@ -314,12 +320,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			alert('Сумма не должна быть меньше или раной нулю.');
 			return;
 		}
-		cost.dateCost = cost.dateCost.toString().split('T')[0];
-		let data = `idCost=${cost.idCost}&date=${cost.dateCost}&idCategory=${cost.idCategory}&count=${cost.count}&comment=${cost.commentCost}&idAccount=${cost.idAccount}`;
+		cost.date = cost.date.toString().split('T')[0];
+		let data = `idCost=${cost.idCost}&date=${cost.date}&idCategory=${cost.idCategory}&count=${cost.count}&comment=${cost.comment}&idAccount=${cost.idAccount}`;
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/cost/', data).then(response => {
-			let html = `<div class="costRecord" data-id="${response.idCost}" data-id-category="${response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="${response.date}" data-count="${response.count}" data-comment="${response.comment}">
+			response = JSON.parse(response);
+			let html = `<div class="costRecord" data-id="${response.idCost}" data-id-category="${response.idCategory.idCategory}" data-id-account="${response.idAccount.idAccount}" data-date="${response.date}" data-count="${response.count}" data-comment="${response.comment}" data-type="cost">
 			<div>${response.date}</div>
 			<div>${response.idCategory.title}</div>
 			<div>${response.count} &#8381;</div>
@@ -328,13 +335,25 @@ document.addEventListener('DOMContentLoaded', function () {
 			currentDialog.close();
 			let dom = new DOMParser().parseFromString(html, 'text/html');
 			let newCost = dom.querySelector('.costRecord');
-			newCost.addEventListener('click', getCostById);
+			newCost.addEventListener('click', getOperationById);
 			
 			if (method == 'PUT') {
 				document.getElementById('costList').appendChild(newCost);
 				updateAccountCountMoney(response.idAccount.idAccount, -1 * response.count);
-			} else
+			} else {
+				if (currentEntity.dataset.idAccount == response.idAccount.idAccount) {
+					let count = +newCost.dataset.count - +currentEntity.dataset.count;
+					count = +count.toFixed(2);
+					updateAccountCountMoney(response.idAccount.idAccount, -1 * count);
+					currentEntity.innerHTML = newCost.innerHTML;
+				} else {
+					updateAccountCountMoney(currentEntity.dataset.idAccount, currentEntity.dataset.count);
+					updateAccountCountMoney(response.idAccount.idAccount, -1 * response.count);
+				}
 				currentEntity.innerHTML = newCost.innerHTML;
+			}
+			
+			updateCharts();
 		}).catch(e => {
 			alert(e);
 		});			
@@ -345,11 +364,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	let updateAccountCountMoney = (idAccount, count) => {
 		let account = document.querySelector(`div[data-id="${idAccount}"]`);
-		account.dataset.countMoney = +(account.dataset.countMoney) + count;
+		let countMoney = +account.dataset.countMoney;
+		countMoney += +count;
+		account.dataset.countMoney = countMoney.toFixed(2);
 		let rub = formatMoney(account.dataset.countMoney.split('.')[0]);
 		let kop = account.dataset.countMoney.split('.')[1] ??= '00';		
 		rub = rub + ' &#8381;';
-		kop = kop + ' &#162;';
+		kop = '&nbsp;' + kop + ' &#162;';
 		
 		account.querySelectorAll('.countMoney')[0].innerHTML = rub;
 		account.querySelectorAll('.countMoney')[1].innerHTML = kop;
@@ -361,6 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		let method = event.target.value == 'Create' ? 'PUT' : 'POST';
 		
 		ajax(method, '/category/', data).then(response => {
+			response = JSON.parse(response);
 			let html = `<div class="category" data-id="${response.idCategory}" data-title="${response.title}" data-comment="${response.comment}">
 			<div class="hidden">${response.idCategory}</div>
 			<div class="titleCategory">${response.title}</div>
@@ -402,4 +424,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	document.getElementById('categoryAddOk').addEventListener('click', addOrUpdateCategory);
 	document.getElementById('categoryUpdateOk').addEventListener('click', addOrUpdateCategory);
+	
+	let updateCharts = () => {
+		ajax('GET', '/charts/').then(response => {
+			let chart = document.querySelector('.chart');
+			chart.innerHTML = response;
+		}).catch(e => {
+			alert(e);
+		});
+
+	};	
 });
