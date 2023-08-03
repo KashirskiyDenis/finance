@@ -1,12 +1,12 @@
 'use strict';
 
-const fs = require('node:fs');
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
-const path = __dirname + '/db.json';
+const path = new URL('./db.json', import.meta.url);
 let db;
 
 function initDB(dbStructura) {
-	if (fs.existsSync(path)) {
+	if (existsSync(path)) {
 		readDB();
 		return true;
 	} else {
@@ -17,17 +17,17 @@ function initDB(dbStructura) {
 
 function readDB() {
 	try {
-		db = JSON.parse(fs.readFileSync(path));
-	} catch (e) {
-		console.log(e.message);
+		db = JSON.parse(readFileSync(path));
+	} catch (error) {
+		console.log(error.message);
 	}
 }
 
 function writeDB() {
 	try {
-		fs.writeFileSync(path, JSON.stringify(db));
-	} catch (e) {
-		console.log(e.message);
+		writeFileSync(path, JSON.stringify(db));
+	} catch (error) {
+		console.log(error.message);
 	}
 }
 
@@ -139,4 +139,4 @@ function compareFunction(a, b) {
 	return a.date.localeCompare(b.date);
 }
 
-module.exports = { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove }
+export { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove };

@@ -1,7 +1,6 @@
-const fs = require('node:fs');
-const path = require('node:path');
+import { readFileSync } from 'node:fs';
 
-let rawdata = fs.readFileSync(path.join(__dirname, 'routes.json'));
+let rawdata = readFileSync(new URL('./routes.json', import.meta.url));
 let routes = JSON.parse(rawdata);
 
-module.exports = routes;
+export { routes };

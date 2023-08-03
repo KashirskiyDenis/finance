@@ -10,10 +10,28 @@
 		"income": [],
 		"cost": [],
 		"category": [],
-		"foreignKey": {
-			"account": [],
+		"foreignKeyDelete": {
+			"account": [
+				"income",
+				"cost"
+			],
 			"income": [],
 			"cost": [],
+			"category": [
+				"income",
+				"cost"
+			]
+		},
+		"foreignKeyRead": {
+			"account": [],
+			"income": [
+				"account",
+				"category"
+			],
+			"cost": [
+				"account",
+				"category"
+			],
 			"category": []
 		}
 	}

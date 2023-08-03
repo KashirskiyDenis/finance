@@ -1,13 +1,13 @@
 'use strict';
 
-const http = require('node:http');
-const fs = require('node:fs').promises;
-const url = require('node:url');
-const config = require('./config');
-const routes = require('./routes');
-const db = require('./db');
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { parse } from 'node:url';
+import { config } from './config/index.js';
+import { routes } from './routes/index.js';
+import { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove } from './db/index.js';
 
-db.initDB(config.db);
+initDB(config.db);
 
 const bodyParser = (string) => {
 	let collection = string.split('&');
@@ -47,7 +47,7 @@ const toNumber = (obj) => {
 };
 
 const countMoneyByAccountByPeriod = (categoryName, period) => {
-	let list = db.getAllFull(categoryName);
+	let list = getAllFull(categoryName);
 	if (period == 'month')
 		period = new Date().toISOString().split(/\d\dT/)[0] + '01';
 	else if (period == 'year')
@@ -71,7 +71,7 @@ const countMoneyByAccountByPeriod = (categoryName, period) => {
 };
 
 const countMoneyByCategoryByPeriod = (categoryName, period) => {
-	let list = db.getAllFull(categoryName);
+	let list = getAllFull(categoryName);
 	if (period == 'month')
 		period = new Date().toISOString().split(/\d\dT/)[0] + '01';
 	else if (period == 'year')
@@ -125,7 +125,7 @@ const createDataForChart = (assArr) => {
 };
 
 const accountList = () => {
-	let list = db.getAll('account');
+	let list = getAll('account');
 	let html = '<div class="bankAccountList">';
 	let select = '<select id="idAccount" name="idAccount">';
 	
@@ -149,7 +149,7 @@ const accountList = () => {
 };
 
 const incomeList = () => {
-	let list = db.getAllFull('income');
+	let list = getAllFull('income');
 	let html = `<div id="incomeList">
 	<div class="operationHead">
 		<div>Дата</div>
@@ -174,7 +174,7 @@ const incomeList = () => {
 };
 
 const costList = () => {
-	let list = db.getAllFull('cost');
+	let list = getAllFull('cost');
 	let html = `<div id="costList">
 	<div class="operationHead">
 		<div>Дата</div>
@@ -199,7 +199,7 @@ const costList = () => {
 };
 
 const categoryList = () => {
-	let list = db.getAll('category');
+	let list = getAll('category');
 	let html = '<div class="categoryList">';
 	let select = '<select id="idCategory" name="idCategory">';
 
@@ -261,10 +261,10 @@ const createAllChartHTML = () => {
 };
 
 const requestListener = function (req, res) {
-	let path = url.parse(req.url).pathname;
+	let path = parse(req.url).pathname;
 	
 	if (routes[path]) {
-		fs.readFile(routes[path], { encoding: 'utf8' })
+		readFile(routes[path], { encoding: 'utf8' })
 		.then(content => {
 			if (routes[path].includes('index.html')) {
 				content = content.toString();
@@ -291,7 +291,7 @@ const requestListener = function (req, res) {
 		let id = path.split('/')[2];
 
 		if (method == 'GET') {
-			let collection = db.getById(collectionName, id);
+			let collection = getById(collectionName, id);
 
 			if (!collection) {
 				res.writeHead(404);
@@ -310,10 +310,10 @@ const requestListener = function (req, res) {
 			req.on('end', () => {
 				try {
 					let entity = bodyParser(bodyReq);
-					let collection = db.add(collectionName, entity);
+					let collection = add(collectionName, entity);
 
 					if (collectionName == 'income' || collectionName == 'cost') {
-						let account = db.getById('account', entity.idAccount);
+						let account = getById('account', entity.idAccount);
 
 						if (collectionName == 'income')
 							account.countMoney += entity.count;
@@ -322,13 +322,13 @@ const requestListener = function (req, res) {
 						
 						account.countMoney = round(account.countMoney);
 						collection.idAccount = account;
-						collection.idCategory = db.getById('category', collection.idCategory);
-						db.update('account', account);
+						collection.idCategory = getById('category', collection.idCategory);
+						update('account', account);
 					}
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
 					res.end(JSON.stringify(collection));
-				} catch (e) {
+				} catch (error) {
 					res.writeHead(500);
 					res.end(e.message);
 				}
@@ -346,11 +346,11 @@ const requestListener = function (req, res) {
 
 				try {
 					if (collectionName == 'income' || collectionName == 'cost') {
-						let account = db.getById('account', entity.idAccount);
-						let entityOld = db.getById(collectionName, entity[formatId(collectionName)]);
+						let account = getById('account', entity.idAccount);
+						let entityOld = getById(collectionName, entity[formatId(collectionName)]);
 
 						sortFlag = true;
-						collection = db.update(collectionName, entity, sortFlag);
+						collection = update(collectionName, entity, sortFlag);
 
 						if (entity.idAccount == entityOld.idAccount) {
 							if (collectionName == 'income')
@@ -359,10 +359,10 @@ const requestListener = function (req, res) {
 								account.countMoney += entityOld.count - entity.count;
 
 							account.countMoney = round(account.countMoney);
-							collection.idAccount = db.update('account', account);
-							collection.idCategory = db.getById('category', collection.idCategory);
+							collection.idAccount = update('account', account);
+							collection.idCategory = getById('category', collection.idCategory);
 						} else {
-							let accountOld = db.getById('account', entityOld.idAccount);
+							let accountOld = getById('account', entityOld.idAccount);
 						
 							if (collectionName == 'income') {
 								accountOld.countMoney -= entity.count;
@@ -371,41 +371,43 @@ const requestListener = function (req, res) {
 								accountOld.countMoney += entityOld.count;
 								account.countMoney -= entity.count;
 							}
-							db.update('account', accountOld);
+							accountOld.countMoney = round(accountOld.countMoney);
+							update('account', accountOld);
 							account.countMoney = round(account.countMoney);
-							collection.idAccount = db.update('account', account);
-							collection.idCategory = db.getById('category', collection.idCategory);
+							collection.idAccount = update('account', account);
+							collection.idCategory = getById('category', collection.idCategory);
 						}
 					} else {
-						collection = db.update(collectionName, entity);
+						collection = update(collectionName, entity);
 					}
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
 					res.end(JSON.stringify(collection));
-				} catch (e) {
+				} catch (error) {
 					res.writeHead(500);
 					res.end(e.message);
 				}
 			});
 		} else if (method == 'DELETE') {
 			try {
-				let entity = db.getById(collectionName, id);
-				let result = db.remove(collectionName, id);
+				let entity = getById(collectionName, id);
+				let result = remove(collectionName, id);
 
 				if (collectionName == 'income' || collectionName == 'cost') {
-					let account = db.getById('account', entity.idAccount);
+					let account = getById('account', entity.idAccount);
 
 					if (collectionName == 'income')
 						account.countMoney -= entity.count;
 					else
 						account.countMoney += entity.count;
 
-					db.update('account', account);
+					account.countMoney = round(account.countMoney);
+					update('account', account);
 				}
 				res.setHeader('Content-Type', 'text/plain');
 				res.writeHead(200);
 				res.end(result.toString());
-			} catch (e) {
+			} catch (error) {
 				res.writeHead(422);
 				res.end(e.message);
 			}
@@ -415,7 +417,7 @@ const requestListener = function (req, res) {
 		res.writeHead(200);
 		res.end(createAllChartHTML());
 	} else {
-		fs.readFile('./404.html')
+		readFile('./404.html')
 		.then(content => {
 			res.writeHead(404);
 			res.end(content);
@@ -423,8 +425,8 @@ const requestListener = function (req, res) {
 	}
 };
 
-const server = http.createServer(requestListener);
+const server = createServer(requestListener);
 
 server.listen(config.port, config.host, () => {
-	console.log(`Server is running on http://${config.host}:${config.port}`);
+	console.log(`Server is running on ://${config.host}:${config.port}`);
 });	

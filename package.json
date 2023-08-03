@@ -1,6 +1,7 @@
 {
 	"name": "finance",
 	"version": "1.0.0",
+	"type": "module",
 	"description": "manage personal finance",
 	"main": "app.js",
 	"scripts": {

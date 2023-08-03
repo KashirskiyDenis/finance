@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			else if (collectionName == 'income')
 				updateAccountCountMoney(currentEntity.dataset.idAccount, -1 * currentEntity.dataset.count);
 			updateCharts();
-		}).catch(e => {
-			alert(e);
+		}).catch(error => {
+			alert(error);
 		});		
 	};
 	
@@ -243,8 +243,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				currentEntity.innerHTML = newAccount.innerHTML;
 				addOrUpdateAccountSelect('POST', response);
 			}
-		}).catch(e => {
-			alert(e);
+		}).catch(error => {
+			alert(error);
 		});
 	};
 	
@@ -306,8 +306,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				}			
 				currentEntity.innerHTML = newIncome.innerHTML;			
 			}
-		}).catch(e => {
-			alert(e);
+		}).catch(error => {
+			alert(error);
 		});		
 	};
 	
@@ -354,8 +354,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			
 			updateCharts();
-		}).catch(e => {
-			alert(e);
+		}).catch(error => {
+			alert(error);
 		});			
 	};
 	
@@ -401,8 +401,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				currentEntity.innerHTML = newCategory.innerHTML;
 				addOrUpdateCategorySelect(method, response);
 			}
-		}).catch(e => {
-			alert(e);
+		}).catch(error => {
+			alert(error);
 		});
 	};
 	
@@ -429,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		ajax('GET', '/charts/').then(response => {
 			let chart = document.querySelector('.chart');
 			chart.innerHTML = response;
-		}).catch(e => {
-			alert(e);
+		}).catch(error => {
+			alert(error);
 		});
 
 	};	

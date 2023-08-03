@@ -1,7 +1,6 @@
-const fs = require('node:fs');
-const path = require('node:path');
+import { readFileSync } from 'node:fs';
 
-let rawdata = fs.readFileSync(path.join(__dirname, 'config.json'));
+let rawdata = readFileSync(new URL('./config.json', import.meta.url));
 let config = JSON.parse(rawdata);
 
-module.exports = config;
+export { config };
