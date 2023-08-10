@@ -1,6 +1,6 @@
 {
 	"idAccount": 5,
-	"idIncome": 14,
+	"idIncome": 15,
 	"idCost": 44,
 	"idCategory": 17,
 	"account": [
@@ -37,7 +37,7 @@
 			"titleBank": "Какой-то БАНК",
 			"titleAccount": "Новый счёт",
 			"typeAccount": "Дебетовый счёт",
-			"countMoney": 4000.88
+			"countMoney": 10000.88
 		}
 	],
 	"income": [
@@ -78,6 +78,14 @@
 			"date": "2023-07-20",
 			"idCategory": 16,
 			"count": 3654,
+			"comment": "",
+			"idAccount": 4
+		},
+		{
+			"idIncome": 14,
+			"date": "2023-08-10",
+			"idCategory": 16,
+			"count": 6000,
 			"comment": "",
 			"idAccount": 4
 		}

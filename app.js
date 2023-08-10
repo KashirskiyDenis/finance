@@ -5,9 +5,13 @@ import { readFile } from 'node:fs/promises';
 import { parse } from 'node:url';
 import { config } from './config/index.js';
 import { routes } from './routes/index.js';
-import { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove } from './db/index.js';
+import { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, orderBy } from './db/index.js';
+
+let monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь','Октябрь', 'Ноябрь', 'Декабрь'];
 
 initDB(config.db);
+// console.log(orderBy(getAll('account'), 'titleBank', 'ASC'));
+// console.log(getAll('account'));
 
 const bodyParser = (string) => {
 	let collection = string.split('&');
@@ -115,7 +119,7 @@ const createDataForChart = (assArr) => {
 		data.push({ title : key , val : val });
 	}
 
-	for (let i =0; i < data.length; i++) {
+	for (let i = 0; i < data.length; i++) {
 		let tmp = data[i].val / max * 100;
 		data[i].percent = round(tmp);
 		tmp = data[i].val / sum * 100;
@@ -149,19 +153,28 @@ const accountList = () => {
 };
 
 const operationList = (operation) => {
-	let list = getAllFull(operation);
+	let list = orderBy(getAllFull(operation), 'date', 'DESC');
 	let html = `<div id="${operation}List">
 	<div class="operationHead">
 		<div>Дата</div>
 		<div>Категория</div>
 		<div>Сумма</div>
 	</div>`;
+	let currentMonthName = '';
 	
 	for (let i = 0; i < list.length; i++) {
+		let monthNumber = list[i].date.match(/-(\d\d)-/)[1];
+		let monthName = monthNames[+monthNumber - 1];
+		
 		let countMoney = list[i].count.toString();
 		let rub = formatMoney(countMoney.split('.')[0]);
 		let kop = countMoney.split('.')[1] ??= '00';
 		let idOperation = operation == 'income' ? list[i].idIncome : list[i].idCost;
+		
+		if (currentMonthName != monthName) {
+			html += `<h3>${monthName}</h3>`;
+			currentMonthName = monthName;
+		}
 		
 		html += `<div class="${operation}Record" data-id="${idOperation}" data-id-category="${list[i].idCategory.idCategory}" data-id-account="${list[i].idAccount.idAccount}" data-date="${list[i].date}" data-count="${list[i].count}" data-comment="${list[i].comment}" data-type="${operation}">
 		<div>${list[i].date}</div>
@@ -217,13 +230,15 @@ const createAllChartHTML = () => {
 	let chartsHTML = '';
 	
 	dataChart = createDataForChart(countMoneyByCategoryByPeriod('income', 'month'));
+	chartsHTML += '<h3>За текущий месяц</h3>';
 	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
 	dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'month'));
 	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
 	dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'month'));
 	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
 	dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'month'));
-	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');	
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
+	chartsHTML += '<h3>За текущий год</h3>';
 	dataChart = createDataForChart(countMoneyByCategoryByPeriod('income', 'year'));
 	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
 	dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'year'));
@@ -267,15 +282,15 @@ const requestListener = function (req, res) {
 		let id = path.split('/')[2];
 
 		if (method == 'GET') {
-			let collection = getById(collectionName, id);
+			let entity = getById(collectionName, id);
 
-			if (!collection) {
+			if (!entity) {
 				res.writeHead(404);
 				res.end('Not found');
 			} else {
 				res.setHeader('Content-Type', 'application/json');
 				res.writeHead(200);
-				res.end(JSON.stringify(collection));
+				res.end(JSON.stringify(entity));
 			}
 		} else if (method == 'PUT') {
 			let bodyReq = '';
@@ -285,25 +300,25 @@ const requestListener = function (req, res) {
 			});
 			req.on('end', () => {
 				try {
-					let entity = bodyParser(bodyReq);
-					let collection = add(collectionName, entity);
+					let request = bodyParser(bodyReq);
+					let entity = add(collectionName, request);
 
 					if (collectionName == 'income' || collectionName == 'cost') {
-						let account = getById('account', entity.idAccount);
+						let account = getById('account', request.idAccount);
 
 						if (collectionName == 'income')
-							account.countMoney += entity.count;
+							account.countMoney += request.count;
 						else
-							account.countMoney -= entity.count;
+							account.countMoney -= request.count;
 						
 						account.countMoney = round(account.countMoney);
-						collection.idAccount = account;
-						collection.idCategory = getById('category', collection.idCategory);
+						entity.idAccount = account;
+						entity.idCategory = getById('category', entity.idCategory);
 						update('account', account);
 					}
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(200);
-					res.end(JSON.stringify(collection));
+					res.end(JSON.stringify(entity));
 				} catch (error) {
 					res.writeHead(500);
 					res.end(e.message);
@@ -316,53 +331,48 @@ const requestListener = function (req, res) {
 				bodyReq += chankData;
 			});
 			req.on('end', () => {
-				let entity = bodyParser(bodyReq);
-				let sortFlag = false;
-				let collection = null;
-
+				let request = bodyParser(bodyReq);
+				let entity = null;
 				try {
+					entity = update(collectionName, request);
+
 					if (collectionName == 'income' || collectionName == 'cost') {
-						let account = getById('account', entity.idAccount);
-						let entityOld = getById(collectionName, entity[formatId(collectionName)]);
+						let account = getById('account', request.idAccount);
+						let entityOld = getById(collectionName, request[formatId(collectionName)]);
 
-						sortFlag = true;
-						collection = update(collectionName, entity, sortFlag);
-
-						if (entity.idAccount == entityOld.idAccount) {
+						if (request.idAccount == entityOld.idAccount) {
 							if (collectionName == 'income')
-								account.countMoney += entity.count - entityOld.count;
+								account.countMoney += request.count - entityOld.count;
 							else
-								account.countMoney += entityOld.count - entity.count;
+								account.countMoney += entityOld.count - request.count;
 
 							account.countMoney = round(account.countMoney);
-							collection.idAccount = update('account', account);
-							collection.idCategory = getById('category', collection.idCategory);
+							entity.idAccount = update('account', account);
+							entity.idCategory = getById('category', entity.idCategory);
 						} else {
 							let accountOld = getById('account', entityOld.idAccount);
 						
 							if (collectionName == 'income') {
-								accountOld.countMoney -= entity.count;
-								account.countMoney += entity.count;
+								accountOld.countMoney -= request.count;
+								account.countMoney += request.count;
 							} else {
 								accountOld.countMoney += entityOld.count;
-								account.countMoney -= entity.count;
+								account.countMoney -= request.count;
 							}
 							accountOld.countMoney = round(accountOld.countMoney);
 							update('account', accountOld);
 							account.countMoney = round(account.countMoney);
-							collection.idAccount = update('account', account);
-							collection.idCategory = getById('category', collection.idCategory);
+							entity.idAccount = update('account', account);
+							entity.idCategory = getById('category', entity.idCategory);
 						}
-					} else {
-						collection = update(collectionName, entity);
 					}
-					res.setHeader('Content-Type', 'application/json');
-					res.writeHead(200);
-					res.end(JSON.stringify(collection));
 				} catch (error) {
 					res.writeHead(500);
-					res.end(e.message);
-				}
+					res.end(e.message);				
+				}				
+				res.setHeader('Content-Type', 'application/json');
+				res.writeHead(200);
+				res.end(JSON.stringify(entity));
 			});
 		} else if (method == 'DELETE') {
 			try {

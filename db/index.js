@@ -59,7 +59,7 @@ function getByIdFull(collectionName, id) {
 }
 
 function getAll(collectionName) {
-	return db[collectionName];
+	return [...db[collectionName]];
 }
 
 function getAllFull(collectionName) {
@@ -72,7 +72,7 @@ function getAllFull(collectionName) {
 	return arr;
 }
 
-function add(collectionName, entity, sort) {
+function add(collectionName, entity) {
 	let id = formatId(collectionName);
 	entity[id] = db[id]++;
 	for (let key in entity) {
@@ -80,15 +80,12 @@ function add(collectionName, entity, sort) {
 			entity[key] = +entity[key];
 	}
 	db[collectionName].push(entity);
-	
-	if (sort)
-		db[collectionName].sort(compareFunction);
 	writeDB();
 	
 	return { ...entity };
 }
 
-function update(collectionName, entity, sort) {
+function update(collectionName, entity) {
 	for (let i = 0; i < db[collectionName].length; i++) {
 		let id = formatId(collectionName);
 		if (db[collectionName][i][id] == entity[id]) {
@@ -96,8 +93,6 @@ function update(collectionName, entity, sort) {
 			break;
 		}
 	}
-	if (sort)
-		db[collectionName].sort(compareFunction);
 	writeDB();
 	
 	return { ...entity };
@@ -135,8 +130,24 @@ function checkReferentialIntegrity(collectionName, id) {
 	return false;
 }
 
-function compareFunction(a, b) {
-	return a.date.localeCompare(b.date);
+function orderBy(collection, field, orderType) {
+	let compareString = (a, b) => a[field].localeCompare(b[field]);
+	let compareNumber = (a, b) => a[field] - b[field];
+	
+	if (collection.length <= 1)
+		return collection;
+	
+	let type = typeof(collection[0][field]);
+	
+	if (type == 'string')
+		collection.sort(compareString);
+	else if (type == 'number')
+		collection.sort(compareNumber);
+	
+	if (orderType == 'DESC')
+		collection.reverse();
+	
+	return collection;
 }
 
-export { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove };
+export { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, orderBy };
