@@ -10,8 +10,6 @@ import { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, 
 let monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь','Октябрь', 'Ноябрь', 'Декабрь'];
 
 initDB(config.db);
-// console.log(orderBy(getAll('account'), 'titleBank', 'ASC'));
-// console.log(getAll('account'));
 
 const bodyParser = (string) => {
 	let collection = string.split('&');
@@ -246,7 +244,7 @@ const createAllChartHTML = () => {
 	dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'year'));
 	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
 	dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'year'));
-	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');	
+	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');
 	
 	return chartsHTML;
 };
@@ -368,7 +366,7 @@ const requestListener = function (req, res) {
 					}
 				} catch (error) {
 					res.writeHead(500);
-					res.end(e.message);				
+					res.end(e.message);
 				}				
 				res.setHeader('Content-Type', 'application/json');
 				res.writeHead(200);

@@ -1,12 +1,16 @@
 {
-	"name": "finance",
+	"name": "tsv-parser",
 	"version": "1.0.0",
-	"description": "manage personal finance",
+	"description": "Parser tsv files",
 	"main": "app.js",
 	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"keywords": [
+		"tsv",
+		"parser"
+	],
 	"author": "Kashirskiy Denis",
 	"license": "MIT"
 }
