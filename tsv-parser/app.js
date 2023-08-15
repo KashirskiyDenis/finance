@@ -30,24 +30,4 @@ async function toArray(filePath) {
 	}
 }
 
-function toCostObject(costArray) {
-	for (let i = 1; i < costArray.length; i++) {
-		let arr = costArray[i];
-		for (let j = 1; j < arr.length; j++) {
-			if (arr[j] == '')
-				continue;
-			else {
-				let cost = {
-					date: new Date(arr[0].split('.').reverse()).toISOString().split('T')[0],
-					idCategory: costArray[0][j],
-					count: +arr[j],
-					comment: '',
-					idAccount: 3
-				};
-				console.log(cost);
-			}
-		}
-	}
-}
-
-toCostObject(await toArray(new URL('./costs.tsv', import.meta.url)));
+export { toArray };

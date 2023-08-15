@@ -5,11 +5,56 @@ import { readFile } from 'node:fs/promises';
 import { parse } from 'node:url';
 import { config } from './config/index.js';
 import { routes } from './routes/index.js';
-import { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, orderBy } from './db/index.js';
+import { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, orderBy, findByField } from './db/index.js';
+import { toArray } from './tsv-parser/app.js';
 
 let monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь','Октябрь', 'Ноябрь', 'Декабрь'];
 
 initDB(config.db);
+
+const toArrayCostObjects = (costArray) => {
+	let costs = [];
+	for (let i = 1; i < costArray.length; i++) {
+		let arr = costArray[i];
+		for (let j = 1; j < arr.length; j++) {
+			if (arr[j] == '')
+				continue;
+			else {
+				let cost = {
+					date: arr[0].split('.').reverse().join('-'),
+					idCategory: costArray[0][j],
+					count: +arr[j],
+					comment: '',
+					idAccount: 3
+				};
+				costs.push(cost);
+			}
+		}
+	}
+	return costs;
+}
+
+async function loadData() {
+	let arrayCostObjects = toArrayCostObjects(await toArray(new URL('./tsv-parser/costs.tsv', import.meta.url)));
+	
+	for (let i = 0; i < arrayCostObjects.length; i++) {
+		let tmp = findByField('category', 'title', arrayCostObjects[i].idCategory);
+		if (tmp == null) {
+			let category = add('category', {
+				title : arrayCostObjects[i].idCategory,
+				type : 'cost',
+				comment : ''
+			});
+			arrayCostObjects[i].idCategory = category.idCategory;
+			add('cost', arrayCostObjects[i]);
+		} else {
+			arrayCostObjects[i].idCategory = tmp.idCategory;
+			add('cost', arrayCostObjects[i]);
+		}
+	}
+};
+
+// loadData();
 
 const bodyParser = (string) => {
 	let collection = string.split('&');
@@ -233,18 +278,18 @@ const createAllChartHTML = () => {
 	dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'month'));
 	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
 	dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'month'));
-	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий месяц');
+	chartsHTML += createChartHTML(dataChart, 'Доходы по счетам за текущий месяц');
 	dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'month'));
-	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий месяц');
-	chartsHTML += '<h3>За текущий год</h3>';
-	dataChart = createDataForChart(countMoneyByCategoryByPeriod('income', 'year'));
-	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
-	dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'year'));
-	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');
-	dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'year'));
-	chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
-	dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'year'));
-	chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');
+	chartsHTML += createChartHTML(dataChart, 'Расходы по счетам за текущий месяц');
+	// chartsHTML += '<h3>За текущий год</h3>';
+	// dataChart = createDataForChart(countMoneyByCategoryByPeriod('income', 'year'));
+	// chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
+	// dataChart = createDataForChart(countMoneyByCategoryByPeriod('cost', 'year'));
+	// chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');
+	// dataChart = createDataForChart(countMoneyByAccountByPeriod('income', 'year'));
+	// chartsHTML += createChartHTML(dataChart, 'Доходы по категориям за текущий год');
+	// dataChart = createDataForChart(countMoneyByAccountByPeriod('cost', 'year'));
+	// chartsHTML += createChartHTML(dataChart, 'Расходы по категориям за текущий год');
 	
 	return chartsHTML;
 };

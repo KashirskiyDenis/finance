@@ -150,4 +150,12 @@ function orderBy(collection, field, orderType) {
 	return collection;
 }
 
-export { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, orderBy };
+function findByField(collectionName, fieldName, fieldValue) {
+	for (let i = 0; i < db[collectionName].length; i++) {
+		if (db[collectionName][i][fieldName] == fieldValue)
+			return {...db[collectionName][i]};
+	}
+	return null;
+}
+
+export { initDB, getById, getByIdFull, getAll, getAllFull, add, update, remove, orderBy, findByField };
