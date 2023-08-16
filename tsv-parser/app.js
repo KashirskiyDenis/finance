@@ -26,7 +26,7 @@ async function toArray(filePath) {
 		}
 		return monthCost;
 	} catch (error) {
-		console.log(error.message);
+		throw error;
 	}
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, rm } from 'node:fs/promises';
 import { parse } from 'node:url';
 import { config } from './config/index.js';
 import { routes } from './routes/index.js';
@@ -35,26 +35,36 @@ const toArrayCostObjects = (costArray) => {
 }
 
 async function loadData() {
-	let arrayCostObjects = toArrayCostObjects(await toArray(new URL('./tsv-parser/costs.tsv', import.meta.url)));
-	
-	for (let i = 0; i < arrayCostObjects.length; i++) {
-		let tmp = findByField('category', 'title', arrayCostObjects[i].idCategory);
-		if (tmp == null) {
-			let category = add('category', {
-				title : arrayCostObjects[i].idCategory,
-				type : 'cost',
-				comment : ''
-			});
-			arrayCostObjects[i].idCategory = category.idCategory;
-			add('cost', arrayCostObjects[i]);
-		} else {
-			arrayCostObjects[i].idCategory = tmp.idCategory;
-			add('cost', arrayCostObjects[i]);
+	let collectionArray = ['income', 'cost'];
+	for (let j = 0; j < collectionArray.length; j++) {
+		let arrayCostObjects;
+		try {
+			arrayCostObjects = toArrayCostObjects(await toArray(new URL(`./load-files/${collectionArray[j]}.tsv`, import.meta.url)));
+		} catch (error) {
+			continue;
 		}
+		
+		for (let i = 0; i < arrayCostObjects.length; i++) {
+			let tmp = findByField('category', 'title', arrayCostObjects[i].idCategory);
+			if (tmp == null) {
+				let category = add('category', {
+					title : arrayCostObjects[i].idCategory,
+					type : collectionArray[j],
+					comment : ''
+				});
+				arrayCostObjects[i].idCategory = category.idCategory;
+				add(collectionArray[j], arrayCostObjects[i]);
+			} else {
+				arrayCostObjects[i].idCategory = tmp.idCategory;
+				add(collectionArray[j], arrayCostObjects[i]);
+			}
+		}
+		
+		rm(new URL(`./tsv-parser/${collectionArray[j]}.tsv`, import.meta.url));
 	}
 };
 
-// loadData();
+loadData();
 
 const bodyParser = (string) => {
 	let collection = string.split('&');
