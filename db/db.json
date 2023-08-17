@@ -1,1 +1,3501 @@
-{"idAccount":5,"idIncome":15,"idCost":106,"idCategory":21,"account":[{"idAccount":0,"titleBank":"СберБанк","titleAccount":"Копилка","typeAccount":"Накопительный счёт","countMoney":12034.65},{"idAccount":1,"titleBank":"Банк ВТБ","titleAccount":"Для Интернет покупок","typeAccount":"Дебетовый счёт","countMoney":65632.05},{"idAccount":2,"titleBank":"Газпром Банк","titleAccount":"Зарплатный счёт","typeAccount":"Дебетовый счёт","countMoney":98411.05},{"idAccount":3,"titleBank":"Тинькофф Банк","titleAccount":"Повседневные расходы","typeAccount":"Дебетовый счёт","countMoney":99500.05},{"idAccount":4,"titleBank":"Какой-то БАНК","titleAccount":"Новый счёт","typeAccount":"Дебетовый счёт","countMoney":10000.88}],"income":[{"idIncome":1,"date":"2023-06-07","idCategory":15,"count":100000,"comment":"С покупки дома.","idAccount":1},{"idIncome":0,"date":"2023-07-07","idCategory":14,"count":100000,"comment":"Зарплата","idAccount":2},{"idIncome":8,"date":"2023-07-18","idCategory":14,"count":5000,"comment":"","idAccount":4},{"idIncome":9,"date":"2023-07-20","idCategory":15,"count":123,"comment":"","idAccount":4},{"idIncome":10,"date":"2023-07-20","idCategory":16,"count":3654,"comment":"","idAccount":4},{"idIncome":14,"date":"2023-08-10","idCategory":16,"count":6000,"comment":"","idAccount":4}],"cost":[{"idCost":0,"date":"2023-07-07","idCategory":0,"count":1000.03,"comment":"No comment","idAccount":1},{"idCost":11,"date":"2023-07-18","idCategory":0,"count":1000,"comment":"","idAccount":3},{"idCost":13,"date":"2023-07-27","idCategory":5,"count":564,"comment":"","idAccount":4},{"idCost":14,"date":"2023-07-27","idCategory":0,"count":789,"comment":"","idAccount":4},{"idCost":15,"date":"2023-07-27","idCategory":4,"count":2400,"comment":"","idAccount":4},{"idCost":16,"date":"2023-07-27","idCategory":10,"count":2481.12,"comment":"","idAccount":4},{"idCost":17,"date":"2023-07-27","idCategory":11,"count":556,"comment":"","idAccount":4},{"idCost":18,"date":"2023-07-31","idCategory":7,"count":25,"comment":"","idAccount":4},{"idCost":19,"date":"2023-07-31","idCategory":7,"count":30,"comment":"","idAccount":4},{"idCost":20,"date":"2023-07-31","idCategory":11,"count":30,"comment":"","idAccount":4},{"idCost":21,"date":"2023-07-31","idCategory":0,"count":135,"comment":"","idAccount":4},{"idCost":22,"date":"2023-07-31","idCategory":5,"count":66,"comment":"","idAccount":4},{"idCost":23,"date":"2023-07-31","idCategory":0,"count":100,"comment":"","idAccount":4},{"idCost":24,"date":"2023-07-31","idCategory":2,"count":100,"comment":"","idAccount":4},{"idCost":25,"date":"2023-07-31","idCategory":0,"count":500,"comment":"","idAccount":4},{"idCost":27,"date":"2023-07-31","idCategory":4,"count":1000,"comment":"","idAccount":4},{"date":"2023-08-01","idCategory":2,"count":520.8,"comment":"","idAccount":3,"idCost":67},{"date":"2023-08-02","idCategory":10,"count":4580,"comment":"","idAccount":3,"idCost":68},{"date":"2023-08-03","idCategory":1,"count":109,"comment":"","idAccount":3,"idCost":69},{"date":"2023-08-03","idCategory":17,"count":268,"comment":"","idAccount":3,"idCost":70},{"date":"2023-08-03","idCategory":18,"count":2816,"comment":"","idAccount":3,"idCost":71},{"date":"2023-08-04","idCategory":0,"count":1339.8,"comment":"","idAccount":3,"idCost":72},{"date":"2023-08-04","idCategory":1,"count":116.48,"comment":"","idAccount":3,"idCost":73},{"date":"2023-08-04","idCategory":19,"count":628,"comment":"","idAccount":3,"idCost":74},{"date":"2023-08-04","idCategory":10,"count":1954.97,"comment":"","idAccount":3,"idCost":75},{"date":"2023-08-05","idCategory":0,"count":513.93,"comment":"","idAccount":3,"idCost":76},{"date":"2023-08-05","idCategory":5,"count":700,"comment":"","idAccount":3,"idCost":77},{"date":"2023-08-06","idCategory":0,"count":421.98,"comment":"","idAccount":3,"idCost":78},{"date":"2023-08-06","idCategory":1,"count":117,"comment":"","idAccount":3,"idCost":79},{"date":"2023-08-06","idCategory":11,"count":570.7,"comment":"","idAccount":3,"idCost":80},{"date":"2023-08-06","idCategory":5,"count":900,"comment":"","idAccount":3,"idCost":81},{"date":"2023-08-06","idCategory":17,"count":585,"comment":"","idAccount":3,"idCost":82},{"date":"2023-08-06","idCategory":10,"count":6000,"comment":"","idAccount":3,"idCost":83},{"date":"2023-08-07","idCategory":0,"count":402.64,"comment":"","idAccount":3,"idCost":84},{"date":"2023-08-07","idCategory":20,"count":3237.61,"comment":"","idAccount":3,"idCost":85},{"date":"2023-08-08","idCategory":19,"count":590,"comment":"","idAccount":3,"idCost":86},{"date":"2023-08-08","idCategory":8,"count":12400,"comment":"","idAccount":3,"idCost":87},{"date":"2023-08-09","idCategory":0,"count":369.7,"comment":"","idAccount":3,"idCost":88},{"date":"2023-08-09","idCategory":1,"count":136.99,"comment":"","idAccount":3,"idCost":89},{"date":"2023-08-09","idCategory":17,"count":415,"comment":"","idAccount":3,"idCost":90},{"date":"2023-08-09","idCategory":10,"count":1863.86,"comment":"","idAccount":3,"idCost":91},{"date":"2023-08-10","idCategory":1,"count":180,"comment":"","idAccount":3,"idCost":92},{"date":"2023-08-10","idCategory":2,"count":1211,"comment":"","idAccount":3,"idCost":93},{"date":"2023-08-10","idCategory":4,"count":1000,"comment":"","idAccount":3,"idCost":94},{"date":"2023-08-10","idCategory":19,"count":600,"comment":"","idAccount":3,"idCost":95},{"date":"2023-08-11","idCategory":2,"count":500,"comment":"","idAccount":3,"idCost":96},{"date":"2023-08-11","idCategory":7,"count":295,"comment":"","idAccount":3,"idCost":97},{"date":"2023-08-11","idCategory":10,"count":11885,"comment":"","idAccount":3,"idCost":98},{"date":"2023-08-12","idCategory":0,"count":1006.88,"comment":"","idAccount":3,"idCost":99},{"date":"2023-08-12","idCategory":1,"count":47.99,"comment":"","idAccount":3,"idCost":100},{"date":"2023-08-13","idCategory":0,"count":6256.03,"comment":"","idAccount":3,"idCost":101},{"date":"2023-08-13","idCategory":1,"count":128,"comment":"","idAccount":3,"idCost":102},{"date":"2023-08-13","idCategory":7,"count":230,"comment":"","idAccount":3,"idCost":103},{"date":"2023-08-13","idCategory":10,"count":16000,"comment":"","idAccount":3,"idCost":104},{"date":"2023-08-14","idCategory":10,"count":1000,"comment":"","idAccount":3,"idCost":105}],"category":[{"idCategory":0,"title":"Продукты","type":"cost","comment":"Основные продукты, которые едятся на постоянной основе. А так же приёмы пищи в кафе, вызванные необходимостью."},{"idCategory":1,"title":"Вкусняшки","type":"cost","comment":"Конфеты, шоколадки, печенье, лимонады. И всё, что нельзя отнести к продуктам."},{"idCategory":2,"title":"Лекарства","type":"cost","comment":"Всё, что покупается в аптеке или относится к БАДам."},{"idCategory":3,"title":"Больницы","type":"cost","comment":"Посещение врачей, сдача анализов, обследования."},{"idCategory":4,"title":"Спорт","type":"cost","comment":"Абонемент в тренажёрный зал, бассейн. Спортивный инвентарь."},{"idCategory":5,"title":"Досуг","type":"cost","comment":"Посещение кафе и развлекательных мест."},{"idCategory":6,"title":"ЖКХ","type":"cost","comment":"Плата коммунальным службам за воду, электричество, газ. Оплата услуг ЖКХ, Интернета и сотовой связи."},{"idCategory":7,"title":"Проезд","type":"cost","comment":"Траты на проезд в общественном транспорте. Траты на бензин и обслуживание машины."},{"idCategory":8,"title":"Отпуск","type":"cost","comment":"Все траты, которые связаны с отпуском. Билеты, проживания, развлечения, еда."},{"idCategory":9,"title":"Одежда/обувь","type":"cost","comment":"Одежда и обувь купленная не для конкретного мероприятия"},{"idCategory":10,"title":"Свадьба","type":"cost","comment":"Все траты, которые связаны со свадьбой."},{"idCategory":11,"title":"Бытовые вещи","type":"cost","comment":"Моющие средства, салфетки и прочее."},{"idCategory":12,"title":"Вещи для квартиры","type":"cost","comment":"Мебель, мелкая и крупная бытовая техника."},{"idCategory":13,"title":"Прочее расходы","type":"cost","comment":"Всё, что не подходит под другие категории расходов."},{"idCategory":14,"title":"Работа","type":"income","comment":"ЗП, аванс, премии и прочие доходы связанные с работой."},{"idCategory":15,"title":"КэшБэк","type":"income","comment":"Частичный возврат средств на карту после покупок."},{"idCategory":16,"title":"Прочие доходы","type":"income","comment":"Всё, что не подходит под другие категории доходов."},{"title":"Одежда","type":"cost","comment":"","idCategory":17},{"title":"Ипотека","type":"cost","comment":"","idCategory":18},{"title":"Другое","type":"cost","comment":"","idCategory":19},{"title":"Квартира","type":"cost","comment":"","idCategory":20}],"foreignKeyDelete":{"account":["income","cost"],"income":[],"cost":[],"category":["income","cost"]},"foreignKeyRead":{"account":[],"income":["account","category"],"cost":["account","category"],"category":[]}}
+{
+	"idAccount": 5,
+	"idIncome": 12,
+	"idCost": 397,
+	"idCategory": 26,
+	"account": [
+		{
+			"idAccount": 0,
+			"titleBank": "СберБанк",
+			"titleAccount": "Копилка",
+			"typeAccount": "Накопительный счёт",
+			"countMoney": 12034.65
+		},
+		{
+			"idAccount": 1,
+			"titleBank": "Банк ВТБ",
+			"titleAccount": "Для Интернет покупок",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 65632.05
+		},
+		{
+			"idAccount": 2,
+			"titleBank": "Газпром Банк",
+			"titleAccount": "Зарплатный счёт",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 98411.05
+		},
+		{
+			"idAccount": 3,
+			"titleBank": "Тинькофф Банк",
+			"titleAccount": "Повседневные расходы",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 99500.05
+		},
+		{
+			"idAccount": 4,
+			"titleBank": "Какой-то БАНК",
+			"titleAccount": "Новый счёт",
+			"typeAccount": "Дебетовый счёт",
+			"countMoney": 10000.88
+		}
+	],
+	"income": [
+		{
+			"date": "2023-07-07",
+			"idCategory": 21,
+			"count": 295.98,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 0
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 22,
+			"count": 191,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 1
+		},
+		{
+			"date": "2023-07-10",
+			"idCategory": 23,
+			"count": 971,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 2
+		},
+		{
+			"date": "2023-07-11",
+			"idCategory": 24,
+			"count": 26424,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 3
+		},
+		{
+			"date": "2023-07-13",
+			"idCategory": 25,
+			"count": 46274.75,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 4
+		},
+		{
+			"date": "2023-07-26",
+			"idCategory": 24,
+			"count": 14460,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 5
+		},
+		{
+			"date": "2023-07-28",
+			"idCategory": 25,
+			"count": 23197.27,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 6
+		},
+		{
+			"date": "2023-08-03",
+			"idCategory": 24,
+			"count": 41964,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 7
+		},
+		{
+			"date": "2023-08-07",
+			"idCategory": 21,
+			"count": 513.4,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 8
+		},
+		{
+			"date": "2023-08-08",
+			"idCategory": 22,
+			"count": 162,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 9
+		},
+		{
+			"date": "2023-08-11",
+			"idCategory": 24,
+			"count": 50433,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 10
+		},
+		{
+			"date": "2023-08-11",
+			"idCategory": 25,
+			"count": 49710.78,
+			"comment": "",
+			"idAccount": 3,
+			"idIncome": 11
+		}
+	],
+	"cost": [
+		{
+			"date": "2022-09-27",
+			"idCategory": 0,
+			"count": 139.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 0
+		},
+		{
+			"date": "2022-09-27",
+			"idCategory": 2,
+			"count": 590,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 1
+		},
+		{
+			"date": "2022-09-29",
+			"idCategory": 0,
+			"count": 206.85,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 2
+		},
+		{
+			"date": "2022-09-30",
+			"idCategory": 0,
+			"count": 128.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 3
+		},
+		{
+			"date": "2022-09-30",
+			"idCategory": 11,
+			"count": 150,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 4
+		},
+		{
+			"date": "2022-09-30",
+			"idCategory": 3,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 5
+		},
+		{
+			"date": "2022-10-01",
+			"idCategory": 0,
+			"count": 992.58,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 6
+		},
+		{
+			"date": "2022-10-02",
+			"idCategory": 0,
+			"count": 457.56,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 7
+		},
+		{
+			"date": "2022-10-02",
+			"idCategory": 5,
+			"count": 870,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 8
+		},
+		{
+			"date": "2022-10-03",
+			"idCategory": 0,
+			"count": 133.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 9
+		},
+		{
+			"date": "2022-10-03",
+			"idCategory": 20,
+			"count": 2218.33,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 10
+		},
+		{
+			"date": "2022-10-05",
+			"idCategory": 0,
+			"count": 224,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 11
+		},
+		{
+			"date": "2022-10-06",
+			"idCategory": 0,
+			"count": 73.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 12
+		},
+		{
+			"date": "2022-10-06",
+			"idCategory": 2,
+			"count": 372,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 13
+		},
+		{
+			"date": "2022-10-07",
+			"idCategory": 0,
+			"count": 273.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 14
+		},
+		{
+			"date": "2022-10-07",
+			"idCategory": 5,
+			"count": 70,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 15
+		},
+		{
+			"date": "2022-10-08",
+			"idCategory": 0,
+			"count": 1018.46,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 16
+		},
+		{
+			"date": "2022-10-08",
+			"idCategory": 1,
+			"count": 106.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 17
+		},
+		{
+			"date": "2022-10-08",
+			"idCategory": 5,
+			"count": 300,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 18
+		},
+		{
+			"date": "2022-10-09",
+			"idCategory": 0,
+			"count": 34.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 19
+		},
+		{
+			"date": "2022-10-09",
+			"idCategory": 5,
+			"count": 119,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 20
+		},
+		{
+			"date": "2022-10-12",
+			"idCategory": 0,
+			"count": 169.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 21
+		},
+		{
+			"date": "2022-10-13",
+			"idCategory": 0,
+			"count": 370.39,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 22
+		},
+		{
+			"date": "2022-10-14",
+			"idCategory": 0,
+			"count": 565.16,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 23
+		},
+		{
+			"date": "2022-10-14",
+			"idCategory": 5,
+			"count": 192,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 24
+		},
+		{
+			"date": "2022-10-15",
+			"idCategory": 0,
+			"count": 520.4,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 25
+		},
+		{
+			"date": "2022-10-15",
+			"idCategory": 1,
+			"count": 66,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 26
+		},
+		{
+			"date": "2022-10-15",
+			"idCategory": 11,
+			"count": 758.43,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 27
+		},
+		{
+			"date": "2022-10-16",
+			"idCategory": 0,
+			"count": 848,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 28
+		},
+		{
+			"date": "2022-10-18",
+			"idCategory": 0,
+			"count": 164.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 29
+		},
+		{
+			"date": "2022-10-20",
+			"idCategory": 0,
+			"count": 447.25,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 30
+		},
+		{
+			"date": "2022-10-20",
+			"idCategory": 5,
+			"count": 205,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 31
+		},
+		{
+			"date": "2022-10-21",
+			"idCategory": 0,
+			"count": 49,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 32
+		},
+		{
+			"date": "2022-10-22",
+			"idCategory": 0,
+			"count": 946.93,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 33
+		},
+		{
+			"date": "2022-10-22",
+			"idCategory": 2,
+			"count": 247,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 34
+		},
+		{
+			"date": "2022-10-23",
+			"idCategory": 0,
+			"count": 960.88,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 35
+		},
+		{
+			"date": "2022-10-23",
+			"idCategory": 4,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 36
+		},
+		{
+			"date": "2022-10-23",
+			"idCategory": 5,
+			"count": 107.78,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 37
+		},
+		{
+			"date": "2022-10-25",
+			"idCategory": 11,
+			"count": 849,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 38
+		},
+		{
+			"date": "2022-10-25",
+			"idCategory": 5,
+			"count": 123,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 39
+		},
+		{
+			"date": "2022-10-26",
+			"idCategory": 19,
+			"count": 300,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 40
+		},
+		{
+			"date": "2022-10-27",
+			"idCategory": 0,
+			"count": 845.39,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 41
+		},
+		{
+			"date": "2022-10-28",
+			"idCategory": 0,
+			"count": 385.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 42
+		},
+		{
+			"date": "2022-10-29",
+			"idCategory": 11,
+			"count": 645.38,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 43
+		},
+		{
+			"date": "2022-10-29",
+			"idCategory": 2,
+			"count": 230.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 44
+		},
+		{
+			"date": "2022-10-30",
+			"idCategory": 0,
+			"count": 274.91,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 45
+		},
+		{
+			"date": "2022-10-31",
+			"idCategory": 1,
+			"count": 112,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 46
+		},
+		{
+			"date": "2022-11-01",
+			"idCategory": 0,
+			"count": 279.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 47
+		},
+		{
+			"date": "2022-11-01",
+			"idCategory": 1,
+			"count": 234.96,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 48
+		},
+		{
+			"date": "2022-11-01",
+			"idCategory": 2,
+			"count": 569,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 49
+		},
+		{
+			"date": "2022-11-01",
+			"idCategory": 19,
+			"count": 400,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 50
+		},
+		{
+			"date": "2022-11-03",
+			"idCategory": 0,
+			"count": 408.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 51
+		},
+		{
+			"date": "2022-11-03",
+			"idCategory": 19,
+			"count": 99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 52
+		},
+		{
+			"date": "2022-11-04",
+			"idCategory": 0,
+			"count": 1157.06,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 53
+		},
+		{
+			"date": "2022-11-04",
+			"idCategory": 2,
+			"count": 573,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 54
+		},
+		{
+			"date": "2022-11-04",
+			"idCategory": 5,
+			"count": 1210,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 55
+		},
+		{
+			"date": "2022-11-05",
+			"idCategory": 11,
+			"count": 33.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 56
+		},
+		{
+			"date": "2022-11-05",
+			"idCategory": 20,
+			"count": 2907.14,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 57
+		},
+		{
+			"date": "2022-11-06",
+			"idCategory": 0,
+			"count": 178.37,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 58
+		},
+		{
+			"date": "2022-11-06",
+			"idCategory": 11,
+			"count": 1461.3,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 59
+		},
+		{
+			"date": "2022-11-08",
+			"idCategory": 5,
+			"count": 570,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 60
+		},
+		{
+			"date": "2022-11-09",
+			"idCategory": 1,
+			"count": 196.96,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 61
+		},
+		{
+			"date": "2022-11-09",
+			"idCategory": 3,
+			"count": 1939.4,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 62
+		},
+		{
+			"date": "2022-11-10",
+			"idCategory": 0,
+			"count": 623.89,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 63
+		},
+		{
+			"date": "2022-11-11",
+			"idCategory": 1,
+			"count": 79.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 64
+		},
+		{
+			"date": "2022-11-12",
+			"idCategory": 0,
+			"count": 303.1,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 65
+		},
+		{
+			"date": "2022-11-12",
+			"idCategory": 11,
+			"count": 163,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 66
+		},
+		{
+			"date": "2022-11-12",
+			"idCategory": 2,
+			"count": 249,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 67
+		},
+		{
+			"date": "2022-11-12",
+			"idCategory": 20,
+			"count": 270,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 68
+		},
+		{
+			"date": "2022-11-13",
+			"idCategory": 0,
+			"count": 1006.54,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 69
+		},
+		{
+			"date": "2022-11-13",
+			"idCategory": 11,
+			"count": 490.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 70
+		},
+		{
+			"date": "2022-11-14",
+			"idCategory": 1,
+			"count": 39,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 71
+		},
+		{
+			"date": "2022-11-14",
+			"idCategory": 11,
+			"count": 157.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 72
+		},
+		{
+			"date": "2022-11-14",
+			"idCategory": 2,
+			"count": 151,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 73
+		},
+		{
+			"date": "2022-11-15",
+			"idCategory": 11,
+			"count": 396.95,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 74
+		},
+		{
+			"date": "2022-11-16",
+			"idCategory": 5,
+			"count": 226,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 75
+		},
+		{
+			"date": "2022-11-17",
+			"idCategory": 0,
+			"count": 51.35,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 76
+		},
+		{
+			"date": "2022-11-17",
+			"idCategory": 1,
+			"count": 131.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 77
+		},
+		{
+			"date": "2022-11-18",
+			"idCategory": 0,
+			"count": 640.76,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 78
+		},
+		{
+			"date": "2022-11-18",
+			"idCategory": 1,
+			"count": 44.29,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 79
+		},
+		{
+			"date": "2022-11-18",
+			"idCategory": 5,
+			"count": 5302.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 80
+		},
+		{
+			"date": "2022-11-19",
+			"idCategory": 0,
+			"count": 468.24,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 81
+		},
+		{
+			"date": "2022-11-19",
+			"idCategory": 1,
+			"count": 34.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 82
+		},
+		{
+			"date": "2022-11-19",
+			"idCategory": 11,
+			"count": 79,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 83
+		},
+		{
+			"date": "2022-11-20",
+			"idCategory": 1,
+			"count": 95.87,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 84
+		},
+		{
+			"date": "2022-11-21",
+			"idCategory": 0,
+			"count": 55,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 85
+		},
+		{
+			"date": "2022-11-22",
+			"idCategory": 1,
+			"count": 189,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 86
+		},
+		{
+			"date": "2022-11-22",
+			"idCategory": 19,
+			"count": 119.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 87
+		},
+		{
+			"date": "2022-11-23",
+			"idCategory": 1,
+			"count": 75,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 88
+		},
+		{
+			"date": "2022-11-24",
+			"idCategory": 0,
+			"count": 566.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 89
+		},
+		{
+			"date": "2022-11-25",
+			"idCategory": 0,
+			"count": 608.94,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 90
+		},
+		{
+			"date": "2022-11-25",
+			"idCategory": 4,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 91
+		},
+		{
+			"date": "2022-11-26",
+			"idCategory": 0,
+			"count": 334.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 92
+		},
+		{
+			"date": "2022-11-26",
+			"idCategory": 11,
+			"count": 296.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 93
+		},
+		{
+			"date": "2022-11-26",
+			"idCategory": 2,
+			"count": 158.4,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 94
+		},
+		{
+			"date": "2022-11-26",
+			"idCategory": 5,
+			"count": 1595,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 95
+		},
+		{
+			"date": "2022-11-27",
+			"idCategory": 0,
+			"count": 382.46,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 96
+		},
+		{
+			"date": "2022-11-28",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 97
+		},
+		{
+			"date": "2022-11-30",
+			"idCategory": 0,
+			"count": 313.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 98
+		},
+		{
+			"date": "2022-11-30",
+			"idCategory": 19,
+			"count": 500,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 99
+		},
+		{
+			"date": "2022-12-01",
+			"idCategory": 5,
+			"count": 2172,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 100
+		},
+		{
+			"date": "2022-12-02",
+			"idCategory": 0,
+			"count": 589.78,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 101
+		},
+		{
+			"date": "2022-12-02",
+			"idCategory": 1,
+			"count": 33,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 102
+		},
+		{
+			"date": "2022-12-02",
+			"idCategory": 2,
+			"count": 882,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 103
+		},
+		{
+			"date": "2022-12-02",
+			"idCategory": 17,
+			"count": 899,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 104
+		},
+		{
+			"date": "2022-12-02",
+			"idCategory": 19,
+			"count": 400,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 105
+		},
+		{
+			"date": "2022-12-03",
+			"idCategory": 0,
+			"count": 228.59,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 106
+		},
+		{
+			"date": "2022-12-03",
+			"idCategory": 2,
+			"count": 292,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 107
+		},
+		{
+			"date": "2022-12-03",
+			"idCategory": 17,
+			"count": 5727,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 108
+		},
+		{
+			"date": "2022-12-04",
+			"idCategory": 0,
+			"count": 111.16,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 109
+		},
+		{
+			"date": "2022-12-04",
+			"idCategory": 1,
+			"count": 299.33,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 110
+		},
+		{
+			"date": "2022-12-04",
+			"idCategory": 20,
+			"count": 3210.23,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 111
+		},
+		{
+			"date": "2022-12-04",
+			"idCategory": 19,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 112
+		},
+		{
+			"date": "2022-12-06",
+			"idCategory": 0,
+			"count": 628.73,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 113
+		},
+		{
+			"date": "2022-12-06",
+			"idCategory": 17,
+			"count": 999,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 114
+		},
+		{
+			"date": "2022-12-07",
+			"idCategory": 3,
+			"count": 1500,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 115
+		},
+		{
+			"date": "2022-12-08",
+			"idCategory": 0,
+			"count": 414.84,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 116
+		},
+		{
+			"date": "2022-12-09",
+			"idCategory": 0,
+			"count": 378.91,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 117
+		},
+		{
+			"date": "2022-12-09",
+			"idCategory": 1,
+			"count": 189.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 118
+		},
+		{
+			"date": "2022-12-10",
+			"idCategory": 0,
+			"count": 616.74,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 119
+		},
+		{
+			"date": "2022-12-10",
+			"idCategory": 1,
+			"count": 159.96,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 120
+		},
+		{
+			"date": "2022-12-10",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 121
+		},
+		{
+			"date": "2022-12-10",
+			"idCategory": 5,
+			"count": 12372.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 122
+		},
+		{
+			"date": "2022-12-10",
+			"idCategory": 17,
+			"count": 337.89,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 123
+		},
+		{
+			"date": "2022-12-10",
+			"idCategory": 19,
+			"count": 250,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 124
+		},
+		{
+			"date": "2022-12-11",
+			"idCategory": 0,
+			"count": 82.33,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 125
+		},
+		{
+			"date": "2022-12-11",
+			"idCategory": 11,
+			"count": 338,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 126
+		},
+		{
+			"date": "2022-12-11",
+			"idCategory": 5,
+			"count": 530,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 127
+		},
+		{
+			"date": "2022-12-13",
+			"idCategory": 0,
+			"count": 149.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 128
+		},
+		{
+			"date": "2022-12-15",
+			"idCategory": 11,
+			"count": 79.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 129
+		},
+		{
+			"date": "2022-12-16",
+			"idCategory": 0,
+			"count": 699.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 130
+		},
+		{
+			"date": "2022-12-16",
+			"idCategory": 1,
+			"count": 79.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 131
+		},
+		{
+			"date": "2022-12-16",
+			"idCategory": 11,
+			"count": 265,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 132
+		},
+		{
+			"date": "2022-12-16",
+			"idCategory": 17,
+			"count": 299,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 133
+		},
+		{
+			"date": "2022-12-17",
+			"idCategory": 0,
+			"count": 109.55,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 134
+		},
+		{
+			"date": "2022-12-17",
+			"idCategory": 1,
+			"count": 387,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 135
+		},
+		{
+			"date": "2022-12-17",
+			"idCategory": 2,
+			"count": 900.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 136
+		},
+		{
+			"date": "2022-12-17",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 137
+		},
+		{
+			"date": "2022-12-17",
+			"idCategory": 19,
+			"count": 5800,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 138
+		},
+		{
+			"date": "2022-12-18",
+			"idCategory": 0,
+			"count": 136.48,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 139
+		},
+		{
+			"date": "2022-12-18",
+			"idCategory": 1,
+			"count": 227.58,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 140
+		},
+		{
+			"date": "2022-12-19",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 141
+		},
+		{
+			"date": "2022-12-20",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 142
+		},
+		{
+			"date": "2022-12-21",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 143
+		},
+		{
+			"date": "2022-12-22",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 144
+		},
+		{
+			"date": "2022-12-23",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 145
+		},
+		{
+			"date": "2022-12-24",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 146
+		},
+		{
+			"date": "2022-12-25",
+			"idCategory": 5,
+			"count": 1241.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 147
+		},
+		{
+			"date": "2022-12-26",
+			"idCategory": 0,
+			"count": 664.4,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 148
+		},
+		{
+			"date": "2022-12-26",
+			"idCategory": 1,
+			"count": 86.4,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 149
+		},
+		{
+			"date": "2022-12-26",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 150
+		},
+		{
+			"date": "2022-12-27",
+			"idCategory": 0,
+			"count": 1379.04,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 151
+		},
+		{
+			"date": "2022-12-27",
+			"idCategory": 1,
+			"count": 4685.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 152
+		},
+		{
+			"date": "2022-12-28",
+			"idCategory": 0,
+			"count": 1229.31,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 153
+		},
+		{
+			"date": "2022-12-28",
+			"idCategory": 1,
+			"count": 39.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 154
+		},
+		{
+			"date": "2022-12-29",
+			"idCategory": 0,
+			"count": 590.2,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 155
+		},
+		{
+			"date": "2022-12-30",
+			"idCategory": 11,
+			"count": 168,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 156
+		},
+		{
+			"date": "2022-12-30",
+			"idCategory": 20,
+			"count": 9999,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 157
+		},
+		{
+			"date": "2022-12-31",
+			"idCategory": 0,
+			"count": 333.95,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 158
+		},
+		{
+			"date": "2022-12-31",
+			"idCategory": 1,
+			"count": 160.77,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 159
+		},
+		{
+			"date": "2022-12-31",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 160
+		},
+		{
+			"date": "2023-01-02",
+			"idCategory": 0,
+			"count": 200.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 161
+		},
+		{
+			"date": "2023-01-02",
+			"idCategory": 1,
+			"count": 91.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 162
+		},
+		{
+			"date": "2023-01-02",
+			"idCategory": 11,
+			"count": 140.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 163
+		},
+		{
+			"date": "2023-01-03",
+			"idCategory": 19,
+			"count": 400,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 164
+		},
+		{
+			"date": "2023-01-04",
+			"idCategory": 0,
+			"count": 94.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 165
+		},
+		{
+			"date": "2023-01-05",
+			"idCategory": 0,
+			"count": 20.39,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 166
+		},
+		{
+			"date": "2023-01-05",
+			"idCategory": 20,
+			"count": 4244.38,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 167
+		},
+		{
+			"date": "2023-01-06",
+			"idCategory": 19,
+			"count": 700,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 168
+		},
+		{
+			"date": "2023-01-07",
+			"idCategory": 0,
+			"count": 437.49,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 169
+		},
+		{
+			"date": "2023-01-07",
+			"idCategory": 17,
+			"count": 79,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 170
+		},
+		{
+			"date": "2023-01-08",
+			"idCategory": 0,
+			"count": 563.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 171
+		},
+		{
+			"date": "2023-01-08",
+			"idCategory": 1,
+			"count": 46.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 172
+		},
+		{
+			"date": "2023-01-08",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 173
+		},
+		{
+			"date": "2023-01-09",
+			"idCategory": 0,
+			"count": 76.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 174
+		},
+		{
+			"date": "2023-01-09",
+			"idCategory": 3,
+			"count": 1273,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 175
+		},
+		{
+			"date": "2023-01-09",
+			"idCategory": 4,
+			"count": 1300,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 176
+		},
+		{
+			"date": "2023-01-09",
+			"idCategory": 19,
+			"count": 390,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 177
+		},
+		{
+			"date": "2023-01-11",
+			"idCategory": 0,
+			"count": 117.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 178
+		},
+		{
+			"date": "2023-01-13",
+			"idCategory": 0,
+			"count": 278.06,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 179
+		},
+		{
+			"date": "2023-01-13",
+			"idCategory": 1,
+			"count": 75.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 180
+		},
+		{
+			"date": "2023-01-14",
+			"idCategory": 0,
+			"count": 688.66,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 181
+		},
+		{
+			"date": "2023-01-14",
+			"idCategory": 11,
+			"count": 89.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 182
+		},
+		{
+			"date": "2023-01-14",
+			"idCategory": 2,
+			"count": 209,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 183
+		},
+		{
+			"date": "2023-01-14",
+			"idCategory": 5,
+			"count": 1020,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 184
+		},
+		{
+			"date": "2023-01-15",
+			"idCategory": 0,
+			"count": 19.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 185
+		},
+		{
+			"date": "2023-01-17",
+			"idCategory": 0,
+			"count": 496.49,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 186
+		},
+		{
+			"date": "2023-01-17",
+			"idCategory": 2,
+			"count": 179,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 187
+		},
+		{
+			"date": "2023-01-18",
+			"idCategory": 0,
+			"count": 32.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 188
+		},
+		{
+			"date": "2023-01-18",
+			"idCategory": 1,
+			"count": 112,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 189
+		},
+		{
+			"date": "2023-01-18",
+			"idCategory": 11,
+			"count": 452,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 190
+		},
+		{
+			"date": "2023-01-19",
+			"idCategory": 0,
+			"count": 182.6,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 191
+		},
+		{
+			"date": "2023-01-19",
+			"idCategory": 2,
+			"count": 758,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 192
+		},
+		{
+			"date": "2023-01-20",
+			"idCategory": 0,
+			"count": 448.86,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 193
+		},
+		{
+			"date": "2023-01-20",
+			"idCategory": 1,
+			"count": 275.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 194
+		},
+		{
+			"date": "2023-01-20",
+			"idCategory": 2,
+			"count": 895,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 195
+		},
+		{
+			"date": "2023-01-21",
+			"idCategory": 0,
+			"count": 133.6,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 196
+		},
+		{
+			"date": "2023-01-21",
+			"idCategory": 1,
+			"count": 1357.37,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 197
+		},
+		{
+			"date": "2023-01-22",
+			"idCategory": 0,
+			"count": 515,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 198
+		},
+		{
+			"date": "2023-01-22",
+			"idCategory": 1,
+			"count": 45,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 199
+		},
+		{
+			"date": "2023-01-22",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 200
+		},
+		{
+			"date": "2023-01-22",
+			"idCategory": 17,
+			"count": 350,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 201
+		},
+		{
+			"date": "2023-01-24",
+			"idCategory": 0,
+			"count": 199.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 202
+		},
+		{
+			"date": "2023-01-24",
+			"idCategory": 5,
+			"count": 8500,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 203
+		},
+		{
+			"date": "2023-01-26",
+			"idCategory": 0,
+			"count": 39.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 204
+		},
+		{
+			"date": "2023-01-28",
+			"idCategory": 0,
+			"count": 1041.44,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 205
+		},
+		{
+			"date": "2023-01-28",
+			"idCategory": 1,
+			"count": 29.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 206
+		},
+		{
+			"date": "2023-01-28",
+			"idCategory": 19,
+			"count": 30,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 207
+		},
+		{
+			"date": "2023-01-29",
+			"idCategory": 0,
+			"count": 681.96,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 208
+		},
+		{
+			"date": "2023-01-29",
+			"idCategory": 1,
+			"count": 259,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 209
+		},
+		{
+			"date": "2023-01-29",
+			"idCategory": 11,
+			"count": 199,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 210
+		},
+		{
+			"date": "2023-01-30",
+			"idCategory": 1,
+			"count": 102.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 211
+		},
+		{
+			"date": "2023-01-31",
+			"idCategory": 0,
+			"count": 49.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 212
+		},
+		{
+			"date": "2023-01-31",
+			"idCategory": 1,
+			"count": 44,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 213
+		},
+		{
+			"date": "2023-01-31",
+			"idCategory": 11,
+			"count": 79,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 214
+		},
+		{
+			"date": "2023-02-02",
+			"idCategory": 0,
+			"count": 196.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 215
+		},
+		{
+			"date": "2023-02-04",
+			"idCategory": 0,
+			"count": 941.16,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 216
+		},
+		{
+			"date": "2023-02-04",
+			"idCategory": 1,
+			"count": 517,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 217
+		},
+		{
+			"date": "2023-02-04",
+			"idCategory": 11,
+			"count": 118,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 218
+		},
+		{
+			"date": "2023-02-04",
+			"idCategory": 19,
+			"count": 79.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 219
+		},
+		{
+			"date": "2023-02-05",
+			"idCategory": 0,
+			"count": 436.33,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 220
+		},
+		{
+			"date": "2023-02-05",
+			"idCategory": 1,
+			"count": 115,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 221
+		},
+		{
+			"date": "2023-02-05",
+			"idCategory": 2,
+			"count": 719,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 222
+		},
+		{
+			"date": "2023-02-05",
+			"idCategory": 3,
+			"count": 2850,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 223
+		},
+		{
+			"date": "2023-02-05",
+			"idCategory": 20,
+			"count": 3538.23,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 224
+		},
+		{
+			"date": "2023-02-07",
+			"idCategory": 2,
+			"count": 220,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 225
+		},
+		{
+			"date": "2023-02-08",
+			"idCategory": 1,
+			"count": 31.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 226
+		},
+		{
+			"date": "2023-02-08",
+			"idCategory": 7,
+			"count": 130,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 227
+		},
+		{
+			"date": "2023-02-09",
+			"idCategory": 0,
+			"count": 828.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 228
+		},
+		{
+			"date": "2023-02-09",
+			"idCategory": 1,
+			"count": 140.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 229
+		},
+		{
+			"date": "2023-02-09",
+			"idCategory": 7,
+			"count": 130,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 230
+		},
+		{
+			"date": "2023-02-10",
+			"idCategory": 1,
+			"count": 100,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 231
+		},
+		{
+			"date": "2023-02-10",
+			"idCategory": 7,
+			"count": 310,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 232
+		},
+		{
+			"date": "2023-02-11",
+			"idCategory": 0,
+			"count": 783.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 233
+		},
+		{
+			"date": "2023-02-11",
+			"idCategory": 1,
+			"count": 433.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 234
+		},
+		{
+			"date": "2023-02-11",
+			"idCategory": 11,
+			"count": 412.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 235
+		},
+		{
+			"date": "2023-02-11",
+			"idCategory": 7,
+			"count": 60,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 236
+		},
+		{
+			"date": "2023-02-12",
+			"idCategory": 0,
+			"count": 357.45,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 237
+		},
+		{
+			"date": "2023-02-12",
+			"idCategory": 1,
+			"count": 49.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 238
+		},
+		{
+			"date": "2023-02-12",
+			"idCategory": 11,
+			"count": 19.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 239
+		},
+		{
+			"date": "2023-02-12",
+			"idCategory": 7,
+			"count": 122,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 240
+		},
+		{
+			"date": "2023-02-13",
+			"idCategory": 0,
+			"count": 195.51,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 241
+		},
+		{
+			"date": "2023-02-13",
+			"idCategory": 1,
+			"count": 119,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 242
+		},
+		{
+			"date": "2023-02-13",
+			"idCategory": 7,
+			"count": 120,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 243
+		},
+		{
+			"date": "2023-02-14",
+			"idCategory": 5,
+			"count": 870,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 244
+		},
+		{
+			"date": "2023-02-16",
+			"idCategory": 0,
+			"count": 633.66,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 245
+		},
+		{
+			"date": "2023-02-16",
+			"idCategory": 1,
+			"count": 39.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 246
+		},
+		{
+			"date": "2023-02-16",
+			"idCategory": 20,
+			"count": 50,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 247
+		},
+		{
+			"date": "2023-02-16",
+			"idCategory": 19,
+			"count": 6800,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 248
+		},
+		{
+			"date": "2023-02-17",
+			"idCategory": 0,
+			"count": 970,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 249
+		},
+		{
+			"date": "2023-02-17",
+			"idCategory": 1,
+			"count": 218.86,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 250
+		},
+		{
+			"date": "2023-02-17",
+			"idCategory": 5,
+			"count": 1700,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 251
+		},
+		{
+			"date": "2023-02-18",
+			"idCategory": 0,
+			"count": 1070,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 252
+		},
+		{
+			"date": "2023-02-18",
+			"idCategory": 5,
+			"count": 700,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 253
+		},
+		{
+			"date": "2023-02-19",
+			"idCategory": 0,
+			"count": 1425.96,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 254
+		},
+		{
+			"date": "2023-02-20",
+			"idCategory": 0,
+			"count": 1257.52,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 255
+		},
+		{
+			"date": "2023-02-20",
+			"idCategory": 1,
+			"count": 75.48,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 256
+		},
+		{
+			"date": "2023-02-21",
+			"idCategory": 1,
+			"count": 89.59,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 257
+		},
+		{
+			"date": "2023-02-21",
+			"idCategory": 11,
+			"count": 149.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 258
+		},
+		{
+			"date": "2023-02-22",
+			"idCategory": 7,
+			"count": 120,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 259
+		},
+		{
+			"date": "2023-02-23",
+			"idCategory": 0,
+			"count": 134.48,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 260
+		},
+		{
+			"date": "2023-02-23",
+			"idCategory": 1,
+			"count": 38.1,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 261
+		},
+		{
+			"date": "2023-02-23",
+			"idCategory": 11,
+			"count": 477,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 262
+		},
+		{
+			"date": "2023-02-24",
+			"idCategory": 0,
+			"count": 553.3,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 263
+		},
+		{
+			"date": "2023-02-24",
+			"idCategory": 11,
+			"count": 219.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 264
+		},
+		{
+			"date": "2023-02-24",
+			"idCategory": 7,
+			"count": 155,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 265
+		},
+		{
+			"date": "2023-02-25",
+			"idCategory": 0,
+			"count": 344.58,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 266
+		},
+		{
+			"date": "2023-02-25",
+			"idCategory": 1,
+			"count": 99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 267
+		},
+		{
+			"date": "2023-02-25",
+			"idCategory": 11,
+			"count": 54.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 268
+		},
+		{
+			"date": "2023-02-26",
+			"idCategory": 1,
+			"count": 271.66,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 269
+		},
+		{
+			"date": "2023-02-26",
+			"idCategory": 11,
+			"count": 299,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 270
+		},
+		{
+			"date": "2023-03-01",
+			"idCategory": 0,
+			"count": 139.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 271
+		},
+		{
+			"date": "2023-03-01",
+			"idCategory": 3,
+			"count": 1124,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 272
+		},
+		{
+			"date": "2023-03-01",
+			"idCategory": 4,
+			"count": 2600,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 273
+		},
+		{
+			"date": "2023-03-01",
+			"idCategory": 19,
+			"count": 800,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 274
+		},
+		{
+			"date": "2023-03-02",
+			"idCategory": 0,
+			"count": 67,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 275
+		},
+		{
+			"date": "2023-03-02",
+			"idCategory": 1,
+			"count": 250,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 276
+		},
+		{
+			"date": "2023-03-02",
+			"idCategory": 20,
+			"count": 3361.14,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 277
+		},
+		{
+			"date": "2023-07-01",
+			"idCategory": 0,
+			"count": 1373.57,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 278
+		},
+		{
+			"date": "2023-07-01",
+			"idCategory": 11,
+			"count": 432.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 279
+		},
+		{
+			"date": "2023-07-01",
+			"idCategory": 20,
+			"count": 2342.45,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 280
+		},
+		{
+			"date": "2023-07-01",
+			"idCategory": 5,
+			"count": 515,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 281
+		},
+		{
+			"date": "2023-07-02",
+			"idCategory": 0,
+			"count": 342.56,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 282
+		},
+		{
+			"date": "2023-07-02",
+			"idCategory": 5,
+			"count": 294,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 283
+		},
+		{
+			"date": "2023-07-03",
+			"idCategory": 18,
+			"count": 22400,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 284
+		},
+		{
+			"date": "2023-07-04",
+			"idCategory": 0,
+			"count": 68,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 285
+		},
+		{
+			"date": "2023-07-05",
+			"idCategory": 0,
+			"count": 129.3,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 286
+		},
+		{
+			"date": "2023-07-06",
+			"idCategory": 1,
+			"count": 125,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 287
+		},
+		{
+			"date": "2023-07-07",
+			"idCategory": 0,
+			"count": 980.53,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 288
+		},
+		{
+			"date": "2023-07-07",
+			"idCategory": 7,
+			"count": 900,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 289
+		},
+		{
+			"date": "2023-07-07",
+			"idCategory": 19,
+			"count": 2049,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 290
+		},
+		{
+			"date": "2023-07-07",
+			"idCategory": 10,
+			"count": 9490,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 291
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 0,
+			"count": 1490.53,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 292
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 1,
+			"count": 266,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 293
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 11,
+			"count": 124,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 294
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 3,
+			"count": 2529,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 295
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 4,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 296
+		},
+		{
+			"date": "2023-07-08",
+			"idCategory": 7,
+			"count": 100,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 297
+		},
+		{
+			"date": "2023-07-09",
+			"idCategory": 0,
+			"count": 35,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 298
+		},
+		{
+			"date": "2023-07-09",
+			"idCategory": 19,
+			"count": 1250,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 299
+		},
+		{
+			"date": "2023-07-10",
+			"idCategory": 0,
+			"count": 149.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 300
+		},
+		{
+			"date": "2023-07-10",
+			"idCategory": 7,
+			"count": 149,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 301
+		},
+		{
+			"date": "2023-07-11",
+			"idCategory": 1,
+			"count": 246,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 302
+		},
+		{
+			"date": "2023-07-12",
+			"idCategory": 0,
+			"count": 42.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 303
+		},
+		{
+			"date": "2023-07-13",
+			"idCategory": 0,
+			"count": 69.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 304
+		},
+		{
+			"date": "2023-07-14",
+			"idCategory": 0,
+			"count": 922.56,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 305
+		},
+		{
+			"date": "2023-07-14",
+			"idCategory": 1,
+			"count": 308,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 306
+		},
+		{
+			"date": "2023-07-15",
+			"idCategory": 0,
+			"count": 1175.1,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 307
+		},
+		{
+			"date": "2023-07-15",
+			"idCategory": 1,
+			"count": 240,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 308
+		},
+		{
+			"date": "2023-07-15",
+			"idCategory": 5,
+			"count": 482.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 309
+		},
+		{
+			"date": "2023-07-15",
+			"idCategory": 17,
+			"count": 1299,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 310
+		},
+		{
+			"date": "2023-07-15",
+			"idCategory": 7,
+			"count": 31,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 311
+		},
+		{
+			"date": "2023-07-16",
+			"idCategory": 0,
+			"count": 850.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 312
+		},
+		{
+			"date": "2023-07-16",
+			"idCategory": 1,
+			"count": 100,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 313
+		},
+		{
+			"date": "2023-07-16",
+			"idCategory": 10,
+			"count": 3300,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 314
+		},
+		{
+			"date": "2023-07-17",
+			"idCategory": 0,
+			"count": 75.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 315
+		},
+		{
+			"date": "2023-07-17",
+			"idCategory": 11,
+			"count": 75,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 316
+		},
+		{
+			"date": "2023-07-17",
+			"idCategory": 2,
+			"count": 475,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 317
+		},
+		{
+			"date": "2023-07-17",
+			"idCategory": 3,
+			"count": 550,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 318
+		},
+		{
+			"date": "2023-07-17",
+			"idCategory": 10,
+			"count": 2170,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 319
+		},
+		{
+			"date": "2023-07-18",
+			"idCategory": 19,
+			"count": 1617,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 320
+		},
+		{
+			"date": "2023-07-19",
+			"idCategory": 2,
+			"count": 307.3,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 321
+		},
+		{
+			"date": "2023-07-20",
+			"idCategory": 5,
+			"count": 610,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 322
+		},
+		{
+			"date": "2023-07-20",
+			"idCategory": 10,
+			"count": 3499,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 323
+		},
+		{
+			"date": "2023-07-21",
+			"idCategory": 0,
+			"count": 836.86,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 324
+		},
+		{
+			"date": "2023-07-21",
+			"idCategory": 1,
+			"count": 55.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 325
+		},
+		{
+			"date": "2023-07-21",
+			"idCategory": 11,
+			"count": 44.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 326
+		},
+		{
+			"date": "2023-07-22",
+			"idCategory": 0,
+			"count": 644.59,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 327
+		},
+		{
+			"date": "2023-07-22",
+			"idCategory": 11,
+			"count": 527.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 328
+		},
+		{
+			"date": "2023-07-22",
+			"idCategory": 4,
+			"count": 300,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 329
+		},
+		{
+			"date": "2023-07-23",
+			"idCategory": 0,
+			"count": 431.28,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 330
+		},
+		{
+			"date": "2023-07-23",
+			"idCategory": 5,
+			"count": 800,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 331
+		},
+		{
+			"date": "2023-07-23",
+			"idCategory": 7,
+			"count": 900,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 332
+		},
+		{
+			"date": "2023-07-24",
+			"idCategory": 2,
+			"count": 274.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 333
+		},
+		{
+			"date": "2023-07-25",
+			"idCategory": 11,
+			"count": 128.5,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 334
+		},
+		{
+			"date": "2023-07-25",
+			"idCategory": 10,
+			"count": 2481.12,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 335
+		},
+		{
+			"date": "2023-07-26",
+			"idCategory": 20,
+			"count": 600,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 336
+		},
+		{
+			"date": "2023-07-26",
+			"idCategory": 19,
+			"count": 200,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 337
+		},
+		{
+			"date": "2023-07-27",
+			"idCategory": 0,
+			"count": 610.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 338
+		},
+		{
+			"date": "2023-07-27",
+			"idCategory": 1,
+			"count": 42.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 339
+		},
+		{
+			"date": "2023-07-27",
+			"idCategory": 4,
+			"count": 2400,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 340
+		},
+		{
+			"date": "2023-07-28",
+			"idCategory": 0,
+			"count": 1154.16,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 341
+		},
+		{
+			"date": "2023-07-28",
+			"idCategory": 1,
+			"count": 56.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 342
+		},
+		{
+			"date": "2023-07-28",
+			"idCategory": 7,
+			"count": 25,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 343
+		},
+		{
+			"date": "2023-07-29",
+			"idCategory": 0,
+			"count": 1037.96,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 344
+		},
+		{
+			"date": "2023-07-29",
+			"idCategory": 11,
+			"count": 317.6,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 345
+		},
+		{
+			"date": "2023-07-29",
+			"idCategory": 5,
+			"count": 318,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 346
+		},
+		{
+			"date": "2023-07-30",
+			"idCategory": 0,
+			"count": 361.55,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 347
+		},
+		{
+			"date": "2023-07-30",
+			"idCategory": 1,
+			"count": 409.68,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 348
+		},
+		{
+			"date": "2023-07-30",
+			"idCategory": 11,
+			"count": 252.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 349
+		},
+		{
+			"date": "2023-07-30",
+			"idCategory": 5,
+			"count": 900,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 350
+		},
+		{
+			"date": "2023-07-31",
+			"idCategory": 1,
+			"count": 138,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 351
+		},
+		{
+			"date": "2023-08-01",
+			"idCategory": 2,
+			"count": 520.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 352
+		},
+		{
+			"date": "2023-08-02",
+			"idCategory": 10,
+			"count": 4580,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 353
+		},
+		{
+			"date": "2023-08-03",
+			"idCategory": 1,
+			"count": 109,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 354
+		},
+		{
+			"date": "2023-08-03",
+			"idCategory": 17,
+			"count": 268,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 355
+		},
+		{
+			"date": "2023-08-03",
+			"idCategory": 18,
+			"count": 2816,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 356
+		},
+		{
+			"date": "2023-08-04",
+			"idCategory": 0,
+			"count": 1339.8,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 357
+		},
+		{
+			"date": "2023-08-04",
+			"idCategory": 1,
+			"count": 116.48,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 358
+		},
+		{
+			"date": "2023-08-04",
+			"idCategory": 19,
+			"count": 628,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 359
+		},
+		{
+			"date": "2023-08-04",
+			"idCategory": 10,
+			"count": 1954.97,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 360
+		},
+		{
+			"date": "2023-08-05",
+			"idCategory": 0,
+			"count": 513.93,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 361
+		},
+		{
+			"date": "2023-08-05",
+			"idCategory": 5,
+			"count": 700,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 362
+		},
+		{
+			"date": "2023-08-06",
+			"idCategory": 0,
+			"count": 421.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 363
+		},
+		{
+			"date": "2023-08-06",
+			"idCategory": 1,
+			"count": 117,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 364
+		},
+		{
+			"date": "2023-08-06",
+			"idCategory": 11,
+			"count": 570.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 365
+		},
+		{
+			"date": "2023-08-06",
+			"idCategory": 5,
+			"count": 900,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 366
+		},
+		{
+			"date": "2023-08-06",
+			"idCategory": 17,
+			"count": 585,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 367
+		},
+		{
+			"date": "2023-08-06",
+			"idCategory": 10,
+			"count": 6000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 368
+		},
+		{
+			"date": "2023-08-07",
+			"idCategory": 0,
+			"count": 402.64,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 369
+		},
+		{
+			"date": "2023-08-07",
+			"idCategory": 20,
+			"count": 3237.61,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 370
+		},
+		{
+			"date": "2023-08-08",
+			"idCategory": 19,
+			"count": 590,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 371
+		},
+		{
+			"date": "2023-08-08",
+			"idCategory": 8,
+			"count": 12400,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 372
+		},
+		{
+			"date": "2023-08-09",
+			"idCategory": 0,
+			"count": 369.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 373
+		},
+		{
+			"date": "2023-08-09",
+			"idCategory": 1,
+			"count": 136.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 374
+		},
+		{
+			"date": "2023-08-09",
+			"idCategory": 17,
+			"count": 415,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 375
+		},
+		{
+			"date": "2023-08-09",
+			"idCategory": 10,
+			"count": 1863.86,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 376
+		},
+		{
+			"date": "2023-08-10",
+			"idCategory": 1,
+			"count": 180,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 377
+		},
+		{
+			"date": "2023-08-10",
+			"idCategory": 2,
+			"count": 1211,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 378
+		},
+		{
+			"date": "2023-08-10",
+			"idCategory": 4,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 379
+		},
+		{
+			"date": "2023-08-10",
+			"idCategory": 19,
+			"count": 600,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 380
+		},
+		{
+			"date": "2023-08-11",
+			"idCategory": 2,
+			"count": 500,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 381
+		},
+		{
+			"date": "2023-08-11",
+			"idCategory": 7,
+			"count": 295,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 382
+		},
+		{
+			"date": "2023-08-11",
+			"idCategory": 10,
+			"count": 11885,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 383
+		},
+		{
+			"date": "2023-08-12",
+			"idCategory": 0,
+			"count": 1006.88,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 384
+		},
+		{
+			"date": "2023-08-12",
+			"idCategory": 1,
+			"count": 47.99,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 385
+		},
+		{
+			"date": "2023-08-13",
+			"idCategory": 0,
+			"count": 1315.03,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 386
+		},
+		{
+			"date": "2023-08-13",
+			"idCategory": 1,
+			"count": 128,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 387
+		},
+		{
+			"date": "2023-08-13",
+			"idCategory": 7,
+			"count": 230,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 388
+		},
+		{
+			"date": "2023-08-13",
+			"idCategory": 10,
+			"count": 16000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 389
+		},
+		{
+			"date": "2023-08-14",
+			"idCategory": 0,
+			"count": 249.94,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 390
+		},
+		{
+			"date": "2023-08-14",
+			"idCategory": 2,
+			"count": 201.1,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 391
+		},
+		{
+			"date": "2023-08-14",
+			"idCategory": 10,
+			"count": 1000,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 392
+		},
+		{
+			"date": "2023-08-15",
+			"idCategory": 0,
+			"count": 259.98,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 393
+		},
+		{
+			"date": "2023-08-15",
+			"idCategory": 2,
+			"count": 490,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 394
+		},
+		{
+			"date": "2023-08-16",
+			"idCategory": 0,
+			"count": 68.9,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 395
+		},
+		{
+			"date": "2023-08-16",
+			"idCategory": 1,
+			"count": 119.7,
+			"comment": "",
+			"idAccount": 3,
+			"idCost": 396
+		}
+	],
+	"category": [
+		{
+			"idCategory": 0,
+			"title": "Продукты",
+			"type": "cost",
+			"comment": "Основные продукты, которые едятся на постоянной основе. А так же приёмы пищи в кафе, вызванные необходимостью."
+		},
+		{
+			"idCategory": 1,
+			"title": "Вкусняшки",
+			"type": "cost",
+			"comment": "Конфеты, шоколадки, печенье, лимонады. И всё, что нельзя отнести к продуктам."
+		},
+		{
+			"idCategory": 2,
+			"title": "Лекарства",
+			"type": "cost",
+			"comment": "Всё, что покупается в аптеке или относится к БАДам."
+		},
+		{
+			"idCategory": 3,
+			"title": "Больницы",
+			"type": "cost",
+			"comment": "Посещение врачей, сдача анализов, обследования."
+		},
+		{
+			"idCategory": 4,
+			"title": "Спорт",
+			"type": "cost",
+			"comment": "Абонемент в тренажёрный зал, бассейн. Спортивный инвентарь."
+		},
+		{
+			"idCategory": 5,
+			"title": "Досуг",
+			"type": "cost",
+			"comment": "Посещение кафе и развлекательных мест."
+		},
+		{
+			"idCategory": 6,
+			"title": "ЖКХ",
+			"type": "cost",
+			"comment": "Плата коммунальным службам за воду, электричество, газ. Оплата услуг ЖКХ, Интернета и сотовой связи."
+		},
+		{
+			"idCategory": 7,
+			"title": "Проезд",
+			"type": "cost",
+			"comment": "Траты на проезд в общественном транспорте. Траты на бензин и обслуживание машины."
+		},
+		{
+			"idCategory": 8,
+			"title": "Отпуск",
+			"type": "cost",
+			"comment": "Все траты, которые связаны с отпуском. Билеты, проживания, развлечения, еда."
+		},
+		{
+			"idCategory": 9,
+			"title": "Одежда/обувь",
+			"type": "cost",
+			"comment": "Одежда и обувь купленная не для конкретного мероприятия"
+		},
+		{
+			"idCategory": 10,
+			"title": "Свадьба",
+			"type": "cost",
+			"comment": "Все траты, которые связаны со свадьбой."
+		},
+		{
+			"idCategory": 11,
+			"title": "Бытовые вещи",
+			"type": "cost",
+			"comment": "Моющие средства, салфетки и прочее."
+		},
+		{
+			"idCategory": 12,
+			"title": "Вещи для квартиры",
+			"type": "cost",
+			"comment": "Мебель, мелкая и крупная бытовая техника."
+		},
+		{
+			"idCategory": 13,
+			"title": "Прочее расходы",
+			"type": "cost",
+			"comment": "Всё, что не подходит под другие категории расходов."
+		},
+		{
+			"idCategory": 14,
+			"title": "Работа",
+			"type": "income",
+			"comment": "ЗП, аванс, премии и прочие доходы связанные с работой."
+		},
+		{
+			"idCategory": 15,
+			"title": "КэшБэк",
+			"type": "income",
+			"comment": "Частичный возврат средств на карту после покупок."
+		},
+		{
+			"idCategory": 16,
+			"title": "Прочие доходы",
+			"type": "income",
+			"comment": "Всё, что не подходит под другие категории доходов."
+		},
+		{
+			"title": "Одежда",
+			"type": "cost",
+			"comment": "",
+			"idCategory": 17
+		},
+		{
+			"title": "Ипотека",
+			"type": "cost",
+			"comment": "",
+			"idCategory": 18
+		},
+		{
+			"title": "Другое",
+			"type": "cost",
+			"comment": "",
+			"idCategory": 19
+		},
+		{
+			"title": "Квартира",
+			"type": "cost",
+			"comment": "",
+			"idCategory": 20
+		},
+		{
+			"title": "КэшБэк 1",
+			"type": "income",
+			"comment": "",
+			"idCategory": 21
+		},
+		{
+			"title": "КэшБэк 2",
+			"type": "income",
+			"comment": "",
+			"idCategory": 22
+		},
+		{
+			"title": "Интернет",
+			"type": "income",
+			"comment": "",
+			"idCategory": 23
+		},
+		{
+			"title": "ЗП 1",
+			"type": "income",
+			"comment": "",
+			"idCategory": 24
+		},
+		{
+			"title": "ЗП 2",
+			"type": "income",
+			"comment": "",
+			"idCategory": 25
+		}
+	],
+	"foreignKeyDelete": {
+		"account": [
+			"income",
+			"cost"
+		],
+		"income": [],
+		"cost": [],
+		"category": [
+			"income",
+			"cost"
+		]
+	},
+	"foreignKeyRead": {
+		"account": [],
+		"income": [
+			"account",
+			"category"
+		],
+		"cost": [
+			"account",
+			"category"
+		],
+		"category": []
+	}
+}

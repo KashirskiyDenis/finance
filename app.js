@@ -12,55 +12,56 @@ let monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 
 
 initDB(config.db);
 
-const toArrayCostObjects = (costArray) => {
-	let costs = [];
-	for (let i = 1; i < costArray.length; i++) {
-		let arr = costArray[i];
+const toArrayOperationObjects = (operationArray) => {
+	let operations = [];
+	for (let i = 1; i < operationArray.length; i++) {
+		let arr = operationArray[i];
 		for (let j = 1; j < arr.length; j++) {
 			if (arr[j] == '')
 				continue;
 			else {
-				let cost = {
+				let operation = {
 					date: arr[0].split('.').reverse().join('-'),
-					idCategory: costArray[0][j],
+					idCategory: operationArray[0][j],
 					count: +arr[j],
 					comment: '',
 					idAccount: 3
 				};
-				costs.push(cost);
+				operations.push(operation);
 			}
 		}
 	}
-	return costs;
+
+	return operations;
 }
 
 async function loadData() {
 	let collectionArray = ['income', 'cost'];
 	for (let j = 0; j < collectionArray.length; j++) {
-		let arrayCostObjects;
+		let arrayOperationObjects;
 		try {
-			arrayCostObjects = toArrayCostObjects(await toArray(new URL(`./load-files/${collectionArray[j]}.tsv`, import.meta.url)));
+			arrayOperationObjects = toArrayOperationObjects(await toArray(new URL(`./load-files/${collectionArray[j]}.tsv`, import.meta.url)));
 		} catch (error) {
 			continue;
 		}
 		
-		for (let i = 0; i < arrayCostObjects.length; i++) {
-			let tmp = findByField('category', 'title', arrayCostObjects[i].idCategory);
+		for (let i = 0; i < arrayOperationObjects.length; i++) {
+			let tmp = findByField('category', 'title', arrayOperationObjects[i].idCategory);
 			if (tmp == null) {
 				let category = add('category', {
-					title : arrayCostObjects[i].idCategory,
+					title : arrayOperationObjects[i].idCategory,
 					type : collectionArray[j],
 					comment : ''
 				});
-				arrayCostObjects[i].idCategory = category.idCategory;
-				add(collectionArray[j], arrayCostObjects[i]);
+				arrayOperationObjects[i].idCategory = category.idCategory;
+				add(collectionArray[j], arrayOperationObjects[i]);
 			} else {
-				arrayCostObjects[i].idCategory = tmp.idCategory;
-				add(collectionArray[j], arrayCostObjects[i]);
+				arrayOperationObjects[i].idCategory = tmp.idCategory;
+				add(collectionArray[j], arrayOperationObjects[i]);
 			}
 		}
 		
-		rm(new URL(`./tsv-parser/${collectionArray[j]}.tsv`, import.meta.url));
+		rm(new URL(`./load-files/${collectionArray[j]}.tsv`, import.meta.url));
 	}
 };
 

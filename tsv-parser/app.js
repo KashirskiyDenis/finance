@@ -8,17 +8,17 @@ async function toArray(filePath) {
 		let monthCost = [];
 		contents = contents.split(/\r\n/);
 		
-		for (let i = contents.length - 1; i > 0; i--) {
+		for (let i = contents.length - 1; i >= 0; i--) {
 			contents[i] = contents[i].replace(/\u00a0/g, '');
 			contents[i] = contents[i].replace(/,/g, '.');
 			let arr = contents[i].split(/\t/);
 			
-			if (arr[0] == '')
+			if (arr[0] == '' || arr[0].match(/^[А-я]+\s\d{4}/))
 				continue;
 			else if (arr[0].match(/\d\d\.\d\d\.\d{4}/)) {
 				if (arr.length != 1)
 					monthCost.push(arr);
-			} else if (arr[0].match(/^[А-я]+\s\d{4}/)) {
+			} else if (i == 0) {
 				monthCost.push(contents[0].trim().split(/\t/));
 				monthCost.reverse();
 				break;
